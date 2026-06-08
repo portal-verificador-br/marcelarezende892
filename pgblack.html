@@ -1,290 +1,741 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ACESSO AO SERVIDOR - SARV 892</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nunca Mais Perca Cliente no WhatsApp | Sistema AutoCliente</title>
+    <meta name="description" content="Robô responde seus clientes 24h enquanto você trabalha. Para encanadores, eletricistas e autônomos.">
     
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1773918999950681'); 
-    fbq('track', 'PageView');
-    fbq('track', 'ViewContent');
-    </script>
-
+    <!-- Meta Pixel (substitua pelo seu) -->
+    <meta name="facebook-domain-verification" content="SEU_CODIGO" />
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
-        html, body { overflow-x: hidden; width: 100%; max-width: 100%; position: relative; background-color: #0b0f19; color: #fff; }
-
-        .alert-bar {
-            background-color: #ff0000; color: #fff; text-align: center; padding: 14px;
-            font-weight: 900; font-size: 15px; animation: pulse 0.8s infinite;
-            position: sticky; top: 0; z-index: 1000; text-transform: uppercase;
-            width: 100%; box-sizing: border-box;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        @keyframes pulse { 0% { background-color: #b30000; } 50% { background-color: #ff0000; } 100% { background-color: #b30000; } }
-
-        #loader-redirect {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #0b0f19; z-index: 20000; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;
-        }
-        .spinner { width: 70px; height: 70px; border: 6px solid #1a233a; border-top: 6px solid #00ff66; border-radius: 50%; animation: spin 0.8s linear infinite; }
-
-        .container { max-width: 650px; margin: 0 auto; background: #121824; padding: 25px 20px; width: 100%; border: 1px solid #1e293b; box-sizing: border-box; }
-
-        h1 { font-size: 32px; color: #fff; line-height: 1.2; margin: 20px 0; font-weight: 900; letter-spacing: -1px; text-align: left; }
-        .highlight { background: #00ff66; color: #000; padding: 2px 8px; font-weight: 900; border-radius: 4px; display: inline-block; }
-
-        .author-box { padding: 15px 0; border-bottom: 1px solid #1e293b; margin-bottom: 25px; width: 100%; }
-        .author-info { display: flex; align-items: center; margin-bottom: 20px; }
-        .author-img { width: 55px; height: 55px; border-radius: 50%; margin-right: 15px; border: 2px solid #00ff66; object-fit: cover; }
         
-        .inserted-image { width: 100%; border-radius: 10px; margin: 25px 0; display: block; border: 2px solid #00ff66; box-shadow: 0 0 20px rgba(0,255,102,0.2); }
-
-        .step-card { background: #1e293b; border-left: 8px solid #00ff66; padding: 22px; margin: 30px 0; border-radius: 8px; }
-        .step-card h3 { color: #00ff66; text-transform: uppercase; font-weight: 900; margin-bottom: 10px; }
-
-        .cta-box {
-            background-color: #1a233a; border: 3px dashed #00ff66; padding: 35px 20px;
-            text-align: center; margin: 40px 0; border-radius: 15px;
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
         }
-
-        .btn-pulse {
-            background: #00ff66; color: #000; font-size: 24px; font-weight: 900;
-            padding: 24px 15px; text-decoration: none; display: block; border-radius: 12px;
-            animation: grow 0.9s infinite alternate; text-transform: uppercase; border: none; width: 100%; cursor: pointer;
+        
+        .urgency-bar {
+            background: linear-gradient(90deg, #ff4444, #cc0000);
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            animation: pulse 2s infinite;
         }
-        @keyframes grow { from { transform: scale(1); } to { transform: scale(1.04); } }
-
-        /* Estilo Comentários FB 2026 */
-        .comments-section { margin-top: 50px; border-top: 1px solid #1e293b; padding-top: 30px; background: #f0f2f5; border-radius: 10px; padding: 20px; }
-        .comment-title { color: #4b4f56; font-size: 14px; font-weight: bold; margin-bottom: 15px; border-bottom: 1px solid #dddfe2; padding-bottom: 10px; }
-        .comment-group { margin-bottom: 18px; display: flex; flex-direction: column; }
-        .comment { display: flex; align-items: flex-start; margin-bottom: 5px; }
-        .avatar { width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; flex-shrink: 0; background-size: cover; background-position: center; border: 1px solid #ddd; background-color: #ccc; }
-        .comment-body { background: #fff; padding: 12px 16px; border-radius: 18px; flex-grow: 1; color: #1c1e21; font-size: 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-        .comment-name { font-weight: bold; color: #36393f; margin-bottom: 3px; font-size: 14px; } /* Preto Grafite */
-        .comment-actions { margin-left: 55px; font-size: 12px; color: #8e9297; font-weight: 600; } /* Cinza Gelo */
-        .comment-actions span { cursor: pointer; margin-right: 12px; }
-
-        /* Pop-up Customizado */
-        #notification {
-            position: fixed; bottom: 20px; left: 15px; right: 15px; max-width: 350px; background: #1e293b; 
-            padding: 14px 16px; border-radius: 14px; display: none; align-items: center; z-index: 10000; 
-            border-left: 6px solid #00ff66; box-shadow: 0 15px 40px rgba(0,0,0,0.6); margin: 0 auto;
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
-        .pop-content p { font-size: 13px; margin: 0; color: #cbd5e1 !important; }
-        .pop-status { color: #00ff66; font-size: 11px; font-weight: 900; text-transform: uppercase; }
+        
+        .hero {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #22c55e;
+            color: #000;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        
+        h1 {
+            font-size: clamp(28px, 6vw, 48px);
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        h1 span {
+            color: #fbbf24;
+        }
+        
+        .subheadline {
+            font-size: 18px;
+            color: #a1a1aa;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .video-container {
+            position: relative;
+            background: #1a1a1a;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 30px 0;
+            aspect-ratio: 16/9;
+            border: 2px solid #333;
+        }
+        
+        .video-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            cursor: pointer;
+        }
+        
+        .play-btn {
+            width: 80px;
+            height: 80px;
+            background: #ff0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+        
+        .play-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .play-btn::after {
+            content: '';
+            border-left: 30px solid #fff;
+            border-top: 18px solid transparent;
+            border-bottom: 18px solid transparent;
+            margin-left: 8px;
+        }
+        
+        .pain-points {
+            background: #111;
+            padding: 40px 20px;
+            margin: 40px 0;
+        }
+        
+        .pain-points h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .pain-list {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .pain-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #222;
+        }
+        
+        .pain-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .pain-text strong {
+            color: #ef4444;
+        }
+        
+        .solution {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .solution h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .solution h2 span {
+            color: #22c55e;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+            text-align: left;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #1a1a1a, #111);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #333;
+        }
+        
+        .feature-card h3 {
+            color: #fbbf24;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .feature-card p {
+            color: #a1a1aa;
+            font-size: 14px;
+        }
+        
+        .proof {
+            background: #0f172a;
+            padding: 50px 20px;
+        }
+        
+        .proof h2 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .testimonial {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #22c55e;
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            background: #334155;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #22c55e;
+        }
+        
+        .testimonial-name {
+            font-weight: bold;
+        }
+        
+        .testimonial-role {
+            font-size: 12px;
+            color: #64748b;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: #cbd5e1;
+        }
+        
+        .offer {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        
+        .offer-box {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border: 2px solid #fbbf24;
+            border-radius: 20px;
+            padding: 40px 30px;
+        }
+        
+        .offer h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .price-container {
+            margin: 30px 0;
+        }
+        
+        .original-price {
+            font-size: 24px;
+            color: #666;
+            text-decoration: line-through;
+        }
+        
+        .current-price {
+            font-size: 56px;
+            font-weight: 800;
+            color: #22c55e;
+        }
+        
+        .current-price span {
+            font-size: 24px;
+        }
+        
+        .price-note {
+            color: #a1a1aa;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .bonus-list {
+            text-align: left;
+            margin: 30px 0;
+        }
+        
+        .bonus-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #222;
+        }
+        
+        .bonus-check {
+            color: #22c55e;
+            font-size: 20px;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            width: 100%;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #000;
+            padding: 20px 40px;
+            font-size: 20px;
+            font-weight: 800;
+            text-decoration: none;
+            border-radius: 12px;
+            text-transform: uppercase;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.4);
+        }
+        
+        .guarantee {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+            padding: 20px;
+            background: #111;
+            border-radius: 10px;
+        }
+        
+        .guarantee-icon {
+            font-size: 40px;
+        }
+        
+        .guarantee-text {
+            text-align: left;
+            font-size: 14px;
+            color: #a1a1aa;
+        }
+        
+        .guarantee-text strong {
+            color: #fff;
+            display: block;
+        }
+        
+        .faq {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+        
+        .faq h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid #333;
+            padding: 20px 0;
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #fbbf24;
+        }
+        
+        .faq-answer {
+            color: #a1a1aa;
+        }
+        
+        .footer {
+            background: #111;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .footer a {
+            color: #666;
+            text-decoration: underline;
+        }
+        
+        .floating-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #0a0a0a;
+            padding: 15px 20px;
+            border-top: 1px solid #333;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .floating-cta.show {
+            display: block;
+        }
+        
+        .floating-cta .cta-btn {
+            padding: 15px;
+            font-size: 16px;
+        }
+        
+        @media (max-width: 600px) {
+            .offer-box {
+                padding: 30px 20px;
+            }
+            
+            .current-price {
+                font-size: 44px;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <div class="alert-bar">
-        ⚠️ URGENTE: O LOGIN NO SERVIDOR EXPIRA EM <span id="timer">10:00</span>
+    <!-- Barra de Urgência -->
+    <div class="urgency-bar">
+        🔥 ÚLTIMAS 23 VAGAS com desconto de lançamento — Encerra em <span id="timer">02:47:33</span>
     </div>
-
-    <div id="loader-redirect">
-        <div class="spinner"></div>
-        <p style="margin-top: 25px; font-weight: 900; color: #00ff66;">CONECTANDO AO TERMINAL DE SAQUE...</p>
-    </div>
-
-    <div class="container">
-        <h1>Vazamento Interno: <span class="highlight">"Estou vendendo meu acesso ao Servidor SARV para você sacar seu dinheiro retido hoje."</span></h1>
-
-        <div class="author-box">
-            <div class="author-info">
-                <img src="robertoperfil.jpg" class="author-img" alt="Roberto Menezes">
-                <div>
-                    <strong style="color: #fff; font-size: 16px;">Roberto Menezes</strong><br>
-                    <span style="color: #ff3b30; font-weight: bold; font-size: 12px;">EX-AUDITOR SÊNIOR FINANCEIRO</span>
-                </div>
-            </div>
-        </div>
-
-        <p>Eu fui desligado porque me recusei a esconder que os bancos estão segurando o seu dinheiro. Esse servidor que você está prestes a acessar é o mesmo que usei por 20 anos.</p>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="badge">✓ Mais de 847 autônomos já usam</div>
         
-        <p><b>Atenção:</b> Eu não estou vendendo curso. Estou vendendo o <b>Acesso Direto ao Servidor</b>. Lá dentro você vai ver o saldo do seu CPF e terá o campo para colocar seu PIX e realizar o saque agora mesmo.</p>
-
-        <img src="https://raw.githubusercontent.com/portal-verificador-br/robertomenezes/main/sarvexsa.png" class="inserted-image" alt="Servidor de Saque">
-
-        <div class="step-card">
-            <h3>DENTRO DO SERVIDOR VOCÊ IRÁ:</h3>
-            <p>1. Visualizar o montante acumulado no seu CPF (R$ 850 a R$ 2.900).</p>
-            <p>2. Digitar sua Chave PIX ou Conta Bancária.</p>
-            <p>3. Confirmar o envio imediato do saldo para sua conta.</p>
+        <h1>Nunca Mais <span>Perca Cliente</span> Por Não Responder WhatsApp a Tempo</h1>
+        
+        <p class="subheadline">
+            Robô inteligente responde, agenda e fecha orçamentos 24 horas por dia — 
+            enquanto você está trabalhando, dormindo ou com a família.
+        </p>
+        
+        <!-- VSL Container -->
+        <div class="video-container">
+            <div class="video-placeholder" onclick="playVideo()">
+                <div class="play-btn"></div>
+            </div>
+            <!-- Substitua pelo embed do seu VSL -->
+            <!-- <iframe src="SEU_VSL_AQUI" frameborder="0" allowfullscreen></iframe> -->
         </div>
-
-        <div class="cta-box">
-            <p style="text-decoration: line-through; color: #64748b; font-size: 15px;">VALOR DO ACESSO: R$ 997,00</p>
-            <p style="font-size: 46px; font-weight: 900; color: #00ff66; margin: 5px 0;">R$ 97,00</p>
+        
+        <a href="#oferta" class="cta-btn">QUERO PARAR DE PERDER CLIENTES →</a>
+    </section>
+    
+    <!-- Dores -->
+    <section class="pain-points">
+        <h2>😤 Isso já aconteceu com você?</h2>
+        
+        <div class="pain-list">
+            <div class="pain-item">
+                <span class="pain-icon">📱</span>
+                <div class="pain-text">
+                    <strong>Cliente mandou mensagem às 21h</strong> pedindo orçamento. 
+                    Você viu só de manhã — e ele já tinha fechado com outro.
+                </div>
+            </div>
             
-            <button onclick="irParaCheckout()" class="btn-pulse">COMPRAR ACESSO E REALIZAR SAQUE</button>
+            <div class="pain-item">
+                <span class="pain-icon">🔨</span>
+                <div class="pain-text">
+                    <strong>Estava no meio de um serviço</strong>, com as mãos sujas, 
+                    e perdeu 3 ligações de clientes novos.
+                </div>
+            </div>
             
-            <p style="margin-top: 20px; color: #ff3b30; font-weight: 900;">🚨 O ACESSO AO SERVIDOR EXPIRA ÀS <span id="expire-hour"></span></p>
-        </div>
-
-        <div class="comments-section">
-            <div class="comment-title">8 comentários recentes</div>
+            <div class="pain-item">
+                <span class="pain-icon">😴</span>
+                <div class="pain-text">
+                    <strong>Final de semana querendo descansar</strong>, mas fica com 
+                    o celular na mão com medo de perder oportunidade.
+                </div>
+            </div>
             
-            <div class="comment-group">
-                <div class="comment">
-                    <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?u=11');"></div>
-                    <div class="comment-body">
-                        <div class="comment-name">Fernando Guimarães de Oliveira</div>
-                        Consegui o acesso e entrei no servidor. Tinha R$ 2.430 retidos. Coloquei meu Pix e caiu em menos de 2 minutos. Valeu Roberto!
-                    </div>
+            <div class="pain-item">
+                <span class="pain-icon">💸</span>
+                <div class="pain-text">
+                    <strong>Sabe que está deixando dinheiro na mesa</strong> todo dia, 
+                    mas não tem tempo de ficar respondendo WhatsApp.
                 </div>
-                <div class="comment-actions"><span>Curtir</span><span>Responder</span><span>12 min</span></div>
-            </div>
-
-            <div class="comment-group">
-                <div class="comment">
-                    <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?u=12');"></div>
-                    <div class="comment-body">
-                        <div class="comment-name">Bruna Costa Silveira</div>
-                        Entrei no painel e saquei R$ 2.200 que nem sabia que existia. Aproveitem enquanto o servidor tá on!
-                    </div>
-                </div>
-                <div class="comment-actions"><span>Curtir</span><span>Responder</span><span>7 min</span></div>
-            </div>
-
-            <div class="comment-group">
-                <div class="comment">
-                    <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?u=84');"></div>
-                    <div class="comment-body">
-                        <div class="comment-name">Marcos Vinicius Pereira</div>
-                        Aparece tudo detalhado. Já estou com meus R$ 1.900 na conta. Obrigado Roberto pelo suporte.
-                    </div>
-                </div>
-                <div class="comment-actions"><span>Curtir</span><span>Responder</span><span>5 min</span></div>
-            </div>
-
-            <div class="comment-group">
-                <div class="comment">
-                    <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?u=32');"></div>
-                    <div class="comment-body">
-                        <div class="comment-name">Ana Beatriz Cavalcanti</div>
-                        Meu marido não acreditou, mas quando viu o Pix de 2.450 caindo ele ficou doido kkkkk. Muito bom mesmo.
-                    </div>
-                </div>
-                <div class="comment-actions"><span>Curtir</span><span>Responder</span><span>4 min</span></div>
-            </div>
-
-            <div class="comment-group">
-                <div class="comment">
-                    <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?u=15');"></div>
-                    <div class="comment-body">
-                        <div class="comment-name">Ricardo Mendes de Souza</div>
-                        Liberou na mesma hora. Login e senha funcionaram certinho no servidor. Dinheiro já tá no bolso.
-                    </div>
-                </div>
-                <div class="comment-actions"><span>Curtir</span><span>Responder</span><span>3 min</span></div>
-            </div>
-
-            <div class="comment-group">
-                <div class="comment">
-                    <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?u=54');"></div>
-                    <div class="comment-body">
-                        <div class="comment-name">Sandra Lúcia Figueiredo</div>
-                        Sou aposentada e tinha quase 3 mil reais de taxas retidas. Esse sistema salvou meu mês. Gratidão!
-                    </div>
-                </div>
-                <div class="comment-actions"><span>Curtir</span><span>Responder</span><span>2 min</span></div>
-            </div>
-
-            <div class="comment-group">
-                <div class="comment">
-                    <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?u=17');"></div>
-                    <div class="comment-body">
-                        <div class="comment-name">Lucas Ferreira de Almeida</div>
-                        Top demais, achei que ia demorar mas o terminal de saque é bem rápido. Recomendo.
-                    </div>
-                </div>
-                <div class="comment-actions"><span>Curtir</span><span>Responder</span><span>1 min</span></div>
-            </div>
-
-            <div class="comment-group">
-                <div class="comment">
-                    <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?u=18');"></div>
-                    <div class="comment-body">
-                        <div class="comment-name">Juliana Maria dos Santos</div>
-                        Gente pode comprar sem medo, acabei de sacar 1850 reais. Roberto é o cara!
-                    </div>
-                </div>
-                <div class="comment-actions"><span>Curtir</span><span>Responder</span><span>Agora</span></div>
             </div>
         </div>
-
-        <div style="text-align: center; padding: 20px 0; color: #64748b; font-size: 11px;">
-            Acesso ao Servidor #892 | Garantia de Saque Conforme Lei 179/2021
+    </section>
+    
+    <!-- Solução -->
+    <section class="solution">
+        <h2>Apresentando o <span>Sistema AutoCliente</span></h2>
+        
+        <p style="color: #a1a1aa; max-width: 600px; margin: 0 auto 40px;">
+            Um robô de inteligência artificial que atende seus clientes no WhatsApp 
+            como se fosse você — educado, profissional e que <strong style="color: #fff;">nunca deixa cliente esperando</strong>.
+        </p>
+        
+        <div class="features">
+            <div class="feature-card">
+                <h3>⚡ Resposta em 3 Segundos</h3>
+                <p>Cliente mandou mensagem? Resposta instantânea, 24 horas por dia, 7 dias por semana. Zero espera.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>📋 Coleta Informações</h3>
+                <p>Pergunta o que precisa saber: tipo de serviço, endereço, urgência. Você recebe tudo organizado.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>📅 Agenda Automático</h3>
+                <p>Integra com sua agenda e já marca o horário da visita ou orçamento sem você fazer nada.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>💰 Passa Valores</h3>
+                <p>Configure sua tabela de preços e o robô já informa valores base, filtando curiosos.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>🎯 Qualifica Clientes</h3>
+                <p>Identifica quem é cliente sério e quem só está "pesquisando". Você foca em quem vai fechar.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>📲 Notifica Você</h3>
+                <p>Quando é urgente ou precisa de você, o sistema avisa na hora. Controle total.</p>
+            </div>
         </div>
+    </section>
+    
+    <!-- Prova Social -->
+    <section class="proof">
+        <h2>👷 O Que Estão Dizendo</h2>
+        
+        <div class="testimonials">
+            <div class="testimonial">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">RC</div>
+                    <div>
+                        <div class="testimonial-name">Roberto Carlos</div>
+                        <div class="testimonial-role">Eletricista — São Paulo/SP</div>
+                    </div>
+                </div>
+                <p class="testimonial-text">
+                    "Primeira semana já fechei 4 serviços que eu ia perder. 
+                    Cliente mandou mensagem 23h, robô respondeu, agendou pro dia seguinte. 
+                    Acordei com trabalho garantido."
+                </p>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">MS</div>
+                    <div>
+                        <div class="testimonial-name">Marcos Silva</div>
+                        <div class="testimonial-role">Encanador — Curitiba/PR</div>
+                    </div>
+                </div>
+                <p class="testimonial-text">
+                    "Eu tava perdendo cliente toda hora. Agora o robô responde enquanto 
+                    to debaixo da pia. Final de semana desligo o celular tranquilo."
+                </p>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">AF</div>
+                    <div>
+                        <div class="testimonial-name">Ana Fátima</div>
+                        <div class="testimonial-role">Diarista — Belo Horizonte/MG</div>
+                    </div>
+                </div>
+                <p class="testimonial-text">
+                    "Achei que era coisa de outro mundo, mas configurei em 15 minutos. 
+                    O vídeo explica tudo. Agora não perco mais nenhuma cliente."
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Oferta -->
+    <section class="offer" id="oferta">
+        <div class="offer-box">
+            <h2>🎁 Oferta Especial de Lançamento</h2>
+            
+            <div class="price-container">
+                <div class="original-price">De R$ 497,00</div>
+                <div class="current-price"><span>R$</span> 97</div>
+                <p class="price-note">Pagamento único • Acesso vitalício</p>
+            </div>
+            
+            <div class="bonus-list">
+                <div class="bonus-item">
+                    <span class="bonus-check">✓</span>
+                    <span>Sistema AutoCliente completo</span>
+                </div>
+                <div class="bonus-item">
+                    <span class="bonus-check">✓</span>
+                    <span>Robô de WhatsApp configurado pra você</span>
+                </div>
+                <div class="bonus-item">
+                    <span class="bonus-check">✓</span>
+                    <span>50 respostas prontas pro seu serviço</span>
+                </div>
+                <div class="bonus-item">
+                    <span class="bonus-check">✓</span>
+                    <span>Suporte por 90 dias no grupo VIP</span>
+                </div>
+                <div class="bonus-item">
+                    <span class="bonus-check">✓</span>
+                    <span><strong style="color: #fbbf24;">BÔNUS:</strong> Script de fechamento por WhatsApp</span>
+                </div>
+                <div class="bonus-item">
+                    <span class="bonus-check">✓</span>
+                    <span><strong style="color: #fbbf24;">BÔNUS:</strong> Modelo de mensagem pra cobrar cliente</span>
+                </div>
+            </div>
+            
+            <a href="[pay.exemplo.com](https://pay.exemplo.com/autocliente)" class="cta-btn">
+                QUERO GARANTIR MINHA VAGA →
+            </a>
+            
+            <div class="guarantee">
+                <span class="guarantee-icon">🛡️</span>
+                <div class="guarantee-text">
+                    <strong>Garantia de 7 dias</strong>
+                    Se não funcionar pra você, devolvemos 100% do valor. 
+                    Sem perguntas, sem burocracia.
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ -->
+    <section class="faq">
+        <h2>❓ Perguntas Frequentes</h2>
+        
+        <div class="faq-item">
+            <p class="faq-question">Funciona pra qual tipo de serviço?</p>
+            <p class="faq-answer">Qualquer autônomo que recebe clientes por WhatsApp: eletricista, encanador, pintor, diarista, pedreiro, marceneiro, técnico de ar-condicionado, etc.</p>
+        </div>
+        
+        <div class="faq-item">
+            <p class="faq-question">Preciso entender de tecnologia?</p>
+            <p class="faq-answer">Zero. Se você sabe usar WhatsApp, consegue configurar. Tem vídeo explicando cada passo, e suporte se travar.</p>
+        </div>
+        
+        <div class="faq-item">
+            <p class="faq-question">Tem mensalidade?</p>
+            <p class="faq-answer">Não. Pagamento único de R$ 97 e acesso vitalício. Sem surpresas.</p>
+        </div>
+        
+        <div class="faq-item">
+            <p class="faq-question">O robô vai parecer robô?</p>
+            <p class="faq-answer">Não. As respostas são naturais, escritas como você falaria. Cliente nem percebe que é automático.</p>
+        </div>
+        
+        <div class="faq-item">
+            <p class="faq-question">E se eu não gostar?</p>
+            <p class="faq-answer">Você tem 7 dias pra testar. Se não servir pra você, é só pedir reembolso pelo email que devolvemos tudo.</p>
+        </div>
+    </section>
+    
+    <!-- CTA Final -->
+    <section class="offer" style="padding-top: 0;">
+        <a href="[pay.exemplo.com](https://pay.exemplo.com/autocliente)" class="cta-btn">
+            GARANTIR MINHA VAGA POR R$ 97 →
+        </a>
+        <p style="margin-top: 15px; color: #666; font-size: 14px;">
+            ⚡ Acesso imediato após confirmação do pagamento
+        </p>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 AutoCliente. Todos os direitos reservados.</p>
+        <p style="margin-top: 10px;">
+            <a href="/termos">Termos de Uso</a> • 
+            <a href="/privacidade">Política de Privacidade</a>
+        </p>
+        <p style="margin-top: 15px;">
+            Este produto não garante resultados. Os resultados variam de pessoa para pessoa.
+        </p>
+    </footer>
+    
+    <!-- Floating CTA Mobile -->
+    <div class="floating-cta" id="floatingCta">
+        <a href="#oferta" class="cta-btn">GARANTIR MINHA VAGA →</a>
     </div>
-
-    <div id="notification">
-        <div class="pop-content">
-            <p>🎉 <b><span id="notify-name"></span></b> acessou o servidor</p>
-            <p>e sacou <b>R$ <span id="notify-val"></span></b> agora!</p>
-            <span class="pop-status">● TRANSFERÊNCIA CONCLUÍDA</span>
-        </div>
-    </div>
-
+    
     <script>
-        function irParaCheckout() {
-            // Dispara evento de contato (Lead) no Facebook
-            if(typeof fbq === 'function') fbq('track', 'Contact');
+        // Timer de escassez
+        function startTimer() {
+            let hours = 2, minutes = 47, seconds = 33;
             
-            // Seu Número e a Mensagem Opção 1
-            const fone = "5511983836605";
-            const msg = encodeURIComponent("Quero acessar ao SARV e fazer meu saque agora!");
-            const linkZap = "https://wa.me/" + fone + "?text=" + msg;
-
-            document.getElementById('loader-redirect').style.display = 'flex';
-            
-            setTimeout(() => { 
-                window.location.href = linkZap; 
-            }, 1200);
+            setInterval(() => {
+                seconds--;
+                if (seconds < 0) { seconds = 59; minutes--; }
+                if (minutes < 0) { minutes = 59; hours--; }
+                if (hours < 0) { hours = 23; } // Reset diário
+                
+                document.getElementById('timer').textContent = 
+                    `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            }, 1000);
         }
-
-        let time = 600;
-        setInterval(() => {
-            let min = Math.floor(time / 60); let sec = time % 60;
-            document.getElementById('timer').innerHTML = `${min}:${sec < 10 ? '0' + sec : sec}`;
-            if(time > 0) time--;
-        }, 1000);
-
-        const d = new Date();
-        d.setMinutes(d.getMinutes() + 15);
-        document.getElementById('expire-hour').innerText = d.getHours() + ":" + (d.getMinutes()<10?'0':'') + d.getMinutes();
-
-        const fullNames = [
-            'Pedro Henrique Barbosa', 
-            'Lucas Oliveira de Almeida', 
-            'Marcos Vinicius Pereira', 
-            'Ricardo Oliveira Silva', 
-            'Sandra Lúcia Figueiredo', 
-            'Aline Cavalcanti de Oliveira', 
-            'Bruna Silveira de Assis'
-        ];
+        startTimer();
         
-        function showNotification() {
-            const randomName = fullNames[Math.floor(Math.random() * fullNames.length)];
-            const randomVal = (Math.random() * (2900 - 850) + 850).toFixed(2);
-            document.getElementById('notify-name').innerText = randomName;
-            document.getElementById('notify-val').innerText = randomVal;
-            const notify = document.getElementById('notification');
-            notify.style.display = 'flex';
-            setTimeout(() => { notify.style.display = 'none'; }, 4500);
+        // Floating CTA
+        window.addEventListener('scroll', () => {
+            const floatingCta = document.getElementById('floatingCta');
+            if (window.scrollY > 600) {
+                floatingCta.classList.add('show');
+            } else {
+                floatingCta.classList.remove('show');
+            }
+        });
+        
+        // Play video placeholder
+        function playVideo() {
+            // Substitua pelo código do seu VSL
+            alert('Substitua esta função pelo embed do seu VSL');
         }
-        setInterval(showNotification, 10000);
     </script>
 </body>
 </html>

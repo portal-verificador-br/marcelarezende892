@@ -1,141 +1,1021 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nunca Mais Perca Cliente no WhatsApp | Sistema AutoCliente</title>
-    <meta name="description" content="Robô responde seus clientes 24h enquanto você trabalha. Para encanadores, eletricistas e autônomos.">
-    
-    <!-- Meta Pixel (substitua pelo seu) -->
-    <meta name="facebook-domain-verification" content="SEU_CODIGO" />
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: #0a0a0a;
-            color: #fff;
-            line-height: 1.6;
-        }
-        
-        .urgency-bar {
-            background: linear-gradient(90deg, #ff4444, #cc0000);
-            padding: 12px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 14px;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-        
-        .hero {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        
-        .badge {
-            display: inline-block;
-            background: #22c55e;
-            color: #000;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-        
-        h1 {
-            font-size: clamp(28px, 6vw, 48px);
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        
-        h1 span {
-            color: #fbbf24;
-        }
-        
-        .subheadline {
-            font-size: 18px;
-            color: #a1a1aa;
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .video-container {
-            position: relative;
-            background: #1a1a1a;
-            border-radius: 16px;
-            overflow: hidden;
-            margin: 30px 0;
-            aspect-ratio: 16/9;
-            border: 2px solid #333;
-        }
-        
-        .video-placeholder {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
-            cursor: pointer;
-        }
-        
-        .play-btn {
-            width: 80px;
-            height: 80px;
-            background: #ff0000;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s;
-        }
-        
-        .play-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        .play-btn::after {
-            content: '';
-            border-left: 30px solid #fff;
-            border-top: 18px solid transparent;
-            border-bottom: 18px solid transparent;
-            margin-left: 8px;
-        }
-        
-        .pain-points {
-            background: #111;
-            padding: 40px 20px;
-            margin: 40px 0;
-        }
-        
-        .pain-points h2 {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 30px;
-        }
-        
-        .pain-list {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .pain-item {
-            display: flex;
-            align-items: flex-start;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vontade de Agir</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black:  #060606;
+  --dark:   #0F0F0F;
+  --card:   #161616;
+  --border: #222;
+  --muted:  #444;
+  --fog:    #777;
+  --white:  #F2EFE8;
+  --acid:   #C8F400;
+  --acid2:  #A5CB00;
+  --orange: #E07010;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Manrope', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+
+/* ── SCREENS ── */
+.screen { display: none; min-height: 100vh; flex-direction: column; }
+.screen.active { display: flex; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp   { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeLeft { from { opacity:0; transform:translateX(-40px); } to { opacity:1; transform:translateX(0); } }
+@keyframes fadeRight{ from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
+@keyframes scaleIn  { from { opacity:0; transform:scale(0.92); } to { opacity:1; transform:scale(1); } }
+@keyframes lineGrow { from { width:0; } to { width:100%; } }
+
+.anim-up    { opacity:0; }
+.anim-left  { opacity:0; }
+.anim-right { opacity:0; }
+.anim-scale { opacity:0; }
+.animated.anim-up    { animation: fadeUp 0.7s ease forwards; }
+.animated.anim-left  { animation: fadeLeft 0.7s ease forwards; }
+.animated.anim-right { animation: fadeRight 0.7s ease forwards; }
+.animated.anim-scale { animation: scaleIn 0.6s ease forwards; }
+.d1 { animation-delay: 0.1s !important; }
+.d2 { animation-delay: 0.25s !important; }
+.d3 { animation-delay: 0.4s !important; }
+.d4 { animation-delay: 0.55s !important; }
+.d5 { animation-delay: 0.7s !important; }
+
+/* ══════════════════════════════
+   SCREEN 1 — QUIZ INTRO
+══════════════════════════════ */
+#s-intro {
+  position: relative;
+  overflow: hidden;
+  align-items: stretch;
+}
+.intro-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex: 1;
+  min-height: 100vh;
+}
+.intro-left {
+  background: var(--black);
+  padding: 80px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.intro-right {
+  position: relative;
+  overflow: hidden;
+}
+.intro-right img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(30%) contrast(1.1);
+  display: block;
+}
+.intro-right-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--black) 0%, transparent 40%);
+}
+.intro-right-label {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 120px;
+  line-height: 1;
+  color: rgba(200,244,0,0.08);
+  letter-spacing: -2px;
+  user-select: none;
+}
+
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--acid); margin-bottom: 28px; }
+.intro-left h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 6vw, 88px); line-height: 0.92; letter-spacing: 2px; margin-bottom: 24px; }
+.intro-left h1 em { font-style: normal; color: var(--acid); display: block; }
+.intro-left p { font-size: 17px; color: var(--fog); line-height: 1.75; margin-bottom: 44px; max-width: 440px; }
+.intro-left p strong { color: var(--white); }
+
+.btn-primary {
+  display: inline-block;
+  background: var(--acid);
+  color: var(--black);
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  padding: 18px 40px;
+  border-radius: 2px;
+  cursor: pointer;
+  border: none;
+  letter-spacing: 0.5px;
+  transition: background 0.15s, transform 0.15s;
+  text-decoration: none;
+  max-width: 380px;
+  text-align: center;
+}
+.btn-primary:hover { background: var(--acid2); transform: translateY(-2px); }
+.btn-note { font-size: 12px; color: var(--muted); margin-top: 12px; }
+
+/* ══════════════════════════════
+   SCREEN 2 — QUIZ
+══════════════════════════════ */
+#s-quiz {
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  background: var(--dark);
+}
+.quiz-box { width: 100%; max-width: 620px; }
+
+.prog-wrap { margin-bottom: 48px; }
+.prog-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--fog); margin-bottom: 10px; font-weight: 600; letter-spacing: 0.5px; }
+.prog-track { height: 2px; background: var(--border); border-radius: 1px; }
+.prog-fill { height: 100%; background: var(--acid); border-radius: 1px; transition: width 0.5s cubic-bezier(.4,0,.2,1); }
+
+.q-block { display: none; }
+.q-block.active { display: block; animation: fadeUp 0.4s ease forwards; }
+.q-step { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--acid); margin-bottom: 18px; }
+.q-text { font-family: 'Bebas Neue', sans-serif; font-size: clamp(30px, 5vw, 52px); line-height: 1.0; letter-spacing: 1px; margin-bottom: 36px; color: var(--white); }
+
+.options { display: flex; flex-direction: column; gap: 10px; }
+.opt {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 18px 22px;
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--fog);
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.opt:hover { border-color: var(--acid); color: var(--white); }
+.opt.sel { border-color: var(--acid); color: var(--white); background: rgba(200,244,0,0.05); }
+.opt-l { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--acid); min-width: 22px; }
+
+.btn-next {
+  margin-top: 32px;
+  display: inline-block;
+  background: var(--acid);
+  color: var(--black);
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  padding: 16px 36px;
+  border-radius: 2px;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s, background 0.15s;
+  opacity: 0;
+  pointer-events: none;
+}
+.btn-next.show { opacity: 1; pointer-events: all; }
+.btn-next:hover { background: var(--acid2); }
+
+/* ══════════════════════════════
+   SCREEN 3 — RESULTADO
+══════════════════════════════ */
+#s-result {
+  background: var(--black);
+  align-items: stretch;
+}
+.result-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex: 1;
+  min-height: 100vh;
+}
+.result-left {
+  padding: 80px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--border);
+}
+.result-tag { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--acid); margin-bottom: 24px; }
+.result-left h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 5vw, 72px); line-height: 0.95; letter-spacing: 2px; margin-bottom: 20px; }
+.result-left h2 em { font-style: normal; color: var(--acid); display: block; }
+.result-left p { font-size: 16px; color: var(--fog); line-height: 1.75; margin-bottom: 40px; }
+.result-left p strong { color: var(--white); }
+
+.scores { display: flex; flex-direction: column; gap: 18px; }
+.score-row { display: flex; flex-direction: column; gap: 6px; }
+.score-meta { display: flex; justify-content: space-between; }
+.score-name { font-size: 13px; color: var(--fog); font-weight: 500; }
+.score-val { font-size: 13px; font-weight: 700; color: var(--acid); }
+.score-track { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.score-bar { height: 100%; background: var(--acid); border-radius: 2px; width: 0; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
+
+.result-right {
+  padding: 80px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--dark);
+}
+.result-right h3 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 1px; margin-bottom: 8px; }
+.result-right h3 em { font-style: normal; color: var(--acid); }
+.result-right .r-sub { font-size: 15px; color: var(--fog); line-height: 1.65; margin-bottom: 36px; }
+
+.price-block { margin-bottom: 28px; }
+.price-from { font-size: 14px; color: var(--muted); text-decoration: line-through; margin-bottom: 4px; }
+.price-main { font-family: 'Bebas Neue', sans-serif; font-size: 80px; line-height: 1; letter-spacing: 2px; color: var(--white); }
+.price-main sup { font-size: 30px; vertical-align: super; }
+.price-parcel { font-size: 13px; color: var(--fog); margin-top: 4px; }
+
+.btn-buy {
+  display: block;
+  background: var(--acid);
+  color: var(--black);
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  padding: 20px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s, transform 0.15s;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+}
+.btn-buy:hover { background: var(--acid2); transform: translateY(-2px); }
+.secure-note { font-size: 12px; color: var(--muted); text-align: center; }
+
+.inc-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+.inc-list li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--fog); }
+.inc-list li::before { content: '—'; color: var(--acid); font-weight: 700; flex-shrink: 0; }
+
+/* ══════════════════════════════
+   SCREEN 4 — PÁGINA DE VENDAS
+══════════════════════════════ */
+#s-sales { flex-direction: column; background: var(--black); }
+
+/* HERO VENDAS */
+.sales-hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  position: relative;
+  overflow: hidden;
+}
+.sh-left {
+  padding: 100px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+.sh-right {
+  position: relative;
+  overflow: hidden;
+}
+.sh-right img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(60%) contrast(1.15) brightness(0.6);
+}
+.sh-right-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--black) 0%, rgba(6,6,6,0.3) 60%, transparent 100%);
+}
+.sh-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--acid); margin-bottom: 24px; }
+.sh-left h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 7vw, 100px); line-height: 0.9; letter-spacing: 2px; margin-bottom: 28px; }
+.sh-left h1 em { font-style: normal; color: var(--acid); display: block; }
+.sh-sub { font-size: 18px; color: var(--fog); line-height: 1.75; max-width: 500px; margin-bottom: 52px; }
+.sh-sub strong { color: var(--white); }
+
+/* PAIN SECTION */
+.pain-sec {
+  background: var(--dark);
+  padding: 100px 72px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.pain-inner { max-width: 1100px; margin: 0 auto; }
+.sec-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--fog); margin-bottom: 56px; display: flex; align-items: center; gap: 20px; }
+.sec-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.pain-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 6vw, 80px); line-height: 0.95; letter-spacing: 2px; margin-bottom: 64px; }
+.pain-headline em { font-style: normal; color: var(--acid); }
+
+.pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 72px; }
+.pain-item { background: var(--dark); padding: 36px 32px; }
+.pain-item-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: rgba(200,244,0,0.12); line-height: 1; margin-bottom: 12px; }
+.pain-item h4 { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+.pain-item p { font-size: 14px; color: var(--fog); line-height: 1.7; }
+
+.pain-punch { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 4.5vw, 60px); line-height: 1.05; letter-spacing: 1px; }
+.pain-punch em { font-style: normal; color: var(--acid); }
+
+/* PRODUCT SECTION */
+.prod-sec { background: var(--black); padding: 100px 72px; }
+.prod-inner { max-width: 1100px; margin: 0 auto; }
+.prod-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-bottom: 80px; }
+.prod-top h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 84px); line-height: 0.92; letter-spacing: 2px; }
+.prod-top h2 em { font-style: normal; color: var(--acid); display: block; }
+.prod-top-right { padding-top: 16px; }
+.prod-top-right p { font-size: 17px; color: var(--fog); line-height: 1.8; margin-bottom: 24px; }
+.prod-top-right p strong { color: var(--white); }
+
+/* EBOOK VISUAL */
+.ebook-vis {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 0;
+}
+.ebook-cover {
+  background: linear-gradient(145deg, #1A1A1A, #0A0A0A);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 36px 28px;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.ebook-cover::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--acid); }
+.ebook-cover-bg { position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 200px; color: rgba(200,244,0,0.04); top: -30px; right: -20px; line-height: 1; user-select: none; letter-spacing: -4px; }
+.ebook-cover-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--acid); margin-bottom: 12px; position: relative; z-index: 1; }
+.ebook-cover-title { font-family: 'Bebas Neue', sans-serif; font-size: 40px; line-height: 0.95; letter-spacing: 2px; position: relative; z-index: 1; margin-bottom: 10px; }
+.ebook-cover-sub { font-size: 11px; color: var(--fog); line-height: 1.5; position: relative; z-index: 1; }
+
+.chapters { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: 6px; overflow: hidden; }
+.ch { background: var(--card); padding: 24px 28px; display: flex; gap: 20px; align-items: flex-start; transition: background 0.15s; }
+.ch:hover { background: #1E1E1E; }
+.ch-n { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--acid); flex-shrink: 0; line-height: 1.1; min-width: 36px; }
+.ch h4 { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 5px; }
+.ch p { font-size: 13px; color: var(--fog); line-height: 1.6; }
+
+/* IMAGE BREAK */
+.img-break { position: relative; height: 440px; overflow: hidden; }
+.img-break img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(50%) brightness(0.5); }
+.img-break-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(6,6,6,0.5); }
+.img-break-text { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 80px); letter-spacing: 3px; text-align: center; line-height: 1.05; }
+.img-break-text em { font-style: normal; color: var(--acid); display: block; }
+
+/* FOR WHO */
+.who-sec { background: var(--dark); padding: 100px 72px; border-top: 1px solid var(--border); }
+.who-inner { max-width: 1100px; margin: 0 auto; }
+.who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 56px; }
+.who-item {
+  background: var(--black);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 28px 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: border-color 0.2s;
+}
+.who-item:hover { border-color: var(--acid); }
+.who-dash { width: 3px; height: 100%; background: var(--acid); flex-shrink: 0; border-radius: 2px; min-height: 20px; }
+.who-item p { font-size: 15px; color: var(--fog); line-height: 1.65; }
+.who-item p strong { color: var(--white); }
+
+/* PRICING */
+.price-sec { background: var(--black); padding: 100px 72px; border-top: 1px solid var(--border); }
+.price-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+.price-inner h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 6vw, 80px); letter-spacing: 2px; line-height: 0.95; margin-bottom: 14px; }
+.price-inner h2 em { font-style: normal; color: var(--acid); }
+.price-inner .p-sub { font-size: 16px; color: var(--fog); line-height: 1.7; margin-bottom: 52px; }
+
+.price-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 52px 44px;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+.price-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--acid); }
+.p-from { font-size: 15px; color: var(--muted); text-decoration: line-through; margin-bottom: 4px; }
+.p-big { font-family: 'Bebas Neue', sans-serif; font-size: 96px; line-height: 1; color: var(--white); letter-spacing: 2px; }
+.p-big sup { font-size: 36px; vertical-align: super; }
+.p-parcel { font-size: 14px; color: var(--fog); margin-bottom: 40px; }
+.p-items { list-style: none; display: flex; flex-direction: column; gap: 13px; margin-bottom: 40px; }
+.p-items li { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--fog); }
+.p-items li::before { content: '—'; color: var(--acid); font-weight: 700; flex-shrink: 0; }
+.guarantee { display: flex; gap: 14px; align-items: flex-start; background: rgba(200,244,0,0.04); border: 1px solid rgba(200,244,0,0.12); border-radius: 4px; padding: 18px 20px; margin-top: 24px; }
+.guarantee p { font-size: 13px; color: var(--fog); line-height: 1.6; }
+.guarantee p strong { color: var(--white); }
+.g-icon { font-size: 22px; flex-shrink: 0; }
+
+/* FAQ */
+.faq-sec { background: var(--dark); padding: 100px 72px; border-top: 1px solid var(--border); }
+.faq-inner { max-width: 760px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--border); padding: 32px 0; }
+.faq-item h4 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.5px; margin-bottom: 12px; color: var(--white); }
+.faq-item p { font-size: 15px; color: var(--fog); line-height: 1.75; }
+
+/* ══════════════════════════════
+   SCREEN 5 — UPSELL
+══════════════════════════════ */
+#s-upsell {
+  background: var(--black);
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+}
+.upsell-box { max-width: 680px; width: 100%; }
+.confirm-strip { background: rgba(200,244,0,0.06); border: 1px solid rgba(200,244,0,0.15); border-radius: 4px; padding: 14px 20px; text-align: center; font-size: 13px; font-weight: 700; color: var(--acid); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 52px; }
+.upsell-box h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 8vw, 80px); line-height: 0.92; letter-spacing: 2px; margin-bottom: 16px; }
+.upsell-box h2 em { font-style: normal; color: var(--acid); display: block; }
+.upsell-sub { font-size: 17px; color: var(--fog); line-height: 1.7; margin-bottom: 48px; }
+.upsell-sub strong { color: var(--white); }
+
+.days-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 44px; }
+.day-block { background: var(--card); padding: 28px 20px; text-align: center; }
+.day-n { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: var(--acid); line-height: 1; margin-bottom: 6px; }
+.day-l { font-size: 13px; color: var(--fog); line-height: 1.5; }
+
+.upsell-price { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+.up-old { font-size: 16px; color: var(--muted); text-decoration: line-through; }
+.up-new { font-family: 'Bebas Neue', sans-serif; font-size: 64px; color: var(--white); letter-spacing: 2px; line-height: 1; }
+.up-new sup { font-size: 24px; vertical-align: super; }
+.up-note { font-size: 13px; color: var(--fog); line-height: 1.5; }
+
+.btn-up { display: block; background: var(--acid); color: var(--black); font-family: 'Manrope', sans-serif; font-size: 16px; font-weight: 800; padding: 20px; border-radius: 2px; border: none; cursor: pointer; text-align: center; transition: background 0.15s; margin-bottom: 14px; width: 100%; letter-spacing: 0.3px; }
+.btn-up:hover { background: var(--acid2); }
+.btn-skip-link { display: block; text-align: center; font-size: 13px; color: var(--muted); cursor: pointer; padding: 8px; background: none; border: none; width: 100%; transition: color 0.15s; text-decoration: underline; }
+.btn-skip-link:hover { color: var(--fog); }
+
+/* ══════════════════════════════
+   SCREEN 6 — DOWNSELL
+══════════════════════════════ */
+#s-downsell {
+  background: var(--dark);
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+}
+.ds-box { max-width: 580px; width: 100%; }
+.ds-tag { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 24px; }
+.ds-box h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 7vw, 72px); line-height: 0.95; letter-spacing: 2px; margin-bottom: 16px; }
+.ds-box h2 em { font-style: normal; color: var(--orange); display: block; }
+.ds-sub { font-size: 16px; color: var(--fog); line-height: 1.75; margin-bottom: 40px; }
+.ds-sub strong { color: var(--white); }
+
+.ds-card { background: var(--black); border: 1px solid var(--border); border-top: 3px solid var(--orange); border-radius: 6px; padding: 36px 32px; }
+.ds-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 1px; margin-bottom: 10px; }
+.ds-card h3 em { font-style: normal; color: var(--orange); }
+.ds-card .dc-desc { font-size: 15px; color: var(--fog); line-height: 1.65; margin-bottom: 24px; }
+.ds-items { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+.ds-items li { display: flex; gap: 10px; font-size: 14px; color: var(--fog); line-height: 1.5; }
+.ds-items li::before { content: '—'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+.ds-price { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.ds-old { font-size: 15px; color: var(--muted); text-decoration: line-through; }
+.ds-new { font-family: 'Bebas Neue', sans-serif; font-size: 56px; line-height: 1; letter-spacing: 2px; color: var(--white); }
+.ds-new sup { font-size: 22px; vertical-align: super; }
+.btn-ds { display: block; background: var(--orange); color: var(--white); font-family: 'Manrope', sans-serif; font-size: 16px; font-weight: 800; padding: 18px; border-radius: 2px; border: none; cursor: pointer; text-align: center; transition: background 0.15s; margin-bottom: 12px; width: 100%; }
+.btn-ds:hover { background: #C06010; }
+.btn-ds-no { display: block; text-align: center; font-size: 13px; color: var(--muted); cursor: pointer; padding: 8px; background: none; border: none; width: 100%; transition: color 0.15s; text-decoration: underline; }
+.btn-ds-no:hover { color: var(--fog); }
+
+/* ══════════════════════════════
+   SCREEN 7 — OBRIGADO
+══════════════════════════════ */
+#s-thanks {
+  background: var(--black);
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  text-align: center;
+}
+.thanks-box { max-width: 540px; width: 100%; }
+.thanks-line { width: 60px; height: 3px; background: var(--acid); border-radius: 2px; margin: 0 auto 40px; animation: lineGrow 0.8s ease forwards; }
+.thanks-box h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 9vw, 96px); line-height: 0.9; letter-spacing: 3px; margin-bottom: 20px; }
+.thanks-box h1 em { font-style: normal; color: var(--acid); display: block; }
+.thanks-sub { font-size: 17px; color: var(--fog); line-height: 1.75; margin-bottom: 56px; }
+.thanks-sub strong { color: var(--white); }
+.steps-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: 6px; overflow: hidden; text-align: left; margin-bottom: 40px; }
+.t-step { background: var(--card); padding: 24px 28px; display: flex; gap: 20px; }
+.t-step-n { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--acid); flex-shrink: 0; line-height: 1.1; }
+.t-step p { font-size: 14px; color: var(--fog); line-height: 1.65; }
+.t-step p strong { color: var(--white); }
+.thanks-footer { font-size: 13px; color: var(--muted); line-height: 1.7; }
+.thanks-footer strong { color: var(--fog); }
+
+/* FOOTER */
+.site-footer { background: var(--black); border-top: 1px solid var(--border); padding: 36px 72px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; }
+.logo em { font-style: normal; color: var(--acid); }
+.site-footer p { font-size: 12px; color: var(--muted); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .intro-split, .result-split, .sales-hero, .prod-top, .ebook-vis { grid-template-columns: 1fr; }
+  .intro-right, .sh-right { display: none; }
+  .intro-left, .result-left, .result-right, .sh-left { padding: 60px 28px; }
+  .pain-sec, .prod-sec, .who-sec, .price-sec, .faq-sec { padding: 70px 28px; }
+  .pain-grid, .who-grid { grid-template-columns: 1fr; }
+  .ebook-vis { grid-template-columns: 1fr; }
+  .ebook-cover { max-width: 240px; }
+  .site-footer { padding: 28px; flex-direction: column; align-items: flex-start; }
+  .days-strip { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ SCREEN 1: QUIZ INTRO ══ -->
+<div class="screen active" id="s-intro">
+  <div class="intro-split">
+    <div class="intro-left">
+      <p class="eyebrow anim-up animated d1">Quiz gratuito — 1 minuto</p>
+      <h1 class="anim-up animated d2">VOCÊ SABE<br>O QUE PRECISA<br><em>FAZER.</em></h1>
+      <p class="anim-up animated d3">Então por que você <strong>não faz?</strong><br>Responda 5 perguntas e descubra exatamente o que está te travando — e como sair disso.</p>
+      <button class="btn-primary anim-up animated d4" onclick="go('s-quiz'); initQuiz()">Descobrir o que me trava</button>
+      <p class="btn-note anim-up animated d5">Sem cadastro. Resultado imediato.</p>
+    </div>
+    <div class="intro-right">
+      <img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=900&q=80" alt="homem pensativo olhando pela janela" loading="lazy">
+      <div class="intro-right-overlay"></div>
+      <div class="intro-right-label">?</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 2: QUIZ ══ -->
+<div class="screen" id="s-quiz">
+  <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:60px 24px; background:var(--dark);">
+    <div class="quiz-box">
+      <div class="prog-wrap">
+        <div class="prog-meta">
+          <span id="prog-label">Pergunta 1 de 5</span>
+          <span id="prog-pct">20%</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:20%"></div></div>
+      </div>
+
+      <!-- Q1 -->
+      <div class="q-block active" id="q1">
+        <p class="q-step">01 / 05</p>
+        <h2 class="q-text">Como é sua manhã na maioria dos dias?</h2>
+        <div class="options">
+          <div class="opt" onclick="pick(this,1,'A')"><span class="opt-l">A</span>Acordo já cansado, sem vontade de encarar o que vem</div>
+          <div class="opt" onclick="pick(this,1,'B')"><span class="opt-l">B</span>Começo bem mas perco o gás em menos de uma hora</div>
+          <div class="opt" onclick="pick(this,1,'C')"><span class="opt-l">C</span>Fico no celular sem conseguir começar nada de verdade</div>
+          <div class="opt" onclick="pick(this,1,'D')"><span class="opt-l">D</span>Já acordo ansioso com tudo que precisa ser feito</div>
+        </div>
+        <button class="btn-next" id="nx1" onclick="nextQ(1,2)">Continuar</button>
+      </div>
+
+      <!-- Q2 -->
+      <div class="q-block" id="q2">
+        <p class="q-step">02 / 05</p>
+        <h2 class="q-text">Quando você deixa algo pra depois, o que acontece?</h2>
+        <div class="options">
+          <div class="opt" onclick="pick(this,2,'A')"><span class="opt-l">A</span>Uma culpa que não sai da cabeça — o dia inteiro</div>
+          <div class="opt" onclick="pick(this,2,'B')"><span class="opt-l">B</span>Alívio na hora, ansiedade maior depois</div>
+          <div class="opt" onclick="pick(this,2,'C')"><span class="opt-l">C</span>Um vazio. Indiferença. Como se não importasse</div>
+          <div class="opt" onclick="pick(this,2,'D')"><span class="opt-l">D</span>Raiva de mim mesmo por não ter conseguido</div>
+        </div>
+        <button class="btn-next" id="nx2" onclick="nextQ(2,3)">Continuar</button>
+      </div>
+
+      <!-- Q3 -->
+      <div class="q-block" id="q3">
+        <p class="q-step">03 / 05</p>
+        <h2 class="q-text">Você já tentou técnicas de produtividade?</h2>
+        <div class="options">
+          <div class="opt" onclick="pick(this,3,'A')"><span class="opt-l">A</span>Sim, várias — nenhuma funcionou por mais de uma semana</div>
+          <div class="opt" onclick="pick(this,3,'B')"><span class="opt-l">B</span>Tentei algumas mas desisti no meio</div>
+          <div class="opt" onclick="pick(this,3,'C')"><span class="opt-l">C</span>Nem me deu vontade de tentar — parece inútil</div>
+          <div class="opt" onclick="pick(this,3,'D')"><span class="opt-l">D</span>Funcionam às vezes, mas somem quando estou mal</div>
+        </div>
+        <button class="btn-next" id="nx3" onclick="nextQ(3,4)">Continuar</button>
+      </div>
+
+      <!-- Q4 -->
+      <div class="q-block" id="q4">
+        <p class="q-step">04 / 05</p>
+        <h2 class="q-text">Como você descreveria os últimos meses emocionalmente?</h2>
+        <div class="options">
+          <div class="opt" onclick="pick(this,4,'A')"><span class="opt-l">A</span>Ansioso na maior parte do tempo, sem conseguir desligar</div>
+          <div class="opt" onclick="pick(this,4,'B')"><span class="opt-l">B</span>Desanimado, sem energia, sem motivação pra nada</div>
+          <div class="opt" onclick="pick(this,4,'C')"><span class="opt-l">C</span>Os dois — oscilo entre ansiedade e vazio</div>
+          <div class="opt" onclick="pick(this,4,'D')"><span class="opt-l">D</span>Irritado com facilidade, intolerante comigo e com os outros</div>
+        </div>
+        <button class="btn-next" id="nx4" onclick="nextQ(4,5)">Continuar</button>
+      </div>
+
+      <!-- Q5 -->
+      <div class="q-block" id="q5">
+        <p class="q-step">05 / 05</p>
+        <h2 class="q-text">O que você mais quer mudar agora?</h2>
+        <div class="options">
+          <div class="opt" onclick="pick(this,5,'A')"><span class="opt-l">A</span>Parar de procrastinar e finalmente sair do lugar</div>
+          <div class="opt" onclick="pick(this,5,'B')"><span class="opt-l">B</span>Me sentir bem comigo mesmo de novo</div>
+          <div class="opt" onclick="pick(this,5,'C')"><span class="opt-l">C</span>Ter mais energia e disposição no dia a dia</div>
+          <div class="opt" onclick="pick(this,5,'D')"><span class="opt-l">D</span>Parar de me sabotar e de me cobrar de um jeito que me paralisa</div>
+        </div>
+        <button class="btn-next" id="nx5" onclick="showResult()">Ver meu resultado</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 3: RESULTADO ══ -->
+<div class="screen" id="s-result">
+  <div class="result-split">
+    <div class="result-left">
+      <p class="result-tag anim-left animated d1">Seu diagnóstico</p>
+      <h2 class="anim-left animated d2">PRESO<br>NO<br><em>LOOP</em></h2>
+      <p class="anim-left animated d3">Seu padrão indica um ciclo muito claro: <strong>ansiedade gera evitação, evitação gera culpa, culpa gera mais ansiedade.</strong> Não é preguiça. Não é falta de força de vontade. É um loop emocional — e loops têm saída.</p>
+      <div class="scores anim-left animated d4">
+        <div class="score-row">
+          <div class="score-meta"><span class="score-name">Loop de ansiedade</span><span class="score-val">91%</span></div>
+          <div class="score-track"><div class="score-bar" data-w="91%"></div></div>
+        </div>
+        <div class="score-row">
+          <div class="score-meta"><span class="score-name">Culpa paralisante</span><span class="score-val">85%</span></div>
+          <div class="score-track"><div class="score-bar" data-w="85%"></div></div>
+        </div>
+        <div class="score-row">
+          <div class="score-meta"><span class="score-name">Desânimo acumulado</span><span class="score-val">78%</span></div>
+          <div class="score-track"><div class="score-bar" data-w="78%"></div></div>
+        </div>
+        <div class="score-row">
+          <div class="score-meta"><span class="score-name">Autossabotagem</span><span class="score-val">73%</span></div>
+          <div class="score-track"><div class="score-bar" data-w="73%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="result-right">
+      <h3 class="anim-right animated d2">A SOLUÇÃO<br><em>EXISTE</em></h3>
+      <p class="r-sub anim-right animated d3">O e-book <strong>Vontade de Agir</strong> foi criado exatamente para quem está nesse loop. Linguagem direta, sem coach motivacional, sem psicologia de palco. Vai direto no que está te travando.</p>
+      <div class="price-block anim-right animated d4">
+        <p class="price-from">De R$ 97</p>
+        <div class="price-main"><sup>R$</sup>37</div>
+        <p class="price-parcel">ou 2x de R$ 19,90 sem juros</p>
+      </div>
+      <ul class="inc-list anim-right animated d4">
+        <li>6 capítulos — direto na causa, não no sintoma</li>
+        <li>Leitura de 2h, resultado pra vida</li>
+        <li>Acesso imediato em PDF</li>
+        <li>Garantia de 7 dias</li>
+      </ul>
+      <button class="btn-buy anim-right animated d5" onclick="go('s-sales')">Quero sair do loop agora</button>
+      <p class="secure-note anim-right animated d5">Compra segura — 7 dias de garantia total</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 4: PÁGINA DE VENDAS ══ -->
+<div class="screen" id="s-sales">
+
+  <!-- HERO -->
+  <div class="sales-hero">
+    <div class="sh-left">
+      <p class="sh-eyebrow anim-up animated d1">E-book — Saúde Mental & Ação</p>
+      <h1 class="anim-up animated d2">VOCÊ NÃO<br>É PREGUIÇOSO.<br><em>VOCÊ ESTÁ<br>PRESO.</em></h1>
+      <p class="sh-sub anim-up animated d3">Existe um loop silencioso de <strong>ansiedade, culpa e desânimo</strong> que trava você antes mesmo de começar. Técnicas de produtividade não resolvem — porque o problema nunca foi o método.</p>
+      <button class="btn-primary anim-up animated d4" onclick="document.getElementById('ancora-preco').scrollIntoView({behavior:'smooth'})">Quero quebrar esse loop — R$ 37</button>
+    </div>
+    <div class="sh-right">
+      <img src="https://images.unsplash.com/photo-1620862657788-c37e7b0b0c8e?w=900&q=80" alt="pessoa olhando janela cidade" loading="lazy">
+      <div class="sh-right-overlay"></div>
+    </div>
+  </div>
+
+  <!-- PAIN -->
+  <div class="pain-sec">
+    <div class="pain-inner">
+      <p class="sec-label">O problema real</p>
+      <h2 class="pain-headline anim-up">VOCÊ SABE O QUE<br>PRECISA FAZER.<br><em>E NÃO FAZ.</em></h2>
+      <div class="pain-grid">
+        <div class="pain-item anim-up d1">
+          <div class="pain-item-num">01</div>
+          <h4>A trava que não tem nome</h4>
+          <p>Você abre o computador, olha pra tarefa e trava. Não é preguiça — é um bloqueio que vem de dentro e você não sabe de onde.</p>
+        </div>
+        <div class="pain-item anim-up d2">
+          <div class="pain-item-num">02</div>
+          <h4>A culpa que não para</h4>
+          <p>Você não fez o que precisava. E agora a culpa não sai. Ela fica lá, pesando, gastando sua energia antes de qualquer coisa começar.</p>
+        </div>
+        <div class="pain-item anim-up d3">
+          <div class="pain-item-num">03</div>
+          <h4>O desânimo que não passa</h4>
+          <p>Tem dias que você não quer fazer nada. Não sabe se é cansaço, depressão ou fraqueza. Só sabe que o gás acabou.</p>
+        </div>
+        <div class="pain-item anim-up d4">
+          <div class="pain-item-num">04</div>
+          <h4>As técnicas que não funcionam</h4>
+          <p>Você já tentou Pomodoro, listas, metas, moodboards. Funcionam por dois dias. Depois o loop volta — e você se sente ainda pior.</p>
+        </div>
+        <div class="pain-item anim-up d5">
+          <div class="pain-item-num">05</div>
+          <h4>O piloto automático que consome</h4>
+          <p>Redes sociais, séries, celular. Não é descanso — é fuga. E no fundo você sabe. E isso dói mais ainda.</p>
+        </div>
+        <div class="pain-item anim-up d5">
+          <div class="pain-item-num">06</div>
+          <h4>A comparação que afunda</h4>
+          <p>Você vê as pessoas avançando e pensa: por que pra mim é tão difícil? E essa pergunta te paralisa mais do que qualquer tarefa.</p>
+        </div>
+      </div>
+      <p class="pain-punch anim-up">SE VOCÊ SE VIU EM PELO MENOS<br>DOIS DESSES PONTOS —<br><em>ESSE E-BOOK FOI ESCRITO PRA VOCÊ.</em></p>
+    </div>
+  </div>
+
+  <!-- PRODUCT -->
+  <div class="prod-sec">
+    <div class="prod-inner">
+      <p class="sec-label">O que você vai receber</p>
+      <div class="prod-top">
+        <div>
+          <h2 class="anim-left">VONTADE<br>DE<br><em>AGIR</em></h2>
+        </div>
+        <div class="prod-top-right anim-right">
+          <p>Um e-book direto ao ponto, escrito por quem viveu esse loop e aprendeu a sair dele — <strong>não com técnicas de produtividade, mas entendendo o que acontece de verdade dentro da cabeça.</strong></p>
+          <p>Sem enrolação. Sem psicologia de palco. Sem papo de coach. Só o que funciona.</p>
+        </div>
+      </div>
+      <div class="ebook-vis">
+        <div class="ebook-cover anim-scale">
+          <div class="ebook-cover-bg">V</div>
+          <p class="ebook-cover-tag">E-book PDF</p>
+          <p class="ebook-cover-title">VONTADE<br>DE<br>AGIR</p>
+          <p class="ebook-cover-sub">Como quebrar o loop de ansiedade, culpa e desânimo</p>
+        </div>
+        <div class="chapters">
+          <div class="ch anim-right d1">
+            <span class="ch-n">01</span>
+            <div><h4>O Loop que Ninguém Explica</h4><p>Por que você procrastina não tem nada a ver com preguiça. Entenda o ciclo real que te paralisa — e por que mais força de vontade só piora.</p></div>
+          </div>
+          <div class="ch anim-right d2">
+            <span class="ch-n">02</span>
+            <div><h4>A Culpa que Paralisa Mais que o Medo</h4><p>A autopunição não te motiva — ela te afunda. Descubra por que se cobrar demais é parte do problema, não da solução.</p></div>
+          </div>
+          <div class="ch anim-right d3">
+            <span class="ch-n">03</span>
+            <div><h4>Desânimo Não é Fraqueza</h4><p>O que está por trás da vontade de não fazer nada — e como identificar se é cansaço, ansiedade disfarçada ou algo que precisa de atenção real.</p></div>
+          </div>
+          <div class="ch anim-right d4">
+            <span class="ch-n">04</span>
+            <div><h4>Ferramentas que Funcionam de Verdade</h4><p>Técnicas simples pra usar no momento exato em que a trava aparece. Com evidência, sem esoterismo, sem precisar de motivação prévia.</p></div>
+          </div>
+          <div class="ch anim-right d5">
+            <span class="ch-n">05</span>
+            <div><h4>Pequenos Começos, Grandes Mudanças</h4><p>Como criar movimento quando você não tem energia pra nada. A estratégia do mínimo possível — e por que ela funciona quando tudo mais falha.</p></div>
+          </div>
+          <div class="ch anim-right d5">
+            <span class="ch-n">06</span>
+            <div><h4>Construindo Vontade Todo Dia</h4><p>Motivação permanente não existe. Existe estrutura e escolha. Como montar uma rotina simples que te faz avançar mesmo nos dias ruins.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAGE BREAK -->
+  <div class="img-break">
+    <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=1400&q=80" alt="pessoa caminhando cidade noturna" loading="lazy">
+    <div class="img-break-overlay">
+      <div class="img-break-text anim-scale animated">
+        O PROBLEMA NUNCA<br>FOI FALTA DE MÉTODO.<br><em>FOI O QUE ACONTECE<br>DENTRO DA SUA CABEÇA.</em>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOR WHO -->
+  <div class="who-sec">
+    <div class="who-inner">
+      <p class="sec-label">Para quem é</p>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6vw,72px);line-height:0.95;letter-spacing:2px;" class="anim-up">ESSE E-BOOK É PRA<br><span style="color:var(--acid)">VOCÊ SE...</span></h2>
+      <div class="who-grid">
+        <div class="who-item anim-up d1"><div class="who-dash"></div><p>Você <strong>sabe o que precisa fazer</strong> mas não consegue começar — todos os dias.</p></div>
+        <div class="who-item anim-up d2"><div class="who-dash"></div><p>A <strong>culpa de procrastinar</strong> te corrói mais do que a tarefa em si.</p></div>
+        <div class="who-item anim-up d3"><div class="who-dash"></div><p>Você tem <strong>ansiedade ou desânimo</strong> que atrapalha sua vida mas não sabe como lidar.</p></div>
+        <div class="who-item anim-up d4"><div class="who-dash"></div><p>Você já tentou técnicas e <strong>nenhuma funcionou</strong> por mais de uma semana.</p></div>
+        <div class="who-item anim-up d5"><div class="who-dash"></div><p>Você quer <strong>se cuidar mais</strong> mas falta aquela faísca inicial pra começar.</p></div>
+        <div class="who-item anim-up d5"><div class="who-dash"></div><p>Você quer uma linguagem <strong>direta e honesta</strong>, sem discurso vazio de motivação.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="price-sec" id="ancora-preco">
+    <div class="price-inner">
+      <p class="sec-label" style="justify-content:center">Investimento</p>
+      <h2 class="anim-up">ACESSO<br><em>COMPLETO</em></h2>
+      <p class="p-sub anim-up d2">Um e-book que você lê uma vez e usa pra sempre.<br>Sem mensalidade. Sem enrolação.</p>
+      <div class="price-card anim-scale d3">
+        <p class="p-from">De R$ 97</p>
+        <div class="p-big"><sup>R$</sup>37</div>
+        <p class="p-parcel">ou 2x de R$ 19,90 sem juros</p>
+        <ul class="p-items">
+          <li>E-book completo — 6 capítulos</li>
+          <li>Linguagem direta, sem enrolação</li>
+          <li>Leitura de 2h, resultado pra vida</li>
+          <li>Acesso imediato em PDF após pagamento</li>
+          <li>Funciona no celular, tablet ou computador</li>
+        </ul>
+        <button class="btn-buy" onclick="go('s-upsell')">Garantir meu acesso agora — R$ 37</button>
+        <p class="secure-note" style="margin-bottom:0">Pagamento seguro — Pix, Cartao ou Boleto</p>
+        <div class="guarantee" style="margin-top:20px">
+          <span class="g-icon">—</span>
+          <p><strong>Garantia de 7 dias.</strong> Se por qualquer motivo você não ficar satisfeito, devolvemos 100% do valor. Sem burocracia, sem perguntas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-sec">
+    <div class="faq-inner">
+      <p class="sec-label">Duvidas</p>
+      <div class="faq-item anim-up d1">
+        <h4>Isso é para quem tem depressão diagnosticada?</h4>
+        <p>Não necessariamente. O e-book é para qualquer pessoa que sente desânimo, ansiedade e dificuldade de agir no dia a dia. Não substitui acompanhamento médico — mas funciona junto com ele.</p>
+      </div>
+      <div class="faq-item anim-up d2">
+        <h4>Quando recebo o e-book após comprar?</h4>
+        <p>Imediatamente. Assim que o pagamento for confirmado, você recebe o acesso por e-mail para baixar o PDF.</p>
+      </div>
+      <div class="faq-item anim-up d3">
+        <h4>Funciona se eu já tentei mil técnicas antes?</h4>
+        <p>Especialmente se você já tentou. A maioria das técnicas falha porque trata o sintoma, não a causa. Este e-book vai direto ao loop emocional que está por trás.</p>
+      </div>
+      <div class="faq-item anim-up d4">
+        <h4>Em quanto tempo vou ver resultado?</h4>
+        <p>O e-book tem leitura de cerca de 2 horas. Muita gente muda a forma de encarar o bloqueio ainda durante a leitura. Os exercícios práticos são pra usar no mesmo dia.</p>
+      </div>
+      <div class="faq-item anim-up d5">
+        <h4>Como funciona a garantia?</h4>
+        <p>7 dias corridos após a compra. Se por qualquer motivo você não ficar satisfeito, manda um e-mail e devolvemos 100% do valor. Sem burocracia, sem perguntas.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="logo">Vontade de <em>Agir</em></div>
+    <p>2026 — Produto digital independente — Todos os direitos reservados</p>
+    <p>Termos — Privacidade — Contato</p>
+  </footer>
+</div>
+
+<!-- ══ SCREEN 5: UPSELL ══ -->
+<div class="screen" id="s-upsell">
+  <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:60px 24px;background:var(--dark);">
+    <div class="upsell-box">
+      <div class="confirm-strip anim-up animated">Compra confirmada — seu e-book esta a caminho</div>
+      <h2 class="anim-up animated d2">ESPERA —<br><em>UMA OFERTA<br>SÓ PRA VOCÊ</em></h2>
+      <p class="upsell-sub anim-up animated d3">O e-book te dá o mapa. O <strong>Plano 21 Dias</strong> te dá o caminho dia a dia — um exercício de 10 minutos por dia pra aplicar tudo que você vai aprender, do dia 1 ao dia 21.</p>
+      <div class="days-strip anim-up animated d4">
+        <div class="day-block"><div class="day-n">1–7</div><div class="day-l">Identificar o loop e os gatilhos</div></div>
+        <div class="day-block"><div class="day-n">8–14</div><div class="day-l">Ferramentas de regulação na pratica</div></div>
+        <div class="day-block"><div class="day-n">15–21</div><div class="day-l">Construir ritmo e consistencia</div></div>
+      </div>
+      <div class="upsell-price anim-up animated d5">
+        <span class="up-old">R$ 47</span>
+        <span class="up-new"><sup>R$</sup>27</span>
+        <span class="up-note">adicionado com<br>1 clique — so agora</span>
+      </div>
+      <button class="btn-up anim-up animated d5" onclick="go('s-thanks')">Sim, quero o Plano 21 Dias por R$ 27</button>
+      <button class="btn-skip-link" onclick="go('s-downsell')">Nao, prefiro so o e-book por agora</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 6: DOWNSELL ══ -->
+<div class="screen" id="s-downsell">
+  <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:60px 24px;background:var(--black);">
+    <div class="ds-box">
+      <p class="ds-tag anim-up animated">Ultima chance</p>
+      <h2 class="anim-up animated d2">E SE A<br>TRAVA BATER<br><em>HOJE?</em></h2>
+      <p class="ds-sub anim-up animated d3">Tudo bem, o Plano 21 Dias fica pra outra hora. Mas e se o bloqueio aparecer <strong>ainda hoje — quando voce mais precisar agir?</strong></p>
+      <div class="ds-card anim-scale animated d4">
+        <h3>GUIA DE <em>EMERGENCIA</em></h3>
+        <p class="dc-desc">Um PDF de bolso com 5 passos pra usar no exato momento em que a ansiedade ou o bloqueio chegarem. Rapido, direto, eficaz.</p>
+        <ul class="ds-items">
+          <li>Protocolo de 5 passos pra quando a trava bater na hora errada</li>
+          <li>Tecnica de 3 minutos pra sair do modo evitacao</li>
+          <li>O que fazer quando a culpa chegar antes da acao</li>
+          <li>Checklist de 2 minutos pra manter o ritmo nos dias ruins</li>
+        </ul>
+        <div class="ds-price">
+          <span class="ds-old">R$ 27</span>
+          <span class="ds-new"><sup>R$</sup>9</span>
+        </div>
+        <button class="btn-ds" onclick="go('s-thanks')">Sim, quero o Guia de Emergencia por R$ 9</button>
+        <button class="btn-ds-no" onclick="go('s-thanks')">Nao, pode ir pro meu e-book</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 7: OBRIGADO ══ -->
+<div class="screen" id="s-thanks">
+  <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:60px 24px;background:var(--dark);">
+    <div class="thanks-box">
+      <div class="thanks-line"></div>
+      <h1 class="anim-up animated d1">TUDO<br><em>CERTO.</em></h1>
+      <p class="thanks-sub anim-up animated d2"><strong>Seu pedido foi confirmado.</strong> Em alguns minutos voce vai receber um e-mail com o link de acesso ao seu material.</p>
+      <div class="steps-list anim-up animated d3">
+        <div class="t-step">
+          <span class="t-step-n">1</span>
+          <p><strong>Verifique seu e-mail</strong> — incluindo spam ou promocoes. O link chega em ate 5 minutos.</p>
+        </div>
+        <div class="t-step">
+          <span class="t-step-n">2</span>
+          <p><strong>Baixe o PDF</strong> no seu celular ou computador. Acesse quando e onde quiser.</p>
+        </div>
+        <div class="t-step">
+          <span class="t-step-n">3</span>
+          <p><strong>Comece pelo Capitulo 1.</strong> Leva 20 minutos e ja vai mudar como voce enxerga o loop.</p>
+        </div>
+      </div>
+      <p class="thanks-footer anim-up animated d4">Qualquer duvida, escreve pra <strong>contato@vontadedeagir.com</strong></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const answers = {};
+
+  function go(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById(id);
+    el.classList.add('active');
+    window.scrollTo(0, 0);
+
+    // trigger animations
+    setTimeout(() => {
+      el.querySelectorAll('.anim-up, .anim-left, .anim-right, .anim-scale').forEach(a => {
+        a.classList.add('animated');
+      });
+    }, 50);
+
+    // animate score bars on result screen
+    if (id === 's-result') {
+      setTimeout(() => {
+        document.querySelectorAll('.score-bar').forEach(b => {
+          b.style.width = b.dataset.w;
+        });
+      }, 400);
+    }
+  }
+
+  function initQuiz() {
+    // animate first question
+    setTimeout(() => {
+      document.querySelectorAll('#s-quiz .anim-up, #s-quiz .anim-left, #s-quiz .anim-right').forEach(a => a.classList.add('animated'));
+    }, 100);
+  }
+
+  function pick(el, qNum, val) {
+    el.closest('.options').querySelectorAll('.opt').forEach(o => o.classList.remove('sel'));
+    el.classList.add('sel');
+    answers[qNum] = val;
+    const nx = document.getElementById('nx' + qNum);
+    if (nx) nx.classList.add('show');
+  }
+
+  function nextQ(from, to) {
+    if (!answers[from]) return;
+    document.getElementById('q' + from).classList.remove('active');
+    document.getElementById('q' + to).classList.add('active');
+    const pct = (to / 5) * 100;
+    document.getElementById('prog-fill').style.width = pct + '%';
+    document.getElementById('prog-label').textContent = `Pergunta ${to} de 5`;
+    document.getElementById('prog-pct').textContent = Math.round(pct) + '%';
+  }
+
+  function showResult() {
+    if (!answers[5]) return;
+    go('s-result');
+  }
+
+  // Intersection Observer for scroll animations on sales page
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('#s-sales .anim-up, #s-sales .anim-left, #s-sales .anim-right, #s-sales .anim-scale').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

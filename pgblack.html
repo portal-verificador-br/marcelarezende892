@@ -105,6 +105,25 @@
             border-radius: 10px;
         }
 
+        .features-list {
+            text-align: left;
+            background: #fff;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border: 1px solid #f0e68c;
+        }
+
+        .features-list p {
+            font-size: 15px;
+            margin-bottom: 8px;
+            color: #222;
+        }
+
+        .features-list p:last-child {
+            margin-bottom: 0;
+        }
+
         .btn-pulse {
             background: #28a745; /* Green */
             color: white;
@@ -116,11 +135,16 @@
             border-radius: 8px;
             box-shadow: 0 4px 0 #1e7e34;
             transition: transform 0.1s;
-            animation: grow 1.5s infinite alternate;
+            animation: grow 1.2s infinite alternate, floatBtn 2s ease-in-out infinite;
             text-transform: uppercase;
         }
 
         @keyframes grow { from { transform: scale(1); } to { transform: scale(1.02); } }
+        @keyframes floatBtn {
+            0% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-5px) scale(1.02); }
+            100% { transform: translateY(0px) scale(1); }
+        }
 
         .btn-pulse:active { transform: translateY(4px); box-shadow: none; }
 
@@ -132,7 +156,7 @@
         .avatar { width: 40px; height: 40px; border-radius: 50%; background: #ccc; margin-right: 10px; flex-shrink: 0; }
         .avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
         .comment-body { background: #f0f2f5; padding: 10px; border-radius: 15px; width: 100%; }
-        .name { font-weight: bold; font-size: 14px; color: #385898; }
+        .name { font-weight: bold; font-size: 14px; color: #000000; }
         .text { font-size: 14px; }
         .meta { font-size: 12px; color: #65676b; margin-top: 5px; }
         .like { color: #65676b; cursor: pointer; }
@@ -241,6 +265,13 @@
         <div class="cta-box">
             <h2>ACESSO RESTRITO AO MANUAL</h2>
             <p>Eu compilei o passo a passo exato em um vídeo à prova de idiotas. Você só precisa clicar onde eu mostro e sacar.</p>
+            
+            <div class="features-list">
+                <p>✅ <strong>Manual de ativação do código</strong></p>
+                <p>✅ <strong>Chave de acesso para finalizar o saque</strong></p>
+                <p>✅ <strong>O WhatsApp pessoal se tiver dúvida</strong></p>
+            </div>
+
             <p style="font-size: 14px; color: #555;">(Funciona para: Nubank, Inter, Bradesco, Itaú, Santander, Caixa e BB)</p>
             
             <br>
@@ -265,7 +296,7 @@
             <div class="comment">
                 <div class="avatar"><img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Fernando Souza"></div>
                 <div class="comment-body">
-                    <div class="name">Fernando Souza</div>
+                    <div class="name">Fernando Souza da Silva</div>
                     <div class="text">Cara, eu tô tremendo... fiz no app do Nubank e apareceu R$ 890,00 que eu nem sabia que tinha. Paguei o manual e lucrei 10x mais em 5 minutos.</div>
                     <div class="meta"><span class="like">Curtir</span> · Responder · 2 min</div>
                 </div>
@@ -283,7 +314,7 @@
             <div class="comment" style="margin-left: 50px;">
                 <div class="avatar"><img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Marcos P."></div>
                 <div class="comment-body">
-                    <div class="name">Marcos P.</div>
+                    <div class="name">Marcos Pereira Santos</div>
                     <div class="text">Carla, pode ir. O Roberto entrega mesmo. O acesso chega no email. É um PDF simples, mas o conteúdo vale ouro. Recuperei 200 reais que o banco comeu de taxa.</div>
                     <div class="meta"><span class="like">Curtir</span> · Responder · 3 min</div>
                 </div>
@@ -292,7 +323,7 @@
             <div class="comment">
                 <div class="avatar"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Juliana M."></div>
                 <div class="comment-body">
-                    <div class="name">Juliana M.</div>
+                    <div class="name">Juliana Medeiros</div>
                     <div class="text">Tô chocada! Funciona no Bradesco tbm!!!</div>
                     <div class="meta"><span class="like">Curtir</span> · Responder · 12 min</div>
                 </div>
@@ -303,7 +334,7 @@
                 <div class="comment">
                     <div class="avatar"><img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Bruno Silveira"></div>
                     <div class="comment-body">
-                        <div class="name">Bruno Silveira</div>
+                        <div class="name">Bruno Silveira de Souza</div>
                         <div class="text">Alguém testou no Itaú? Queria saber se funciona lá também antes de comprar.</div>
                         <div class="meta"><span class="like">Curtir</span> · Responder · 18 min</div>
                     </div>
@@ -312,7 +343,7 @@
                 <div class="comment" style="margin-left: 50px;">
                     <div class="avatar"><img src="https://randomuser.me/api/portraits/women/35.jpg" alt="Patrícia Lima"></div>
                     <div class="comment-body">
-                        <div class="name">Patrícia Lima</div>
+                        <div class="name">Patrícia Lima Costa</div>
                         <div class="text">Bruno, eu fiz no Itaú do meu marido e deu certo sim, sacou R$ 1.200 direto na conta. Valeu muito a pena!</div>
                         <div class="meta"><span class="like">Curtir</span> · Responder · 14 min</div>
                     </div>
@@ -322,7 +353,6 @@
                     <div class="avatar"><img src="https://randomuser.me/api/portraits/men/51.jpg" alt="Eduardo Mendes"></div>
                     <div class="comment-body">
                         <div class="name">Eduardo Mendes</div>
-                        
                         <div class="text">No começo achei que era caô, mas segui o passo a passo do vídeo e recuperei uma grana preta de tarifas absurdas que cobravam da minha PJ. Insano!</div>
                         <div class="meta"><span class="like">Curtir</span> · Responder · 25 min</div>
                     </div>
@@ -331,7 +361,7 @@
                 <div class="comment">
                     <div class="avatar"><img src="https://randomuser.me/api/portraits/women/90.jpg" alt="Camila Ribeiro"></div>
                     <div class="comment-body">
-                        <div class="name">Camila Ribeiro</div>
+                        <div class="name">Camila Ribeiro Antunes</div>
                         <div class="text">Gente, façam logo antes que tirem do ar. Meu pai conseguiu resgatar quase dois mil reais preso no Santander.</div>
                         <div class="meta"><span class="like">Curtir</span> · Responder · 32 min</div>
                     </div>
@@ -352,23 +382,30 @@
     <div id="notification">
         <img src="https://randomuser.me/api/portraits/men/1.jpg" id="notify-img">
         <div>
-            <p><strong><span id="notify-name">João</span> de SP</strong></p>
-            <p>Acabou de comprar o Manual.</p>
-            <p style="color: #28a745; font-size: 11px; font-weight: bold;">Ganhou R$ 450,00 de retorno</p>
+            <p><strong><span id="notify-name">João S.</span></strong></p>
+            <p>Ativou o código 892</p>
+            <p style="color: #28a745; font-size: 11px; font-weight: bold;">Sacou via pix R$ 450,00</p>
         </div>
     </div>
 
     <script>
-        const names = ['Pedro', 'Lucas', 'Fernanda', 'Marcos', 'Júlia', 'Rafael', 'Ana', 'Gustavo'];
-        const locs = ['SP', 'RJ', 'MG', 'RS', 'BA', 'PR'];
+        const namesWithAbbr = [
+            { name: "Pedro H.", surname: "S." },
+            { name: "Lucas M.", surname: "A." },
+            { name: "Fernanda C.", surname: "O." },
+            { name: "Marcos V.", surname: "F." },
+            { name: "Júlia B.", surname: "N." },
+            { name: "Rafael D.", surname: "L." },
+            { name: "Ana P.", surname: "R." },
+            { name: "Gustavo T.", surname: "M." }
+        ];
         
         function showNotification() {
-            const name = names[Math.floor(Math.random() * names.length)];
-            const loc = locs[Math.floor(Math.random() * locs.length)];
+            const randomObj = namesWithAbbr[Math.floor(Math.random() * namesWithAbbr.length)];
             const imgId = Math.floor(Math.random() * 50);
             const gender = Math.random() > 0.5 ? 'men' : 'women';
             
-            document.getElementById('notify-name').innerText = name;
+            document.getElementById('notify-name').innerText = `${randomObj.name} ${randomObj.surname}`;
             document.getElementById('notify-img').src = `https://randomuser.me/api/portraits/${gender}/${imgId}.jpg`;
             
             const notify = document.getElementById('notification');

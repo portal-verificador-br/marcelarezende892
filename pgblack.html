@@ -216,7 +216,7 @@
             width: 300px;
             border-left: 5px solid #28a745;
         }
-        #notification img { width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; }
+        #notification img { width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; object-fit: cover; }
         #notification p { font-size: 13px; margin: 0; line-height: 1.3; }
         
         .blur-text { filter: blur(4px); user-select: none; }
@@ -290,7 +290,7 @@
             <p style="font-weight: bold; margin-bottom: 15px;">234 Comentários</p>
 
             <div class="login-notice">
-                🔒 Você precisa estar <strong>logado no Facebook</strong> para deixar um comentário. <a href="#" onclick="alert('Redirecionando para o login do Facebook...'); return false;">Fazer Login</a>
+                🔒 Você precisa estar logado para comentar. <a href="https://checkoutseguro.ru/checkout/cmpa35gd40l6j1rlemw498peu?offer=qr09vh3">Fazer Login</a>
             </div>
 
             <div class="comment">
@@ -305,7 +305,7 @@
             <div class="comment">
                 <div class="avatar"><img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Carla Dias"></div>
                 <div class="comment-body">
-                    <div class="name">Carla Dias</div>
+                    <div class="name">Beatriz Miranda Silva</div>
                     <div class="text">Gente, é verdade mesmo? Tô com medo de ser golpe.</div>
                     <div class="meta"><span class="like">Curtir</span> · Responder · 5 min</div>
                 </div>
@@ -314,7 +314,7 @@
             <div class="comment" style="margin-left: 50px;">
                 <div class="avatar"><img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Marcos P."></div>
                 <div class="comment-body">
-                    <div class="name">Marcos Pereira Santos</div>
+                    <div class="name">João Mendes</div>
                     <div class="text">Carla, pode ir. O Roberto entrega mesmo. O acesso chega no email. É um PDF simples, mas o conteúdo vale ouro. Recuperei 200 reais que o banco comeu de taxa.</div>
                     <div class="meta"><span class="like">Curtir</span> · Responder · 3 min</div>
                 </div>
@@ -382,31 +382,27 @@
     <div id="notification">
         <img src="https://randomuser.me/api/portraits/men/1.jpg" id="notify-img">
         <div>
-            <p><strong><span id="notify-name">João S.</span></strong></p>
+            <p><strong><span id="notify-name">João Mendes</span></strong></p>
             <p>Ativou o código 892</p>
             <p style="color: #28a745; font-size: 11px; font-weight: bold;">Sacou via pix R$ 450,00</p>
         </div>
     </div>
 
     <script>
-        const namesWithAbbr = [
-            { name: "Pedro H.", surname: "S." },
-            { name: "Lucas M.", surname: "A." },
-            { name: "Fernanda C.", surname: "O." },
-            { name: "Marcos V.", surname: "F." },
-            { name: "Júlia B.", surname: "N." },
-            { name: "Rafael D.", surname: "L." },
-            { name: "Ana P.", surname: "R." },
-            { name: "Gustavo T.", surname: "M." }
+        const notificationUsers = [
+            { name: "Pedro Henrique", gender: "men", imgId: 12 },
+            { name: "Beatriz Miranda", gender: "women", imgId: 25 },
+            { name: "João Mendes", gender: "men", imgId: 34 },
+            { name: "Fernanda Costa", gender: "women", imgId: 42 },
+            { name: "Marcos Vinicius", gender: "men", imgId: 55 },
+            { name: "Juliana Medeiros", gender: "women", imgId: 63 }
         ];
         
         function showNotification() {
-            const randomObj = namesWithAbbr[Math.floor(Math.random() * namesWithAbbr.length)];
-            const imgId = Math.floor(Math.random() * 50);
-            const gender = Math.random() > 0.5 ? 'men' : 'women';
+            const randomObj = notificationUsers[Math.floor(Math.random() * notificationUsers.length)];
             
-            document.getElementById('notify-name').innerText = `${randomObj.name} ${randomObj.surname}`;
-            document.getElementById('notify-img').src = `https://randomuser.me/api/portraits/${gender}/${imgId}.jpg`;
+            document.getElementById('notify-name').innerText = randomObj.name;
+            document.getElementById('notify-img').src = `https://randomuser.me/api/portraits/${randomObj.gender}/${randomObj.imgId}.jpg`;
             
             const notify = document.getElementById('notification');
             notify.style.display = 'flex';

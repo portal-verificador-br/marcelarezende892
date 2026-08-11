@@ -462,7 +462,7 @@
         <div>
             <p><strong><span id="notify-name">João Mendes</span></strong></p>
             <p>Ativou o código 892</p>
-            <p style="color: #28a745; font-size: 11px; font-weight: bold;">Sacou via pix R$ 450,00</p>
+            <p style="color: #28a745; font-size: 11px; font-weight: bold;">Sacou via pix <span id="notify-value">R$ 450,00</span></p>
         </div>
     </div>
 
@@ -475,11 +475,17 @@
             { name: "Marcos Vinicius" },
             { name: "Juliana Medeiros" }
         ];
+
+        function getRandomValue(min, max) {
+            const val = Math.random() * (max - min) + min;
+            return 'R$ ' + val.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
         
         function showNotification() {
             const randomObj = notificationUsers[Math.floor(Math.random() * notificationUsers.length)];
             
             document.getElementById('notify-name').innerText = randomObj.name;
+            document.getElementById('notify-value').innerText = getRandomValue(450.00, 2287.16);
             
             const notify = document.getElementById('notification');
             notify.style.display = 'block';

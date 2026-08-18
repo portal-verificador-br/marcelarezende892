@@ -1,539 +1,623 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protocolo de Reembolso Bancário - Ativo</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doe Esperança — Ajude quem dorme na rua hoje</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night: #1c2436;
+    --night-2: #262f45;
+    --paper: #fbf7f1;
+    --paper-2: #f2ebe0;
+    --ink: #232323;
+    --ink-soft: #6b6558;
+    --amber: #f2a541;
+    --amber-dark: #c97f1f;
+    --brick: #b8432f;
+    --brick-dark: #93341f;
+    --line: #e4dccb;
+    --radius: 14px;
+  }
 
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    
-    // ATENÇÃO: SUBSTITUA ABAIXO PELO SEU ID
-    fbq('init', '887260040779485'); 
-    fbq('track', 'PageView');
-    fbq('track', 'ViewContent');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=COLE_SEU_PIXEL_AQUI&ev=PageView&noscript=1"
-    /></noscript>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
-        body { background-color: #f0f2f5; color: #1c1e21; line-height: 1.6; }
-        
-        .alert-bar {
-            background-color: #c00;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            animation: pulse 2s infinite;
-        }
+  *{ margin:0; padding:0; box-sizing:border-box; }
 
-        @keyframes pulse {
-            0% { background-color: #c00; }
-            50% { background-color: #e00; }
-            100% { background-color: #c00; }
-        }
+  body{
+    font-family:'Inter', -apple-system, sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
+  h1,h2,h3{ font-family:'Fraunces', Georgia, serif; }
 
-        h1 {
-            font-size: 26px;
-            color: #111;
-            line-height: 1.2;
-            margin-bottom: 15px;
-            text-align: center;
-            font-weight: 900;
-        }
-        
-        .highlight { color: #c00; background: yellow; padding: 0 5px; }
+  a{ color:inherit; }
 
-        .author-box {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-        }
-        
-        .author-img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #ddd;
-            margin-right: 10px;
-            overflow: hidden;
-        }
-        
-        .author-img img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .date { font-size: 12px; color: #666; }
+  :focus-visible{
+    outline:3px solid var(--amber-dark);
+    outline-offset:2px;
+  }
 
-        p { margin-bottom: 15px; font-size: 18px; color: #333; }
-        
-        .print-screen {
-            width: 100%;
-            border: 2px solid #000;
-            margin: 15px 0;
-            border-radius: 8px;
-        }
+  /* Urgency bar — toned down, informative rather than shouting */
+  .urgency-bar{
+    background:var(--night);
+    color:var(--paper);
+    text-align:center;
+    padding:10px 16px;
+    font-size:0.88rem;
+    letter-spacing:0.2px;
+  }
+  .urgency-bar strong{ color:var(--amber); }
 
-        .cta-box {
-            background-color: #fff9c4;
-            border: 2px dashed #fbc02d;
-            padding: 20px;
-            text-align: center;
-            margin: 30px 0;
-            border-radius: 10px;
-        }
+  header{
+    background:var(--paper);
+    padding:18px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid var(--line);
+  }
+  .logo{ font-family:'Fraunces', serif; font-size:1.4rem; font-weight:700; }
+  .logo span{ color:var(--brick); }
+  .logo small{ display:block; font-family:'Inter',sans-serif; font-weight:500; font-size:0.62rem; letter-spacing:1.5px; color:var(--ink-soft); text-transform:uppercase; }
 
-        .features-list {
-            text-align: left;
-            background: #fff;
-            padding: 15px;
-            border-radius: 6px;
-            margin: 15px 0;
-            border: 1px solid #f0e68c;
-        }
+  /* Hero: streetlight motif — a lit lamp above a dark curve of "night street" */
+  .hero{
+    background:linear-gradient(180deg, var(--night) 0%, var(--night-2) 70%, var(--paper) 70%);
+    padding:56px 6% 0;
+  }
+  .hero-inner{
+    max-width:760px;
+    margin:0 auto;
+    text-align:center;
+    color:var(--paper);
+  }
+  .lamp{
+    width:64px;
+    height:64px;
+    margin:0 auto 22px;
+    display:block;
+  }
+  .hero h1{
+    font-size:clamp(1.7rem, 4.5vw, 2.5rem);
+    font-weight:600;
+    line-height:1.25;
+    margin-bottom:18px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--amber);
+  }
+  .hero p{
+    font-size:1.05rem;
+    color:#cfd3de;
+    max-width:540px;
+    margin:0 auto 40px;
+  }
 
-        .features-list p {
-            font-size: 15px;
-            margin-bottom: 8px;
-            color: #222;
-        }
+  .impact-card{
+    background:var(--night-2);
+    border:1px solid #3a4360;
+    border-radius:var(--radius) var(--radius) 0 0;
+    padding:28px 24px 34px;
+    max-width:600px;
+    margin:0 auto;
+    text-align:left;
+  }
+  .impact-card h3{ color:var(--paper); font-size:1.15rem; margin-bottom:8px; font-weight:600; }
+  .impact-card p{ color:#c3c8d6; font-size:0.95rem; }
 
-        .features-list p:last-child {
-            margin-bottom: 0;
-        }
+  main{ max-width:600px; margin:0 auto; padding:0 6% 60px; }
 
-        .btn-pulse {
-            background: #28a745; /* Green */
-            color: white;
-            font-size: 22px;
-            font-weight: bold;
-            padding: 20px 15px;
-            text-decoration: none;
-            display: block;
-            border-radius: 8px;
-            box-shadow: 0 4px 0 #1e7e34;
-            transition: transform 0.1s;
-            animation: grow 1.2s infinite alternate, floatBtn 2s ease-in-out infinite;
-            text-transform: uppercase;
-        }
+  /* Donation card */
+  .donation-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-top:none;
+    border-radius:0 0 var(--radius) var(--radius);
+    padding:30px 24px;
+    box-shadow:0 18px 40px rgba(28,36,54,0.08);
+    margin-bottom:44px;
+  }
+  .donation-card h2{
+    font-size:1.3rem;
+    font-weight:600;
+    margin-bottom:20px;
+  }
 
-        @keyframes grow { from { transform: scale(1); } to { transform: scale(1.02); } }
-        @keyframes floatBtn {
-            0% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-5px) scale(1.02); }
-            100% { transform: translateY(0px) scale(1); }
-        }
+  .progress-container{ margin-bottom:26px; }
+  .progress-info{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:0.85rem;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  
+  /* Live Indicator Light for Progress Bar */
+  .live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    background: #eef7f0;
+    color: #2b7a3e;
+    padding: 2px 8px;
+    border-radius: 12px;
+    border: 1px solid #c8e6cb;
+    font-weight: 500;
+  }
+  .live-dot {
+    width: 7px;
+    height: 7px;
+    background-color: #2e7d32;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.7);
+    animation: livePulse 1.8s infinite;
+  }
+  @keyframes livePulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(46, 125, 50, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 125, 50, 0); }
+  }
 
-        .btn-pulse:active { transform: translateY(4px); box-shadow: none; }
+  .progress-info .goal{ color:var(--ink-soft); font-weight:500; }
+  .progress-bar-bg{
+    background:var(--paper-2);
+    border-radius:10px;
+    height:10px;
+    width:100%;
+    overflow:hidden;
+  }
+  .progress-bar-fill{
+    background:linear-gradient(90deg, var(--amber-dark), var(--amber));
+    height:100%;
+    border-radius:10px;
+    transition:width .6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .progress-note{
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin-top:6px;
+  }
 
-        .scarcity { color: #c00; font-weight: bold; margin-top: 10px; font-size: 14px; }
+  .values-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .value-btn{
+    background:var(--paper);
+    border:2px solid var(--line);
+    border-radius:9px;
+    padding:14px 8px;
+    font-size:1.05rem;
+    font-weight:700;
+    font-family:'Inter',sans-serif;
+    cursor:pointer;
+    transition:border-color .15s, background .15s, color .15s;
+    color:var(--ink);
+  }
+  .value-btn:hover{ border-color:var(--amber-dark); }
+  .value-btn[aria-pressed="true"]{
+    border-color:var(--brick);
+    background:#fbeee9;
+    color:var(--brick-dark);
+  }
 
-        /* Fake Comments */
-        .comments-section { margin-top: 40px; border-top: 1px solid #ccc; padding-top: 20px; }
-        .comment { display: flex; margin-bottom: 15px; position: relative; }
-        .avatar { width: 40px; height: 40px; border-radius: 50%; background: #ccc; margin-right: 10px; flex-shrink: 0; }
-        .avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-        .comment-body { background: #f0f2f5; padding: 10px 12px; border-radius: 15px; width: 100%; position: relative; }
-        .name { font-weight: bold; font-size: 14px; color: #000000; }
-        .text { font-size: 14px; }
-        .meta { font-size: 12px; color: #65676b; margin-top: 5px; display: flex; align-items: center; gap: 8px; }
-        .like { color: #65676b; cursor: pointer; font-weight: 500; }
-        .like.liked { color: #0d6efd; font-weight: bold; }
-        
-        .like-badge {
-            position: absolute;
-            right: 8px;
-            bottom: -8px;
-            background: #fff;
-            border: 1px solid #ccd0d5;
-            border-radius: 10px;
-            padding: 1px 5px;
-            font-size: 11px;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-        }
+  .custom-value-wrap{ position:relative; margin-bottom:22px; }
+  .custom-value-wrap span{
+    position:absolute; left:14px; top:50%; transform:translateY(-50%);
+    color:var(--ink-soft); font-weight:600; pointer-events:none;
+  }
+  .custom-value-input{
+    width:100%;
+    padding:14px 14px 14px 34px;
+    border:2px solid var(--line);
+    border-radius:9px;
+    font-size:1rem;
+    font-family:'Inter',sans-serif;
+    outline:none;
+    transition:border-color .15s;
+  }
+  .custom-value-input:focus{ border-color:var(--brick); }
 
-        .login-notice {
-            background: #e7f3ff;
-            border: 1px solid #b6d4fe;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            color: #084298;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .login-notice a {
-            color: #0d6efd;
-            font-weight: bold;
-            text-decoration: none;
-        }
+  .cta-donate-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    width:100%;
+    background:var(--brick);
+    color:var(--paper);
+    border:none;
+    padding:17px;
+    border-radius:9px;
+    font-size:1.08rem;
+    font-weight:700;
+    font-family:'Inter',sans-serif;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(184,67,47,0.28);
+    transition:background .15s, transform .1s;
+    text-decoration:none;
+  }
+  .cta-donate-btn:hover{ background:var(--brick-dark); }
+  .cta-donate-btn:active{ transform:scale(0.98); }
 
-        .hidden-comments {
-            display: none;
-        }
+  .security-badge{
+    text-align:center;
+    margin-top:14px;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+  }
 
-        .btn-load-more {
-            background: #e4e6eb;
-            border: none;
-            width: 100%;
-            padding: 12px;
-            font-weight: bold;
-            color: #4b4f56;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            transition: background 0.2s;
-        }
+  /* Transparency section */
+  .transparency{
+    background:var(--paper-2);
+    border-radius:var(--radius);
+    padding:26px 24px;
+    margin-bottom:44px;
+    border:1px solid var(--line);
+  }
+  .transparency h3{ font-size:1.1rem; font-weight:600; margin-bottom:10px; }
+  .transparency p{ font-size:0.92rem; color:var(--ink-soft); margin-bottom:6px; }
+  .transparency a{ color:var(--brick); font-weight:600; text-decoration:underline; }
 
-        .btn-load-more:hover {
-            background: #d8dadf;
-        }
+  /* Comments & Community Section */
+  .comments-section{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 24px;
+    margin-bottom:20px;
+  }
+  .comments-section h3{
+    font-size:1.15rem;
+    font-weight:600;
+    margin-bottom:18px;
+    padding-bottom:12px;
+    border-bottom:1px solid var(--line);
+  }
 
-        /* Sales Notification Popup */
-        #notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            display: none;
-            align-items: center;
-            z-index: 1000;
-            width: 280px;
-            border-left: 5px solid #28a745;
-        }
-        #notification p { font-size: 13px; margin: 0; line-height: 1.3; }
-        
-        .blur-text { filter: blur(4px); user-select: none; }
-    </style>
+  .comment-item {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--paper-2);
+  }
+  .comment-item:last-child {
+    border-bottom: none;
+  }
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+  .comment-author {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+  .comment-badge {
+    background: #fbeee9;
+    color: var(--brick);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .comment-text {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .comment-footer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+  .comment-time {
+    color: #999;
+  }
+  .like-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.15s;
+  }
+  .like-btn:hover, .like-btn.liked {
+    color: var(--brick);
+  }
+
+  /* Live Donation Popup Toast Notification */
+  .donation-popup {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--night);
+    color: var(--paper);
+    padding: 14px 18px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    border-left: 4px solid var(--amber);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 320px;
+    transform: translateY(120px);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+  }
+  .donation-popup.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .popup-icon {
+    font-size: 1.4rem;
+  }
+  .popup-content strong {
+    color: var(--amber);
+    display: block;
+    font-size: 0.9rem;
+  }
+  .popup-content p {
+    font-size: 0.82rem;
+    color: #cfd3de;
+    margin: 0;
+  }
+
+  footer{
+    text-align:center;
+    padding:28px;
+    color:var(--ink-soft);
+    font-size:0.85rem;
+    border-top:1px solid var(--line);
+  }
+
+  @media (max-width:600px){
+    .values-grid{ grid-template-columns:repeat(3, 1fr); }
+    .donation-popup { bottom: 16px; right: 16px; left: 16px; max-width: none; }
+  }
+</style>
 </head>
 <body>
 
-    <div class="alert-bar">
-        ⚠️ URGENTE: ESTA PÁGINA SERÁ RETIRADA DO AR EM 10 MINUTOS POR ORDEM JUDICIAL.
+  <div class="urgency-bar">
+    Hoje, milhares de pessoas vão dormir ao relento no frio. <strong>Sua doação chega ainda hoje.</strong>
+  </div>
+
+  <header>
+    <div class="logo">Doe<span>Esperança</span><small>ação social de rua</small></div>
+  </header>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <svg class="lamp" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="32" cy="24" r="16" fill="#f2a541" opacity="0.25"/>
+        <circle cx="32" cy="24" r="9" fill="#f2a541"/>
+        <rect x="30" y="34" width="4" height="24" rx="2" fill="#cfd3de"/>
+        <path d="M20 58 H44" stroke="#cfd3de" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <h1>Enquanto você lê isso, alguém está dormindo na calçada com <em>fome e frio</em>.</h1>
+      <p>O pouco que você pode dar hoje vira uma marmita quente e um cobertor para quem não tem nada. Cada doação é entregue diretamente, na rua, no mesmo dia.</p>
+
+      <div class="impact-card">
+        <h3>Como sua doação é usada</h3>
+        <p>Compramos marmitas, cobertores e itens de higiene, e entregamos pessoalmente em pontos de rua nas noites de maior frio. Veja fotos e prestação de contas de cada ação nas nossas redes.</p>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="donation-card">
+      <h2>Escolha o valor da sua doação</h2>
+
+      <div class="progress-container">
+        <div class="progress-info">
+          <span id="raisedText">R$ 6.850 arrecadados</span>
+          <div class="live-indicator">
+            <span class="live-dot"></span> Ao vivo
+          </div>
+          <span class="goal">Meta: R$ 10.000</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressBar" style="width:68.5%"></div>
+        </div>
+        <p class="progress-note">Atualizado automaticamente a cada nova doação confirmada.</p>
+      </div>
+
+      <div class="values-grid" role="group" aria-label="Valores sugeridos de doação">
+        <button class="value-btn" aria-pressed="false" data-value="10">R$ 10</button>
+        <button class="value-btn" aria-pressed="false" data-value="20">R$ 20</button>
+        <button class="value-btn" aria-pressed="true" data-value="30">R$ 30</button>
+        <button class="value-btn" aria-pressed="false" data-value="50">R$ 50</button>
+        <button class="value-btn" aria-pressed="false" data-value="100">R$ 100</button>
+        <button class="value-btn" aria-pressed="false" data-value="200">R$ 200</button>
+      </div>
+
+      <div class="custom-value-wrap">
+        <span>R$</span>
+        <label for="customValue" class="sr-only" style="position:absolute;left:-9999px;">Outro valor</label>
+        <input type="text" inputmode="decimal" id="customValue" class="custom-value-input" placeholder="Digite outro valor">
+      </div>
+
+      <a href="#checkout" class="cta-donate-btn" id="donateBtn">Doar R$ 30 com Pix</a>
+
+      <div class="security-badge">🔒 Pagamento via Pix com confirmação instantânea.</div>
     </div>
 
-    <div class="container">
-        
-        <h1>Ex-Funcionária do Santander VAZA Brecha de Segurança: <span class="highlight">"Qualquer CPF pode sacar até R$ 2.400 extra hoje"</span></h1>
-
-        <div class="author-box">
-            <div class="author-img">
-                <img src="marcelaa.jpeg" alt="Marcela">
-            </div>
-            <div>
-                <strong>Por: Marcela Rezende</strong><br>
-                <span class="date">Atualizado: Hoje, às 08:00</span>
-            </div>
-        </div>
-
-        <p>Eles acharam que podiam me calar.</p>
-
-        <p>Trabalhei por 12 anos no setor de Finanças de um dos maiores bancos do Brasil. Fui demitida semana passada dia 03/08/2026 (por justa causa) apenas porque tentei avisar um cliente idoso que ele tinha <strong>dinheiro esquecido</strong> na conta.</p>
-
-        <p>O banco não quer que você saiba disso.</p>
-
-        <p>Existe um protocolo interno, chamado <strong>"Cashback Oculto"</strong> (Cód. 892), que gera rendimentos diários na sua conta corrente. Mas, por padrão, essa função vem DESATIVADA.</p>
-
-        <p>O dinheiro fica lá... rendendo para ELES, enquanto você paga taxas.</p>
-        
-        <h3>A Vingança</h3>
-
-        <p>Decidi jogar a m**** no ventilador. Antes de sair do prédio, copiei o <strong>MANUAL DE ATIVAÇÃO</strong>.</p>
-
-        <p>Não é hacker. Não é ilegal. É um direito seu que está escondido atrás de 3 menus no aplicativo do seu banco.</p>
-
-        <img src="inter.png" class="print-screen" alt="Prova de Saldo">
-
-        <p>Acima está o print da conta do marido que ativou o código ontem. Ele solicitou o saque e o dinheiro caiu na hora.</p>
-
-        <div class="cta-box">
-            <h2>ACESSO RESTRITO AO MANUAL</h2>
-            <p>Eu compilei o passo a passo exato em um vídeo à prova de idiotas. Você só precisa clicar onde eu mostro e sacar.</p>
-            
-            <div class="features-list">
-                <p>✅ <strong>Manual de ativação do código + Vídeo passo a passo</strong></p>
-                <p>✅ <strong>Chave de acesso para finalizar o saque no seu APP</strong></p>
-                <p>✅ <strong>Meu WhatsApp pessoal se tiver dúvida</strong></p>
-            </div>
-
-            <p style="font-size: 14px; color: #555;">(Funciona para: Nubank, Inter, Bradesco, Itaú, Santander, Caixa e BB)</p>
-            
-            <br>
-            
-            <p style="text-decoration: line-through; color: #999;">De: R$ 997,00</p>
-            <p style="font-size: 24px; font-weight: bold; color: #c00;">POR APENAS: R$ 47,00</p>
-            
-            <a href="https://checkoutseguro.ru/checkout/cmpa35gd40l6j1rlemw498peu?offer=qr09vh3" class="btn-pulse">
-                🔓 DESBLOQUEAR MEU SALDO AGORA
-            </a>
-            
-            <p class="scarcity">🔥 Restam apenas 13 licenças antes que o site caia.</p>
-        </div>
-
-        <div class="comments-section">
-            <p style="font-weight: bold; margin-bottom: 15px;">230 Comentários</p>
-
-            <div class="login-notice">
-                Você precisa estar logado para comentar. <a href="https://checkoutseguro.ru/checkout/cmpa35gd40l6j1rlemw498peu?offer=qr09vh3">Fazer Login</a>
-            </div>
-
-            <!-- Comentário 1: Homem -->
-            <div class="comment" id="c1">
-                <div class="avatar"><img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Fernando Souza"></div>
-                <div class="comment-body">
-                    <div class="name">Fernando Souza da Silva</div>
-                    <div class="text">Cara, eu tô tremendo... fiz no app do Nubank e apareceu R$ 890,00 que eu nem sabia que tinha. Comprei o manual e lucrei 10x mais em 5 minutos.</div>
-                    <div class="meta">
-                        <span class="like" onclick="toggleLike('c1')">Curtir</span> · 
-                        <span>Responder</span> · 
-                        <span style="color: #65676b;">2 min</span>
-                    </div>
-                    <div class="like-badge" id="badge-c1" style="display: flex;">
-                        👍 <span id="count-c1">14</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Comentário 2: Mulher -->
-            <div class="comment" id="c2">
-                <div class="avatar"><img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Beatriz Miranda"></div>
-                <div class="comment-body">
-                    <div class="name">Beatriz Miranda Silva</div>
-                    <div class="text">Gente, é verdade mesmo? Tô com medo de ser golpe, mas vou tentar arriscar.</div>
-                    <div class="meta">
-                        <span class="like" onclick="toggleLike('c2')">Curtir</span> · 
-                        <span>Responder</span> · 
-                        <span style="color: #65676b;">5 min</span>
-                    </div>
-                    <div class="like-badge" id="badge-c2" style="display: flex;">
-                        👍 <span id="count-c2">8</span>
-                    </div>
-                </div>
-            </div>
-             
-            <!-- Comentário 3: Homem (resposta aninhada) -->
-            <div class="comment" style="margin-left: 50px;" id="c3">
-                <div class="avatar"><img src="https://randomuser.me/api/portraits/men/12.jpg" alt="João Mendes"></div>
-                <div class="comment-body">
-                    <div class="name">João Mendes de Oliveira</div>
-                    <div class="text">Beatriz, pode ir sem medo. O acesso chega no email na hora. Recuperei o dinheiro que o banco comia de taxa.</div>
-                    <div class="meta">
-                        <span class="like" onclick="toggleLike('c3')">Curtir</span> · 
-                        <span>Responder</span> · 
-                        <span style="color: #65676b;">3 min</span>
-                    </div>
-                    <div class="like-badge" id="badge-c3" style="display: flex;">
-                        👍 <span id="count-c3">5</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Comentário 4: Mulher -->
-            <div class="comment" id="c4">
-                <div class="avatar"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Juliana Medeiros"></div>
-                <div class="comment-body">
-                    <div class="name">Juliana Medeiros Rocha</div>
-                    <div class="text">Tô chocada! Funciona no Bradesco tbm, saquei uma grana boa agora pouco!</div>
-                    <div class="meta">
-                        <span class="like" onclick="toggleLike('c4')">Curtir</span> · 
-                        <span>Responder</span> · 
-                        <span style="color: #65676b;">12 min</span>
-                    </div>
-                    <div class="like-badge" id="badge-c4" style="display: flex;">
-                        👍 <span id="count-c4">19</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Comentários Ocultos que aparecem ao clicar no botão -->
-            <div id="extra-comments" class="hidden-comments">
-                <!-- Comentário 5: Homem -->
-                <div class="comment" id="c5">
-                    <div class="avatar"><img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Bruno Silveira"></div>
-                    <div class="comment-body">
-                        <div class="name">Bruno Silveira de Souza</div>
-                        <div class="text">Alguém testou no Itaú? Queria saber se funciona lá também antes de comprar.</div>
-                        <div class="meta">
-                            <span class="like" onclick="toggleLike('c5')">Curtir</span> · 
-                            <span>Responder</span> · 
-                            <span style="color: #65676b;">18 min</span>
-                        </div>
-                        <div class="like-badge" id="badge-c5" style="display: flex;">
-                            👍 <span id="count-c5">3</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Comentário 6: Mulher (resposta aninhada) -->
-                <div class="comment" style="margin-left: 50px;" id="c6">
-                    <div class="avatar"><img src="https://randomuser.me/api/portraits/women/35.jpg" alt="Patrícia Lima"></div>
-                    <div class="comment-body">
-                        <div class="name">Patrícia Lima Costa</div>
-                        <div class="text">Bruno, eu fiz no Itaú do meu marido e deu certo sim, sacou R$ 1.200 direto na conta. Valeu muito a pena!</div>
-                        <div class="meta">
-                            <span class="like" onclick="toggleLike('c6')">Curtir</span> · 
-                            <span>Responder</span> · 
-                            <span style="color: #65676b;">14 min</span>
-                        </div>
-                        <div class="like-badge" id="badge-c6" style="display: flex;">
-                            👍 <span id="count-c6">11</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Comentário 7: Homem -->
-                <div class="comment" id="c7">
-                    <div class="avatar"><img src="https://randomuser.me/api/portraits/men/51.jpg" alt="Eduardo Mendes"></div>
-                    <div class="comment-body">
-                        <div class="name">Eduardo Mendes Ribeiro</div>
-                        <div class="text">No começo achei que era caô, mas segui o passo a passo e recuperei uma grana preta de tarifas absurdas. Insano!</div>
-                        <div class="meta">
-                            <span class="like" onclick="toggleLike('c7')">Curtir</span> · 
-                            <span>Responder</span> · 
-                            <span style="color: #65676b;">25 min</span>
-                        </div>
-                        <div class="like-badge" id="badge-c7" style="display: flex;">
-                            👍 <span id="count-c7">22</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Comentário 8: Mulher -->
-                <div class="comment" id="c8">
-                    <div class="avatar"><img src="https://randomuser.me/api/portraits/women/90.jpg" alt="Camila Ribeiro"></div>
-                    <div class="comment-body">
-                        <div class="name">Camila Ribeiro Antunes</div>
-                        <div class="text">Gente, façam logo antes que tirem do ar. Meu pai conseguiu resgatar quase dois mil reais preso no Santander.</div>
-                        <div class="meta">
-                            <span class="like" onclick="toggleLike('c8')">Curtir</span> · 
-                            <span>Responder</span> · 
-                            <span style="color: #65676b;">32 min</span>
-                        </div>
-                        <div class="like-badge" id="badge-c8" style="display: flex;">
-                            👍 <span id="count-c8">31</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <button id="loadMoreBtn" class="btn-load-more" onclick="toggleComments()">Ver mais comentários (230)</button>
-        </div>
-        
-        <br><br>
-        <center>
-            <a href="https://checkoutseguro.ru/checkout/cmpa35gd40l6j1rlemw498peu?offer=qr09vh3" style="color: #666; font-size: 12px; text-decoration: none;">Termos de Uso | Privacidade</a>
-            <p style="font-size: 10px; color: #999; margin-top: 10px;">Todos os direitos foram reservados.</p>
-        </center>
-
+    <div class="transparency">
+      <h3>Transparência</h3>
+      <p>Somos uma ação social independente. Publicamos relatórios de arrecadação e uso dos recursos mensalmente.</p>
+      <p><a href="#">Ver prestação de contas</a> · <a href="#">Fotos das últimas entregas</a></p>
     </div>
 
-    <div id="notification">
-        <div>
-            <p><strong><span id="notify-name">João Mendes</span></strong></p>
-            <p>Ativou o código 892</p>
-            <p style="color: #28a745; font-size: 11px; font-weight: bold;">Sacou via pix <span id="notify-value">R$ 450,00</span></p>
+    <div class="comments-section">
+      <h3>Relatos e Apoio da Comunidade</h3>
+      
+      <div class="comment-item">
+        <div class="comment-header">
+          <span class="comment-author">Mariana S.</span>
+          <span class="comment-badge">Doou R$ 30</span>
         </div>
+        <p class="comment-text">Parabéns pela iniciativa! Que mais pessoas possam ajudar hoje.</p>
+        <div class="comment-footer">
+          <span class="comment-time">Há 4 minutos</span>
+          <button class="like-btn" onclick="toggleLike(this)">❤️ <span class="like-count">14</span> curtidas</button>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-header">
+          <span class="comment-author">Carlos Eduardo</span>
+          <span class="comment-badge">Doou R$ 50</span>
+        </div>
+        <p class="comment-text">Fiz minha parte. O frio tá apertando muito aqui na cidade esta semana.</p>
+        <div class="comment-footer">
+          <span class="comment-time">Há 12 minutos</span>
+          <button class="like-btn" onclick="toggleLike(this)">❤️ <span class="like-count">22</span> curtidas</button>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-header">
+          <span class="comment-author">Juliana Ribeiro</span>
+          <span class="comment-badge">Doou R$ 100</span>
+        </div>
+        <p class="comment-text">Essencial esse trabalho. Continuem firmes nessa missão linda!</p>
+        <div class="comment-footer">
+          <span class="comment-time">Há 28 minutos</span>
+          <button class="like-btn liked" onclick="toggleLike(this)">❤️ <span class="like-count">39</span> curtidas</button>
+        </div>
+      </div>
     </div>
+  </main>
 
-    <script>
-        const notificationUsers = [
-            { name: "Pedro Henrique" },
-            { name: "Beatriz Miranda" },
-            { name: "João Gonçalves" },
-            { name: "Fernanda Costa Santos" },
-            { name: "Marcos Vinicius" },
-            { name: "Fernanda Medeiros" }
-        ];
+  <!-- Popup de Doação em Tempo Real -->
+  <div class="donation-popup" id="donationPopup">
+    <div class="popup-icon">🍲</div>
+    <div class="popup-content">
+      <strong id="popupName">Renata M. acabou de doar</strong>
+      <p id="popupText">Doação de R$ 50 confirmada via Pix!</p>
+    </div>
+  </div>
 
-        function getRandomValue(min, max) {
-            const val = Math.random() * (max - min) + min;
-            return 'R$ ' + val.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-        
-        function showNotification() {
-            const randomObj = notificationUsers[Math.floor(Math.random() * notificationUsers.length)];
-            
-            document.getElementById('notify-name').innerText = randomObj.name;
-            document.getElementById('notify-value').innerText = getRandomValue(450.00, 2287.16);
-            
-            const notify = document.getElementById('notification');
-            notify.style.display = 'block';
-            
-            setTimeout(() => {
-                notify.style.display = 'none';
-            }, 4000);
-        }
+  <footer>
+    <p>&copy; 2026 Doe Esperança. Transformando vidas nas ruas.</p>
+  </footer>
 
-        function toggleComments() {
-            const extraComments = document.getElementById('extra-comments');
-            const loadMoreBtn = document.getElementById('loadMoreBtn');
-            
-            if (extraComments.style.display === 'block') {
-                extraComments.style.display = 'none';
-                loadMoreBtn.innerText = 'Ver mais comentários (230)';
-            } else {
-                extraComments.style.display = 'block';
-                loadMoreBtn.innerText = 'Ocultar comentários';
-            }
-        }
+  <script>
+    // Seleção de Valores
+    const buttons = document.querySelectorAll('.value-btn');
+    const customInput = document.getElementById('customValue');
+    const donateBtn = document.getElementById('donateBtn');
 
-        function toggleLike(commentId) {
-            const commentElement = document.getElementById(commentId);
-            const likeBtn = commentElement.querySelector('.like');
-            const badge = document.getElementById('badge-' + commentId);
-            const countSpan = document.getElementById('count-' + commentId);
-            
-            let count = parseInt(countSpan.innerText);
+    function formatBRL(n){
+      return 'R$ ' + Number(n).toLocaleString('pt-BR');
+    }
 
-            if (likeBtn.classList.contains('liked')) {
-                likeBtn.classList.remove('liked');
-                likeBtn.innerText = 'Curtir';
-                count -= 1;
-            } else {
-                likeBtn.classList.add('liked');
-                likeBtn.innerText = 'Descurtir';
-                count += 1;
-            }
+    function setSelected(btn){
+      buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+    }
 
-            countSpan.innerText = count;
-            badge.style.display = 'flex';
-        }
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        setSelected(btn);
+        const val = btn.dataset.value;
+        customInput.value = '';
+        donateBtn.textContent = `Doar ${formatBRL(val)} com Pix`;
+      });
+    });
 
-        // Show first notification after 3 seconds, then every 15 seconds
-        setTimeout(showNotification, 3000);
-        setInterval(showNotification, 15000);
-    </script>
+    customInput.addEventListener('input', () => {
+      buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+      const num = customInput.value.replace(/[^\d,\.]/g, '');
+      donateBtn.textContent = num ? `Doar R$ ${num} com Pix` : 'Doar com Pix';
+    });
+
+    // Curtidas Interativas nos Comentários
+    function toggleLike(btn) {
+      const countSpan = btn.querySelector('.like-count');
+      let count = parseInt(countSpan.textContent);
+      
+      if (btn.classList.contains('liked')) {
+        btn.classList.remove('liked');
+        count -= 1;
+      } else {
+        btn.classList.add('liked');
+        count += 1;
+      }
+      countSpan.textContent = count;
+    }
+
+    // Simulação de doações ao vivo e atualização da barra em tempo real
+    let currentRaised = 6850;
+    const goal = 10000;
+    const raisedText = document.getElementById('raisedText');
+    const progressBar = document.getElementById('progressBar');
+    const popup = document.getElementById('donationPopup');
+    const popupName = document.getElementById('popupName');
+    const popupText = document.getElementById('popupText');
+
+    const recentDonors = [
+      { name: "Lucas Ferreira", value: 30 },
+      { name: "Beatriz Lima", value: 50 },
+      { name: "Rafael Souza", value: 100 },
+      { name: "Camila Dias", value: 20 },
+      { name: "Marcos Vinicius", value: 200 },
+      { name: "Patricia Gomes", value: 10 }
+    ];
+
+    function updateProgress(amount) {
+      currentRaised += amount;
+      if (currentRaised > goal) currentRaised = goal;
+      
+      raisedText.textContent = `R$ ${currentRaised.toLocaleString('pt-BR')} arrecadados`;
+      const percentage = (currentRaised / goal) * 100;
+      progressBar.style.width = percentage + '%';
+    }
+
+    function showRandomDonationPopup() {
+      const randomDonor = recentDonors[Math.floor(Math.random() * recentDonors.length)];
+      
+      popupName.textContent = `${randomDonor.name} acabou de doar`;
+      popupText.textContent = `Contribuição de R$ ${randomDonor.value} confirmada via Pix!`;
+      
+      popup.classList.add('show');
+      updateProgress(randomDonor.value);
+
+      setTimeout(() => {
+        popup.classList.remove('show');
+      }, 5000);
+    }
+
+    // Dispara popups em intervalos realistas (a cada 18 a 30 segundos)
+    function scheduleNextPopup() {
+      const randomTime = Math.floor(Math.random() * 13000) + 18000; 
+      setTimeout(() => {
+        showRandomDonationPopup();
+        scheduleNextPopup();
+      }, randomTime);
+    }
+
+    // Inicia a primeira simulação após 12 segundos para parecer orgânico
+    setTimeout(scheduleNextPopup, 12000);
+  </script>
+
 </body>
-
 </html>

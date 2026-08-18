@@ -14,7 +14,7 @@
     --paper: #fbf7f1;
     --paper-2: #f2ebe0;
     --ink: #232323;
-    --ink-soft: #4a453b; /* Escurecido para dar contraste perfeito com o fundo claro */
+    --ink-soft: #4a453b;
     --amber: #f2a541;
     --amber-dark: #c97f1f;
     --brick: #b8432f;
@@ -67,7 +67,8 @@
 
   /* Hero */
   .hero{
-    background:linear-gradient(180deg, var(--night) 0%, var(--night-2) 70%, var(--paper) 70%);
+    /* Ajustado o gradiente para cobrir a transição onde o texto estava apagado */
+    background: linear-gradient(180deg, var(--night) 0%, var(--night-2) 65%, var(--paper) 65%);
     padding:56px 6% 0;
   }
   .hero-inner{
@@ -86,17 +87,21 @@
     font-size:clamp(1.7rem, 4.5vw, 2.5rem);
     font-weight:600;
     line-height:1.25;
-    margin-bottom:18px;
+    margin-bottom:22px;
   }
   .hero h1 em{
     font-style:normal;
     color:var(--amber);
   }
+  /* Texto corrigido com excelente contraste sobre fundo escuro */
   .hero p{
     font-size:1.05rem;
-    color:#e2e6f0; /* Clareado para legibilidade ideal no fundo escuro */
-    max-width:540px;
-    margin:0 auto 40px;
+    color:#f4f6fc;
+    max-width:580px;
+    margin:0 auto 36px;
+    line-height: 1.6;
+    font-weight: 400;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   }
 
   /* Carrossel de Fotos (5 fotos) */
@@ -235,6 +240,30 @@
     gap:10px;
     margin-bottom:22px;
   }
+  
+  .value-btn-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Tag de destaque "Mais escolhido" no botão de R$ 20 */
+  .badge-tag {
+    position: absolute;
+    top: -8px;
+    right: 6px;
+    background: var(--brick);
+    color: #fff;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    pointer-events: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  }
+
   .value-btn{
     background:var(--paper);
     border:2px solid var(--line);
@@ -246,12 +275,47 @@
     cursor:pointer;
     transition:border-color .15s, background .15s, color .15s;
     color:var(--ink);
+    width: 100%;
   }
   .value-btn:hover{ border-color:var(--amber-dark); }
   .value-btn[aria-pressed="true"]{
     border-color:var(--brick);
     background:#fbeee9;
     color:var(--brick-dark);
+  }
+
+  /* Campo customizado para "Outro Valor" (WhatsApp) */
+  .custom-value-container {
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 12px;
+    margin-bottom: 22px;
+  }
+  .custom-value-label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .custom-value-input-group {
+    display: flex;
+    gap: 8px;
+  }
+  .custom-value-input {
+    flex: 1;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+  }
+  .custom-value-input:focus {
+    border-color: var(--amber-dark);
+    outline: none;
   }
 
   .cta-donate-btn{
@@ -553,7 +617,7 @@
 <body>
 
   <div class="urgency-bar">
-    Hoje, milhares de pessoas vão dormir ao relento no frio. <strong>Sua doação chega ainda hoje.</strong>
+    Hoje, milhares de famílias e <strong>crianças nas ruas</strong> enfrentam o frio. <strong>Sua doação chega ainda hoje.</strong>
   </div>
 
   <header>
@@ -569,7 +633,7 @@
         <path d="M20 58 H44" stroke="#cfd3de" stroke-width="4" stroke-linecap="round"/>
       </svg>
       <h1>Enquanto você lê isso, alguém está dormindo na calçada com <em>fome e frio</em>.</h1>
-      <p>O pouco que você pode dar hoje vira uma marmita quente e um cobertor para quem não tem nada. Cada doação é entregue diretamente, na rua, no mesmo dia.</p>
+      <p>O pouco que você pode dar hoje vira uma marmita quente e um cobertor para moradores e crianças que não têm nada. Cada doação é entregue diretamente, na rua, no mesmo dia.</p>
     </div>
   </div>
 
@@ -580,25 +644,46 @@
 
       <div class="progress-container">
         <div class="progress-info">
-          <span id="raisedText">R$ 5.250 arrecadados</span>
+          <span id="raisedText">R$ 5.780 arrecadados</span>
           <div class="live-indicator">
             <span class="live-dot"></span> Ao vivo
           </div>
           <span class="goal">Meta: R$ 10.000</span>
         </div>
         <div class="progress-bar-bg">
-          <div class="progress-bar-fill" id="progressBar" style="width:52.5%"></div>
+          <div class="progress-bar-fill" id="progressBar" style="width:57.8%"></div>
         </div>
         <p class="progress-note">Atualizado automaticamente a cada nova doação confirmada.</p>
       </div>
 
       <div class="values-grid" role="group" aria-label="Valores sugeridos de doação">
-        <button class="value-btn" aria-pressed="false" data-value="10">R$ 10</button>
-        <button class="value-btn" aria-pressed="false" data-value="20">R$ 20</button>
-        <button class="value-btn" aria-pressed="true" data-value="30">R$ 30</button>
-        <button class="value-btn" aria-pressed="false" data-value="50">R$ 50</button>
-        <button class="value-btn" aria-pressed="false" data-value="100">R$ 100</button>
-        <button class="value-btn" aria-pressed="false" data-value="200">R$ 200</button>
+        <div class="value-btn-wrapper">
+          <button class="value-btn" aria-pressed="false" data-value="10">R$ 10</button>
+        </div>
+        <div class="value-btn-wrapper">
+          <span class="badge-tag">Mais escolhido</span>
+          <button class="value-btn" aria-pressed="false" data-value="20">R$ 20</button>
+        </div>
+        <div class="value-btn-wrapper">
+          <button class="value-btn" aria-pressed="true" data-value="30">R$ 30</button>
+        </div>
+        <div class="value-btn-wrapper">
+          <button class="value-btn" aria-pressed="false" data-value="50">R$ 50</button>
+        </div>
+        <div class="value-btn-wrapper">
+          <button class="value-btn" aria-pressed="false" data-value="100">R$ 100</button>
+        </div>
+        <div class="value-btn-wrapper">
+          <button class="value-btn" aria-pressed="false" data-value="200">R$ 200</button>
+        </div>
+      </div>
+
+      <!-- Outro Valor integrado com WhatsApp -->
+      <div class="custom-value-container">
+        <label class="custom-value-label" for="customAmountInput">Quer doar outro valor? Digite aqui:</label>
+        <div class="custom-value-input-group">
+          <input type="number" id="customAmountInput" class="custom-value-input" placeholder="Ex: 15, 75, 150..." min="1">
+        </div>
       </div>
 
       <a href="#checkout" class="cta-donate-btn" id="donateBtn">Doar R$ 30 com Pix</a>
@@ -615,7 +700,7 @@
         </div>
         <div class="carousel-slide">
           <img src="https://via.placeholder.com/600x300/262f45/f2a541?text=Acao+Noturna+-+Entrega+de+Cobertores+2" alt="Ação 2">
-          <div class="carousel-caption">Distribuição de cobertores nas calçadas.</div>
+          <div class="carousel-caption">Distribuição de cobertores para famílias e crianças.</div>
         </div>
         <div class="carousel-slide">
           <img src="https://via.placeholder.com/600x300/1c2436/f2a541?text=Acao+Noturna+-+Kit+Higiene+3" alt="Ação 3">
@@ -642,7 +727,7 @@
     <!-- Bloco de Como sua doação é usada -->
     <div class="impact-card" style="background:var(--night-2); border:1px solid #3a4360; border-radius:var(--radius); padding:28px 24px 34px; margin-bottom:30px;">
       <h3 style="color:var(--paper); font-size:1.15rem; margin-bottom:8px; font-weight:600;">Como sua doação é usada</h3>
-      <p style="color:#e2e6f0; font-size:0.95rem;">Compramos marmitas, cobertores e itens de higiene, e entregamos pessoalmente em pontos de rua nas noites de maior frio. Veja fotos e prestação de contas de cada ação nas nossas redes.</p>
+      <p style="color:#e2e6f0; font-size:0.95rem;">Compramos marmitas, cobertores e itens de higiene para moradores de rua e crianças desabrigadas, entregando pessoalmente nas noites de maior frio. Veja fotos e prestação de contas nas nossas redes.</p>
     </div>
 
     <div class="transparency">
@@ -664,7 +749,7 @@
       </div>
     </div>
 
-    <!-- Seção de Comentários (Com login obrigatório, fotos linkadas e opção Carregar Mais) -->
+    <!-- Seção de Comentários (Variando sobrenomes: 1 ou 2 sobrenomes) -->
     <div class="comments-section">
       <h3>Relatos e Apoio da Comunidade</h3>
       
@@ -674,7 +759,7 @@
         <a href="#login" class="login-btn">Fazer Login / Criar Conta</a>
       </div>
 
-      <!-- Comentário 1 -->
+      <!-- Comentário 1 (2 sobrenomes) -->
       <div class="comment-item">
         <a href="#perfil-mariana" class="comment-avatar-link"><img src="foto-mariana.jpg" alt="Mariana S." class="comment-user-avatar"></a>
         <div class="comment-content">
@@ -682,7 +767,7 @@
             <span class="comment-author">Mariana Souza Silva</span>
             <span class="comment-badge">Doou R$ 30</span>
           </div>
-          <p class="comment-text">Parabéns pela iniciativa! Que mais pessoas possam ajudar hoje.</p>
+          <p class="comment-text">Parabéns pela iniciativa! Que mais famílias e crianças possam ser ajudadas hoje.</p>
           <div class="comment-footer">
             <span class="comment-time">Há 4 minutos</span>
             <button class="like-btn" onclick="toggleLike(this)">❤️ <span class="like-count">14</span> curtidas</button>
@@ -690,13 +775,13 @@
         </div>
       </div>
 
-      <!-- Comentário 2 -->
+      <!-- Comentário 2 (1 sobrenome) -->
       <div class="comment-item">
         <a href="#perfil-carlos" class="comment-avatar-link"><img src="foto-carlos.jpg" alt="Carlos Eduardo" class="comment-user-avatar"></a>
         <div class="comment-content">
           <div class="comment-header">
-            <span class="comment-author">Carlos Eduardo Santos</span>
-            <span class="comment-badge">Doou R$ 50</span>
+            <span class="comment-author">Carlos Eduardo</span>
+            <span class="comment-badge">Doou R$ 20</span>
           </div>
           <p class="comment-text">Fiz minha parte. O frio tá apertando muito aqui na cidade esta semana.</p>
           <div class="comment-footer">
@@ -706,7 +791,7 @@
         </div>
       </div>
 
-      <!-- Comentário 3 -->
+      <!-- Comentário 3 (2 sobrenomes) -->
       <div class="comment-item">
         <a href="#perfil-juliana" class="comment-avatar-link"><img src="foto-juliana.jpg" alt="Juliana Ribeiro" class="comment-user-avatar"></a>
         <div class="comment-content">
@@ -714,7 +799,7 @@
             <span class="comment-author">Juliana Ribeiro Costa</span>
             <span class="comment-badge">Doou R$ 100</span>
           </div>
-          <p class="comment-text">Essencial esse trabalho. Continuem firmes nessa missão linda!</p>
+          <p class="comment-text">Essencial esse trabalho protegendo as crianças nas ruas. Continuem firmes!</p>
           <div class="comment-footer">
             <span class="comment-time">Há 28 minutos</span>
             <button class="like-btn liked" onclick="toggleLike(this)">❤️ <span class="like-count">39</span> curtidas</button>
@@ -722,12 +807,12 @@
         </div>
       </div>
 
-      <!-- Comentário 4 -->
+      <!-- Comentário 4 (1 sobrenome) -->
       <div class="comment-item">
         <a href="#perfil-roberto" class="comment-avatar-link"><img src="foto-roberto.jpg" alt="Roberto Mendes" class="comment-user-avatar"></a>
         <div class="comment-content">
           <div class="comment-header">
-            <span class="comment-author">Roberto Mendes Oliveira</span>
+            <span class="comment-author">Roberto Mendes</span>
             <span class="comment-badge">Doou R$ 20</span>
           </div>
           <p class="comment-text">Doação feita com muito carinho. Todo mundo merece um prato de comida quente.</p>
@@ -738,7 +823,7 @@
         </div>
       </div>
 
-      <!-- Comentário 5 -->
+      <!-- Comentário 5 (2 sobrenomes) -->
       <div class="comment-item">
         <a href="#perfil-fernanda" class="comment-avatar-link"><img src="foto-fernanda.jpg" alt="Fernanda Lima" class="comment-user-avatar"></a>
         <div class="comment-content">
@@ -754,15 +839,15 @@
         </div>
       </div>
 
-      <!-- Comentário 6 -->
+      <!-- Comentário 6 (1 sobrenome) -->
       <div class="comment-item">
         <a href="#perfil-lucas" class="comment-avatar-link"><img src="foto-lucas.jpg" alt="Lucas Ferreira" class="comment-user-avatar"></a>
         <div class="comment-content">
           <div class="comment-header">
-            <span class="comment-author">Lucas Ferreira Nunes</span>
+            <span class="comment-author">Lucas Ferreira</span>
             <span class="comment-badge">Doou R$ 30</span>
           </div>
-          <p class="comment-text">Muito feliz em poder contribuir hoje com a campanha. Parabéns pela transparência!</p>
+          <p class="comment-text">Muito feliz em poder contribuir hoje com a campanha. Parabéns!</p>
           <div class="comment-footer">
             <span class="comment-time">Há 1 hora</span>
             <button class="like-btn" onclick="toggleLike(this)">❤️ <span class="like-count">12</span> curtidas</button>
@@ -770,9 +855,9 @@
         </div>
       </div>
 
-      <!-- Comentários Ocultos inicialmente (Mais 7 comentários ao clicar no botão) -->
+      <!-- Comentários Ocultos inicialmente (Mais 7 comentários ao clicar no botão, variando sobrenomes) -->
       <div id="hiddenComments" class="hidden-comments">
-        <!-- Comentário 7 -->
+        <!-- Comentário 7 (2 sobrenomes) -->
         <div class="comment-item">
           <a href="#perfil-beatriz" class="comment-avatar-link"><img src="foto-beatriz.jpg" alt="Beatriz Lima" class="comment-user-avatar"></a>
           <div class="comment-content">
@@ -788,12 +873,12 @@
           </div>
         </div>
 
-        <!-- Comentário 8 -->
+        <!-- Comentário 8 (1 sobrenome) -->
         <div class="comment-item">
           <a href="#perfil-gabriel" class="comment-avatar-link"><img src="foto-gabriel.jpg" alt="Gabriel" class="comment-user-avatar"></a>
           <div class="comment-content">
             <div class="comment-header">
-              <span class="comment-author">Gabriel Henrique Antunes</span>
+              <span class="comment-author">Gabriel Antunes</span>
               <span class="comment-badge">Doou R$ 100</span>
             </div>
             <p class="comment-text">Pix enviado e confirmado instantaneamente! Forte abraço a todos os voluntários.</p>
@@ -804,7 +889,7 @@
           </div>
         </div>
 
-        <!-- Comentário 9 -->
+        <!-- Comentário 9 (2 sobrenomes) -->
         <div class="comment-item">
           <a href="#perfil-patricia" class="comment-avatar-link"><img src="foto-patricia.jpg" alt="Patricia" class="comment-user-avatar"></a>
           <div class="comment-content">
@@ -820,12 +905,12 @@
           </div>
         </div>
 
-        <!-- Comentário 10 -->
+        <!-- Comentário 10 (1 sobrenome) -->
         <div class="comment-item">
           <a href="#perfil-renato" class="comment-avatar-link"><img src="foto-renato.jpg" alt="Renato" class="comment-user-avatar"></a>
           <div class="comment-content">
             <div class="comment-header">
-              <span class="comment-author">Renato Augusto Teodoro</span>
+              <span class="comment-author">Renato Teodoro</span>
               <span class="comment-badge">Doou R$ 200</span>
             </div>
             <p class="comment-text">Projeto sério e de muita confiança. Sempre que posso estou apoiando.</p>
@@ -836,7 +921,7 @@
           </div>
         </div>
 
-        <!-- Comentário 11 -->
+        <!-- Comentário 11 (2 sobrenomes) -->
         <div class="comment-item">
           <a href="#perfil-vanessa" class="comment-avatar-link"><img src="foto-vanessa.jpg" alt="Vanessa" class="comment-user-avatar"></a>
           <div class="comment-content">
@@ -852,12 +937,12 @@
           </div>
         </div>
 
-        <!-- Comentário 12 -->
+        <!-- Comentário 12 (1 sobrenome) -->
         <div class="comment-item">
           <a href="#perfil-marcelo" class="comment-avatar-link"><img src="foto-marcelo.jpg" alt="Marcelo" class="comment-user-avatar"></a>
           <div class="comment-content">
             <div class="comment-header">
-              <span class="comment-author">Marcelo Duarte Ribeiro</span>
+              <span class="comment-author">Marcelo Ribeiro</span>
               <span class="comment-badge">Doou R$ 50</span>
             </div>
             <p class="comment-text">Doação realizada com sucesso. Excelente iniciativa social.</p>
@@ -868,7 +953,7 @@
           </div>
         </div>
 
-        <!-- Comentário 13 -->
+        <!-- Comentário 13 (2 sobrenomes) -->
         <div class="comment-item">
           <a href="#perfil-larissa" class="comment-avatar-link"><img src="foto-larissa.jpg" alt="Larissa" class="comment-user-avatar"></a>
           <div class="comment-content">
@@ -906,25 +991,52 @@
   </footer>
 
   <script>
-    // Seleção de Valores Fixos
+    // Seleção de Valores Fixos e Integração com WhatsApp para Outro Valor
     const buttons = document.querySelectorAll('.value-btn');
     const donateBtn = document.getElementById('donateBtn');
+    const customInput = document.getElementById('customAmountInput');
+    let selectedValue = "30";
+    let isCustom = false;
 
     function formatBRL(n){
       return 'R$ ' + Number(n).toLocaleString('pt-BR');
     }
 
-    function setSelected(btn){
-      buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
-      btn.setAttribute('aria-pressed', 'true');
+    function updateDonateButton() {
+      if (isCustom && customInput.value) {
+        donateBtn.textContent = `Doar ${formatBRL(customInput.value)} via WhatsApp`;
+        // Configura o link para o WhatsApp solicitado com mensagem personalizada
+        const msg = encodeURIComponent("Quero ajudar o Doe Esperança com outro valor: R$ " + customInput.value);
+        donateBtn.href = `https://wa.me/551198383665?text=${msg}`;
+      } else {
+        donateBtn.textContent = `Doar ${formatBRL(selectedValue)} com Pix`;
+        donateBtn.href = `#checkout`;
+      }
     }
 
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
-        setSelected(btn);
-        const val = btn.dataset.value;
-        donateBtn.textContent = `Doar ${formatBRL(val)} com Pix`;
+        buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+        btn.setAttribute('aria-pressed', 'true');
+        selectedValue = btn.dataset.value;
+        isCustom = false;
+        customInput.value = '';
+        updateDonateButton();
       });
+    });
+
+    customInput.addEventListener('input', () => {
+      if (customInput.value.trim() !== '') {
+        buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+        isCustom = true;
+        updateDonateButton();
+      } else {
+        isCustom = false;
+        // Restaura para o botão 30 por padrão se limpar
+        document.querySelector('[data-value="30"]').setAttribute('aria-pressed', 'true');
+        selectedValue = "30";
+        updateDonateButton();
+      }
     });
 
     // Curtidas Interativas nos Comentários
@@ -975,8 +1087,8 @@
       goToSlide(currentSlide);
     }, 4000);
 
-    // Simulação de Doações ao Vivo (Atualizando arrecadado a partir de R$ 5.250 e contador de pessoas)
-    let currentRaised = 5250;
+    // Simulação de Doações ao Vivo
+    let currentRaised = 5780;
     let currentDonors = 3200;
     const goal = 10000;
     const raisedText = document.getElementById('raisedText');

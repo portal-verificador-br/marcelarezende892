@@ -42,7 +42,7 @@
     outline-offset:2px;
   }
 
-  /* Urgency bar — toned down, informative rather than shouting */
+  /* Urgency bar */
   .urgency-bar{
     background:var(--night);
     color:var(--paper);
@@ -65,7 +65,7 @@
   .logo span{ color:var(--brick); }
   .logo small{ display:block; font-family:'Inter',sans-serif; font-weight:500; font-size:0.62rem; letter-spacing:1.5px; color:var(--ink-soft); text-transform:uppercase; }
 
-  /* Hero: streetlight motif — a lit lamp above a dark curve of "night street" */
+  /* Hero */
   .hero{
     background:linear-gradient(180deg, var(--night) 0%, var(--night-2) 70%, var(--paper) 70%);
     padding:56px 6% 0;
@@ -99,17 +99,62 @@
     margin:0 auto 40px;
   }
 
-  .impact-card{
-    background:var(--night-2);
-    border:1px solid #3a4360;
-    border-radius:var(--radius) var(--radius) 0 0;
-    padding:28px 24px 34px;
+  /* Carrossel de Fotos (5 fotos) */
+  .carousel-container{
     max-width:600px;
-    margin:0 auto;
-    text-align:left;
+    margin:30px auto;
+    position:relative;
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    background:var(--night);
+    border:1px solid var(--line);
   }
-  .impact-card h3{ color:var(--paper); font-size:1.15rem; margin-bottom:8px; font-weight:600; }
-  .impact-card p{ color:#c3c8d6; font-size:0.95rem; }
+  .carousel-track{
+    display:flex;
+    transition:transform 0.5s ease-in-out;
+    width:500%; /* 5 fotos = 500% */
+  }
+  .carousel-slide{
+    width:20%;
+    flex-shrink:0;
+    position:relative;
+  }
+  .carousel-slide img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    display:block;
+  }
+  .carousel-caption{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    background:rgba(28,36,54,0.85);
+    color:var(--paper);
+    padding:10px 16px;
+    font-size:0.85rem;
+  }
+  .carousel-dots{
+    position:absolute;
+    bottom:12px;
+    right:16px;
+    display:flex;
+    gap:6px;
+    z-index:10;
+  }
+  .dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.4);
+    cursor:pointer;
+    transition:background 0.3s;
+  }
+  .dot.active{
+    background:var(--amber);
+  }
 
   main{ max-width:600px; margin:0 auto; padding:0 6% 60px; }
 
@@ -117,11 +162,10 @@
   .donation-card{
     background:var(--paper);
     border:1px solid var(--line);
-    border-top:none;
-    border-radius:0 0 var(--radius) var(--radius);
+    border-radius:var(--radius);
     padding:30px 24px;
     box-shadow:0 18px 40px rgba(28,36,54,0.08);
-    margin-bottom:44px;
+    margin-bottom:30px;
   }
   .donation-card h2{
     font-size:1.3rem;
@@ -139,7 +183,6 @@
     margin-bottom:8px;
   }
   
-  /* Live Indicator Light for Progress Bar */
   .live-indicator {
     display: inline-flex;
     align-items: center;
@@ -190,7 +233,7 @@
     display:grid;
     grid-template-columns:repeat(3, 1fr);
     gap:10px;
-    margin-bottom:14px;
+    margin-bottom:22px;
   }
   .value-btn{
     background:var(--paper);
@@ -210,23 +253,6 @@
     background:#fbeee9;
     color:var(--brick-dark);
   }
-
-  .custom-value-wrap{ position:relative; margin-bottom:22px; }
-  .custom-value-wrap span{
-    position:absolute; left:14px; top:50%; transform:translateY(-50%);
-    color:var(--ink-soft); font-weight:600; pointer-events:none;
-  }
-  .custom-value-input{
-    width:100%;
-    padding:14px 14px 14px 34px;
-    border:2px solid var(--line);
-    border-radius:9px;
-    font-size:1rem;
-    font-family:'Inter',sans-serif;
-    outline:none;
-    transition:border-color .15s;
-  }
-  .custom-value-input:focus{ border-color:var(--brick); }
 
   .cta-donate-btn{
     display:flex;
@@ -262,12 +288,60 @@
     background:var(--paper-2);
     border-radius:var(--radius);
     padding:26px 24px;
-    margin-bottom:44px;
+    margin-bottom:30px;
     border:1px solid var(--line);
   }
   .transparency h3{ font-size:1.1rem; font-weight:600; margin-bottom:10px; }
   .transparency p{ font-size:0.92rem; color:var(--ink-soft); margin-bottom:6px; }
   .transparency a{ color:var(--brick); font-weight:600; text-decoration:underline; }
+
+  /* Social Proof Banner (Estilo da Imagem) */
+  .social-proof-banner{
+    background: var(--night);
+    color: var(--paper);
+    padding: 18px 20px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 20px rgba(28,36,54,0.15);
+  }
+  .social-avatars{
+    display: flex;
+    align-items: center;
+  }
+  .s-avatar{
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--amber);
+    color: var(--night);
+    font-weight: 700;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--night);
+    margin-left: -10px;
+  }
+  .s-avatar:first-child{
+    margin-left: 0;
+  }
+  .s-avatar.plus{
+    background: var(--amber-dark);
+    color: #fff;
+    font-size: 0.9rem;
+  }
+  .social-proof-text{
+    font-size: 0.88rem;
+    line-height: 1.4;
+    color: #cfd3de;
+  }
+  .social-proof-text strong{
+    color: var(--amber);
+    font-weight: 700;
+  }
 
   /* Comments & Community Section */
   .comments-section{
@@ -284,6 +358,31 @@
     padding-bottom:12px;
     border-bottom:1px solid var(--line);
   }
+
+  /* Aviso de Login Obrigatório para Comentar */
+  .login-to-comment-box{
+    background:var(--paper-2);
+    border:1px dashed #cfc4ac;
+    padding:20px;
+    border-radius:9px;
+    text-align:center;
+    margin-bottom:24px;
+  }
+  .login-to-comment-box p{ margin-bottom:12px; color:var(--ink-soft); font-size:0.9rem; }
+  .login-btn{
+    background:var(--night);
+    color:var(--paper);
+    border:none;
+    padding:10px 20px;
+    border-radius:7px;
+    font-weight:600;
+    font-size:0.88rem;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-block;
+    transition: background 0.2s;
+  }
+  .login-btn:hover{ background:var(--night-2); }
 
   .comment-item {
     padding: 14px 0;
@@ -414,28 +513,24 @@
       </svg>
       <h1>Enquanto você lê isso, alguém está dormindo na calçada com <em>fome e frio</em>.</h1>
       <p>O pouco que você pode dar hoje vira uma marmita quente e um cobertor para quem não tem nada. Cada doação é entregue diretamente, na rua, no mesmo dia.</p>
-
-      <div class="impact-card">
-        <h3>Como sua doação é usada</h3>
-        <p>Compramos marmitas, cobertores e itens de higiene, e entregamos pessoalmente em pontos de rua nas noites de maior frio. Veja fotos e prestação de contas de cada ação nas nossas redes.</p>
-      </div>
     </div>
   </div>
 
   <main>
+    <!-- Bloco de Escolha de Valores -->
     <div class="donation-card">
       <h2>Escolha o valor da sua doação</h2>
 
       <div class="progress-container">
         <div class="progress-info">
-          <span id="raisedText">R$ 6.850 arrecadados</span>
+          <span id="raisedText">R$ 5.250 arrecadados</span>
           <div class="live-indicator">
             <span class="live-dot"></span> Ao vivo
           </div>
           <span class="goal">Meta: R$ 10.000</span>
         </div>
         <div class="progress-bar-bg">
-          <div class="progress-bar-fill" id="progressBar" style="width:68.5%"></div>
+          <div class="progress-bar-fill" id="progressBar" style="width:52.5%"></div>
         </div>
         <p class="progress-note">Atualizado automaticamente a cada nova doação confirmada.</p>
       </div>
@@ -449,15 +544,53 @@
         <button class="value-btn" aria-pressed="false" data-value="200">R$ 200</button>
       </div>
 
-      <div class="custom-value-wrap">
-        <span>R$</span>
-        <label for="customValue" class="sr-only" style="position:absolute;left:-9999px;">Outro valor</label>
-        <input type="text" inputmode="decimal" id="customValue" class="custom-value-input" placeholder="Digite outro valor">
-      </div>
-
       <a href="#checkout" class="cta-donate-btn" id="donateBtn">Doar R$ 30 com Pix</a>
 
       <div class="security-badge">🔒 Pagamento via Pix com confirmação instantânea.</div>
+    </div>
+
+    <!-- Carrossel de 5 Fotos (Inserido entre o bloco de doação e a explicação) -->
+    <div class="carousel-container" id="photoCarousel">
+      <div class="carousel-track" id="carouselTrack">
+        <!-- Foto 1 -->
+        <div class="carousel-slide">
+          <img src="https://via.placeholder.com/600x300/1c2436/f2a541?text=Acao+Noturna+-+Entrega+de+Marmitas+1" alt="Ação 1">
+          <div class="carousel-caption">Equipe preparando marmitas quentes.</div>
+        </div>
+        <!-- Foto 2 -->
+        <div class="carousel-slide">
+          <img src="https://via.placeholder.com/600x300/262f45/f2a541?text=Acao+Noturna+-+Entrega+de+Cobertores+2" alt="Ação 2">
+          <div class="carousel-caption">Distribuição de cobertores nas calçadas.</div>
+        </div>
+        <!-- Foto 3 -->
+        <div class="carousel-slide">
+          <img src="https://via.placeholder.com/600x300/1c2436/f2a541?text=Acao+Noturna+-+Kit+Higiene+3" alt="Ação 3">
+          <div class="carousel-caption">Kits de higiene entregues diretamente.</div>
+        </div>
+        <!-- Foto 4 -->
+        <div class="carousel-slide">
+          <img src="https://via.placeholder.com/600x300/262f45/f2a541?text=Acao+Noturna+-+Atendimento+Humanizado+4" alt="Ação 4">
+          <div class="carousel-caption">Palavra amiga e acolhimento nas ruas.</div>
+        </div>
+        <!-- Foto 5 -->
+        <div class="carousel-slide">
+          <img src="https://via.placeholder.com/600x300/1c2436/f2a541?text=Acao+Noturna+-+Nossas+Ruas+5" alt="Ação 5">
+          <div class="carousel-caption">Apoiando quem mais precisa nesta madrugada.</div>
+        </div>
+      </div>
+      <div class="carousel-dots" id="carouselDots">
+        <span class="dot active" data-slide="0"></span>
+        <span class="dot" data-slide="1"></span>
+        <span class="dot" data-slide="2"></span>
+        <span class="dot" data-slide="3"></span>
+        <span class="dot" data-slide="4"></span>
+      </div>
+    </div>
+
+    <!-- Bloco de Como sua doação é usada -->
+    <div class="impact-card" style="border-radius:var(--radius); margin-bottom:44px;">
+      <h3 style="color:var(--paper); font-size:1.15rem; margin-bottom:8px; font-weight:600;">Como sua doação é usada</h3>
+      <p style="color:#c3c8d6; font-size:0.95rem;">Compramos marmitas, cobertores e itens de higiene, e entregamos pessoalmente em pontos de rua nas noites de maior frio. Veja fotos e prestação de contas de cada ação nas nossas redes.</p>
     </div>
 
     <div class="transparency">
@@ -466,9 +599,30 @@
       <p><a href="#">Ver prestação de contas</a> · <a href="#">Fotos das últimas entregas</a></p>
     </div>
 
+    <!-- Bloco de Prova Social com Contadores Dinâmicos (Estilo do print) -->
+    <div class="social-proof-banner">
+      <div class="social-avatars">
+        <div class="s-avatar">JL</div>
+        <div class="s-avatar">MA</div>
+        <div class="s-avatar">RF</div>
+        <div class="s-avatar plus">+</div>
+      </div>
+      <div class="social-proof-text">
+        <strong id="donorCount">+3.200 pessoas</strong> já garantiram a doação nas últimas 48 horas.
+      </div>
+    </div>
+
+    <!-- Seção de Comentários (Com login obrigatório e mais comentários) -->
     <div class="comments-section">
       <h3>Relatos e Apoio da Comunidade</h3>
       
+      <!-- Caixa informando que precisa estar logado -->
+      <div class="login-to-comment-box">
+        <p>🔒 É preciso estar logado em sua conta para enviar um comentário ou relato.</p>
+        <a href="#login" class="login-btn">Fazer Login / Criar Conta</a>
+      </div>
+
+      <!-- Lista Ampliada de Comentários -->
       <div class="comment-item">
         <div class="comment-header">
           <span class="comment-author">Mariana S.</span>
@@ -504,6 +658,30 @@
           <button class="like-btn liked" onclick="toggleLike(this)">❤️ <span class="like-count">39</span> curtidas</button>
         </div>
       </div>
+
+      <div class="comment-item">
+        <div class="comment-header">
+          <span class="comment-author">Roberto Mendes</span>
+          <span class="comment-badge">Doou R$ 20</span>
+        </div>
+        <p class="comment-text">Doação feita com muito carinho. Todo mundo merece um prato de comida quente.</p>
+        <div class="comment-footer">
+          <span class="comment-time">Há 45 minutos</span>
+          <button class="like-btn" onclick="toggleLike(this)">❤️ <span class="like-count">8</span> curtidas</button>
+        </div>
+      </div>
+
+      <div class="comment-item">
+        <div class="comment-header">
+          <span class="comment-author">Fernanda Lima</span>
+          <span class="comment-badge">Doou R$ 200</span>
+        </div>
+        <p class="comment-text">Orgulho de ver esse projeto crescendo e ajudando tanta gente na rua!</p>
+        <div class="comment-footer">
+          <span class="comment-time">Há 1 hora</span>
+          <button class="like-btn" onclick="toggleLike(this)">❤️ <span class="like-count">51</span> curtidas</button>
+        </div>
+      </div>
     </div>
   </main>
 
@@ -521,9 +699,8 @@
   </footer>
 
   <script>
-    // Seleção de Valores
+    // Seleção de Valores Fixos (Sem input de outro valor)
     const buttons = document.querySelectorAll('.value-btn');
-    const customInput = document.getElementById('customValue');
     const donateBtn = document.getElementById('donateBtn');
 
     function formatBRL(n){
@@ -539,15 +716,8 @@
       btn.addEventListener('click', () => {
         setSelected(btn);
         const val = btn.dataset.value;
-        customInput.value = '';
         donateBtn.textContent = `Doar ${formatBRL(val)} com Pix`;
       });
-    });
-
-    customInput.addEventListener('input', () => {
-      buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
-      const num = customInput.value.replace(/[^\d,\.]/g, '');
-      donateBtn.textContent = num ? `Doar R$ ${num} com Pix` : 'Doar com Pix';
     });
 
     // Curtidas Interativas nos Comentários
@@ -565,11 +735,38 @@
       countSpan.textContent = count;
     }
 
-    // Simulação de doações ao vivo e atualização da barra em tempo real
-    let currentRaised = 6850;
+    // Carrossel Automático e Interativo de 5 Fotos
+    const track = document.getElementById('carouselTrack');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
+    const totalSlides = 5;
+
+    function goToSlide(index) {
+      currentSlide = index;
+      track.style.transform = `translateX(-${currentSlide * 20}%)`;
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        goToSlide(index);
+      });
+    });
+
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      goToSlide(currentSlide);
+    }, 4000);
+
+    // Simulação de Doações ao Vivo (Atualizando arrecadado a partir de R$ 5.250 e contador de pessoas)
+    let currentRaised = 5250;
+    let currentDonors = 3200;
     const goal = 10000;
     const raisedText = document.getElementById('raisedText');
     const progressBar = document.getElementById('progressBar');
+    const donorCount = document.getElementById('donorCount');
     const popup = document.getElementById('donationPopup');
     const popupName = document.getElementById('popupName');
     const popupText = document.getElementById('popupText');
@@ -586,10 +783,12 @@
     function updateProgress(amount) {
       currentRaised += amount;
       if (currentRaised > goal) currentRaised = goal;
+      currentDonors += 1;
       
       raisedText.textContent = `R$ ${currentRaised.toLocaleString('pt-BR')} arrecadados`;
       const percentage = (currentRaised / goal) * 100;
       progressBar.style.width = percentage + '%';
+      donorCount.textContent = `+${currentDonors.toLocaleString('pt-BR')} pessoas`;
     }
 
     function showRandomDonationPopup() {
@@ -606,17 +805,16 @@
       }, 5000);
     }
 
-    // Dispara popups em intervalos realistas (a cada 18 a 30 segundos)
+    // Dispara popups em intervalos orgânicos
     function scheduleNextPopup() {
-      const randomTime = Math.floor(Math.random() * 13000) + 18000; 
+      const randomTime = Math.floor(Math.random() * 12000) + 16000; 
       setTimeout(() => {
         showRandomDonationPopup();
         scheduleNextPopup();
       }, randomTime);
     }
 
-    // Inicia a primeira simulação após 12 segundos para parecer orgânico
-    setTimeout(scheduleNextPopup, 12000);
+    setTimeout(scheduleNextPopup, 10000);
   </script>
 
 </body>

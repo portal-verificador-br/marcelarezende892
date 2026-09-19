@@ -1,174 +1,179 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Página de oferta">
-  <title>Novas Receitas</title>
-
-  <!-- Meta Pixel -->
-  <script>
-    !function(f,b,e,v,n,t,s) {
-      if (f.fbq) return;
-      n = f.fbq = function() {
-        n.callMethod
-          ? n.callMethod.apply(n, arguments)
-          : n.queue.push(arguments);
-      };
-
-      if (!f._fbq) f._fbq = n;
-
-      n.push = n;
-      n.loaded = true;
-      n.version = "2.0";
-      n.queue = [];
-
-      t = b.createElement(e);
-      t.async = true;
-      t.src = v;
-
-      s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s);
-    }(
-      window,
-      document,
-      "script",
-      "[connect.facebook.net](https://connect.facebook.net/en_US/fbevents.js)"
-    );
-
-    fbq("init", "1737103767533720");
-    fbq("track", "PageView");
-  </script>
-
-  <noscript>
-    <img
-      height="1"
-      width="1"
-      style="display:none"
-      src="[facebook.com](https://www.facebook.com/tr?id=1737103767533720&ev=PageView&noscript=1)"
-      alt=""
-    >
-  </noscript>
-
-  <style>
-    :root {
-      font-family: Arial, Helvetica, sans-serif;
-      color: #1f2a1f;
-      background: #f5f7f3;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-    }
-
-    main {
-      width: min(680px, 100%);
-      padding: 48px 32px;
-      border-radius: 20px;
-      background: #ffffff;
-      text-align: center;
-      box-shadow: 0 12px 40px rgba(31, 42, 31, 0.12);
-    }
-
-    h1 {
-      margin: 0 0 16px;
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      line-height: 1.05;
-    }
-
-    p {
-      max-width: 520px;
-      margin: 0 auto 30px;
-      color: #526052;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-
-    .checkout-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 56px;
-      padding: 16px 30px;
-      border-radius: 12px;
-      background: #247a35;
-      color: #ffffff;
-      font-size: 1.05rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition:
-        background-color 160ms ease,
-        transform 160ms ease;
-    }
-
-    .checkout-button:hover {
-      background: #1b6229;
-      transform: translateY(-1px);
-    }
-
-    .checkout-button:focus-visible {
-      outline: 3px solid #9bd5a6;
-      outline-offset: 4px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método 7 Dias</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .tag-atencao {
+            background: #ff4757;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        h1 {
+            font-size: 26px;
+            color: #111;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        h1 span {
+            color: #ff4757;
+        }
+        .subtitle {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        .btn-cta {
+            display: block;
+            width: 100%;
+            background-color: #2ed573;
+            color: white;
+            text-align: center;
+            padding: 18px 10px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(46, 213, 115, 0.3);
+            margin: 20px 0;
+            transition: 0.2s;
+        }
+        .btn-cta:hover {
+            background-color: #26af5f;
+        }
+        .section {
+            margin: 30px 0;
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+        }
+        .section h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #222;
+        }
+        .pain-box {
+            background: #fff1f2;
+            border-left: 4px solid #ff4757;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 15px;
+            color: #4a0404;
+            border-radius: 0 8px 8px 0;
+        }
+        .benefits-list {
+            list-style: none;
+        }
+        .benefits-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 15px;
+        }
+        .benefits-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #2ed573;
+            font-weight: bold;
+        }
+        .price-box {
+            text-align: center;
+            background: #f1f2f6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        .old-price {
+            font-size: 14px;
+            text-decoration: line-through;
+            color: #747d8c;
+        }
+        .new-price {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ff4757;
+        }
+        .guarantee {
+            text-align: center;
+            font-size: 13px;
+            color: #747d8c;
+            margin-top: 15px;
+        }
+    </style>
 </head>
-
 <body>
-  <main>
-    <h1>Novas Receitas</h1>
 
-    <p>
-      Coloque aqui a descrição da sua oferta, os benefícios
-      e as informações importantes para seus visitantes.
-    </p>
+    <div class="container">
+        <!-- TOPO -->
+        <header>
+            <span class="tag-atencao">Protocolo Exclusivo • Vagas Limitadas</span>
+            <h1>O Protocolo Definitivo Para Você Queimar Gordura, Secar a Barriga e Ver a Balança Despencar em <span>Apenas 7 Dias</span>.</h1>
+            <p class="subtitle">Sem dietas restritivas impossíveis, sem passar fome e sem enrolação. Um método cirúrgico para quem tem pressa de ver resultado.</p>
+        </header>
 
-    <!-- Troque LINK_DO_CHECKOUT_AQUI pela URL real do checkout -->
-    <a
-      id="checkout-button"
-      class="checkout-button"
-      href="LINK_DO_CHECKOUT_AQUI"
-    >
-      COMPRAR AGORA
-    </a>
-  </main>
+        <!-- BOTÃO PRINCIPAL -->
+        <a href="SEU_LINK_DE_CHECKOUT_KIWIFY" class="btn-cta">QUERO GARANTIR MEU ACESSO POR R$ 27</a>
 
-  <script>
-    document
-      .getElementById("checkout-button")
-      .addEventListener("click", function(event) {
-        const checkoutUrl = this.getAttribute("href");
+        <!-- A DOR -->
+        <div class="section">
+            <div class="pain-box">
+                Cansada de abrir o guarda-roupa, vestir uma roupa e sentir que ela está apertando? A frustração de tentar de tudo e ver o ponteiro da balança empacado é desanimador. Você precisa de <strong>velocidade</strong>.
+            </div>
+        </div>
 
-        if (
-          !checkoutUrl ||
-          checkoutUrl === "LINK_DO_CHECKOUT_AQUI"
-        ) {
-          event.preventDefault();
+        <!-- A SOLUÇÃO -->
+        <div class="section">
+            <h2>O Que Você Vai Encontrar no Método:</h2>
+            <ul class="benefits-list">
+                <li><strong>Choque Metabólico Inicial (Dias 1 a 3):</strong> Para interromper o ganho de peso imediato.</li>
+                <li><strong>Protocolo de Aceleração (Dias 4 a 7):</strong> Para afinar a silhueta e garantir a queda real na balança.</li>
+                <li><strong>Praticidade Total:</strong> Cardápios fáceis e substituições inteligentes direto ao ponto.</li>
+                <li><strong>Acesso Imediato:</strong> Guia em PDF direto no seu e-mail ou celular.</li>
+            </ul>
+        </div>
 
-          alert(
-            "Substitua LINK_DO_CHECKOUT_AQUI pela URL real do checkout."
-          );
+        <!-- PREÇO E OFERTA -->
+        <div class="section">
+            <div class="price-box">
+                <span class="old-price">De R$ 97,00 por apenas:</span>
+                <div class="new-price">R$ 27,00</div>
+                <p style="font-size: 12px; color: #555; margin-top: 5px;">Pagamento único • Acesso vitalício ao material</p>
+            </div>
+            
+            <a href="SEU_LINK_DE_CHECKOUT_KIWIFY" class="btn-cta">QUERO COMEÇAR AGORA</a>
+            
+            <p class="guarantee">🔒 Garantia incondicional de 7 dias. Seu risco é zero.</p>
+        </div>
+    </div>
 
-          return;
-        }
-
-        event.preventDefault();
-
-        if (typeof fbq === "function") {
-          fbq("track", "InitiateCheckout");
-        }
-
-        setTimeout(function() {
-          window.location.href = checkoutUrl;
-        }, 350);
-      });
-  </script>
 </body>
 </html>

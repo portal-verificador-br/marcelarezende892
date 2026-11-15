@@ -1,334 +1,244 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Consulta Pública - Protocolo de Ressarcimento</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    
-    // SEU PIXEL ID 887260040779485
-    fbq('init', '2711205062544057'); 
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=2711205062544057&ev=PageView&noscript=1"
-    /></noscript>
-    <style>
-        :root {
-            --primary: #003366; 
-            --secondary: #0056b3;
-            --accent: #28a745; 
-            --bg: #f8f9fa;
-            --text: #333;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; -webkit-tap-highlight-color: transparent; }
-        
-        body { 
-            background-color: var(--bg); 
-            color: var(--text);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        header {
-            background: #fff;
-            padding: 15px 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 3px solid var(--accent);
-        }
-        
-        .logo-area { display: flex; align-items: center; gap: 10px; }
-        .shield-icon { color: var(--primary); font-size: 24px; }
-        .logo-text { font-size: 14px; font-weight: 700; color: var(--primary); text-transform: uppercase; line-height: 1.2; }
-        .secure-badge { background: #e8f5e9; color: var(--accent); padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; display: flex; align-items: center; gap: 5px; }
-
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .progress-container { width: 100%; margin-bottom: 30px; }
-        .progress-label { display: flex; justify-content: space-between; font-size: 12px; color: #666; margin-bottom: 5px; font-weight: 500; }
-        .progress-track { background: #e9ecef; height: 8px; border-radius: 4px; overflow: hidden; }
-        .progress-fill { background: var(--secondary); height: 100%; width: 20%; transition: width 0.5s ease; }
-
-        .card {
-            background: #fff;
-            padding: 30px 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            width: 100%;
-            text-align: center;
-            display: none; 
-            animation: slideUp 0.4s ease-out;
-        }
-        .card.active { display: block; }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
-        p.desc { font-size: 15px; color: #555; margin-bottom: 25px; line-height: 1.5; }
-
-        .btn-group { display: flex; flex-direction: column; gap: 12px; }
-        
-        .btn {
-            background: #fff;
-            border: 2px solid #e0e0e0;
-            padding: 18px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #444;
-            cursor: pointer;
-            transition: all 0.2s;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn:hover, .btn:active {
-            border-color: var(--secondary);
-            color: var(--secondary);
-            background: #f0f8ff;
-        }
-        
-        .btn.primary {
-            background: var(--secondary);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 10px rgba(0,86,179,0.3);
-        }
-        .btn.primary:hover { background: #004494; transform: translateY(-2px); }
-
-        .loader-content { text-align: center; }
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #e9ecef;
-            border-top: 5px solid var(--accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px auto;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        .terminal-log {
-            background: #f1f1f1;
-            padding: 15px;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            color: #333;
-            text-align: left;
-            height: 120px;
-            overflow: hidden;
-            border-left: 3px solid var(--secondary);
-            margin-top: 15px;
-        }
-        .log-item { margin-bottom: 5px; display: none; }
-        .log-item.success { color: #28a745; }
-        .log-item.warning { color: #e67e22; }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 11px;
-            color: #aaa;
-            border-top: 1px solid #eee;
-            margin-top: auto;
-            background: #fff;
-        }
-
-        .highlight { color: var(--secondary); font-weight: 700; }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fábrica de Prompts</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#050505;--sf:#101010;--sf2:#171717;--ln:#2a2418;--gold:#d4af37;--gold2:#f0d27a;--tx:#f5f3ee;--mu:#9a9690;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);color-scheme:dark}
+*,*:before,*:after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:radial-gradient(120% 50% at 50% 0,#1c1604,var(--bg) 65%) no-repeat var(--bg);color:var(--tx);font:15px/1.55 Manrope,system-ui,sans-serif;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+main{max-width:640px;margin:0 auto;padding:20px 18px}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;margin:0;font-weight:600;letter-spacing:.01em}
+h1{font-size:34px;line-height:1.08}h2{font-size:28px}h3{font-size:20px}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:22px;font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:700;color:var(--gold)}
+.brand i{width:30px;height:30px;border:1.5px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:15px}
+.sub{color:var(--mu);margin:10px 0 18px}
+.badge{display:inline-block;border:1px solid var(--ln);background:var(--sf);color:var(--gold2);border-radius:99px;padding:4px 12px;font-size:12px;margin-bottom:14px}
+textarea,input,select{width:100%;background:var(--sf);border:1px solid var(--ln);border-radius:12px;color:var(--tx);font:inherit;padding:14px;outline:none}
+textarea{min-height:150px;resize:vertical;font-size:16px}
+textarea:focus,input:focus,select:focus{border-color:var(--gold)}
+label{display:block;font-size:13px;color:var(--mu);margin:12px 0 5px}
+.lab{font-family:"Cormorant Garamond",serif;font-size:21px;margin:18px 0 8px}
+.btn{display:block;width:100%;min-height:54px;border-radius:12px;border:1px solid var(--gold);background:linear-gradient(180deg,#e2bd4b,#b8912b);color:#120e02;font:700 15px Manrope,sans-serif;letter-spacing:.06em;cursor:pointer;margin-top:16px}
+.btn.o{background:transparent;color:var(--gold2)}
+.btn:active{transform:scale(.98)}
+.hint{font-size:13px;color:var(--mu);margin-top:10px}
+details{margin-top:14px;border:1px solid var(--ln);border-radius:12px;background:var(--sf);padding:0 14px}
+summary{min-height:48px;display:flex;align-items:center;cursor:pointer;color:var(--gold2);font-weight:600}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.cats{display:grid;gap:10px;margin-top:6px}
+.cat{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:15px;text-align:left;color:var(--tx);font:inherit;cursor:pointer;display:grid;grid-template-columns:38px 1fr;gap:12px;width:100%}
+.cat:hover,.cat.on{border-color:var(--gold)}
+.cat b{display:block;font-family:"Cormorant Garamond",serif;font-size:19px;color:var(--gold2)}
+.cat span{color:var(--mu);font-size:13px}
+.cat em{font-style:normal;color:var(--gold);font-size:24px;line-height:1.1}
+.cat:active{transform:scale(.98)}.tiles{grid-template-columns:1fr 1fr}.tiles .cat{grid-template-columns:1fr;gap:6px;padding:14px}.tiles .cat span{font-size:12px;line-height:1.35}.tiles .cat:last-child{grid-column:1/-1}
+.out{background:var(--sf);border:1px solid var(--gold);border-radius:14px;padding:16px;white-space:pre-wrap;font-size:14.5px;line-height:1.65;margin-top:14px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.item{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:14px;margin-top:10px}
+.item p{margin:8px 0;color:#d8d5ce;font-size:13.5px;max-height:4.6em;overflow:hidden}
+.item small{color:var(--gold)}
+.item .row{margin-top:6px}.item .btn{min-height:44px;margin-top:0;font-size:13px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+.chip{flex:none;border:1px solid var(--ln);background:var(--sf);color:var(--mu);border-radius:99px;padding:8px 14px;font:inherit;font-size:13px;cursor:pointer}
+.chip.on{border-color:var(--gold);color:var(--gold2)}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:4px;margin-bottom:16px}
+.seg button{min-height:44px;border:0;border-radius:9px;background:transparent;color:var(--mu);font:600 14px Manrope,sans-serif;cursor:pointer}
+.seg .on{background:#1f1a0c;color:var(--gold2)}
+nav{position:fixed;left:0;right:0;bottom:0;background:rgba(8,8,8,.96);border-top:1px solid var(--ln);display:flex;justify-content:center;padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));z-index:5}
+nav div{display:flex;width:100%;max-width:640px}
+nav button{flex:1;background:none;border:0;color:var(--mu);font:500 10.5px Manrope,sans-serif;min-height:54px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+nav button span{font-size:19px;line-height:1}
+nav .on{color:var(--gold)}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--gold);color:#120e02;font-weight:700;padding:10px 18px;border-radius:99px;z-index:20}
+.empty{border:1px dashed var(--ln);border-radius:14px;padding:26px;text-align:center;color:var(--mu);margin-top:12px}
+code{background:var(--sf2);padding:2px 6px;border-radius:6px;color:var(--gold2);font-size:13px}
+@media (prefers-reduced-motion:no-preference){.out{animation:in .35s ease}@keyframes in{from{opacity:0}to{opacity:1}}}
+</style>
 </head>
 <body>
+<main id="app"></main>
+<nav><div id="nav"></div></nav>
+<script>
+/* Endereço do seu servidor de IA (opcional). Recebe POST JSON {instrucao, ideia, modo} e devolve {prompt}. Sem endereço, o app usa o modo básico. */
+var CONFIG = { endpoint: "" };
 
-    <header>
-        <div class="logo-area">
-            <i class="fas fa-university shield-icon"></i>
-            <div class="logo-text">Sistema Nacional<br>de Verificação</div>
-        </div>
-        <div class="secure-badge">
-            <i class="fas fa-lock"></i> SSL SEGURO
-        </div>
-    </header>
+var CATS = [
+ ["modelos","◇","Modelos ultra-realistas","Pessoas fictícias com pele, cabelo, expressão e roupas detalhados.","retrato natural, sem retoque aparente"],
+ ["lifestyle","☼","Lifestyle e selfies","Fotos espontâneas: viagens, restaurantes, academia, praia e rotina.","foto espontânea tirada com celular"],
+ ["produtos","❖","Divulgação de produtos","Modelos apresentando roupas, cosméticos, acessórios e eletrônicos.","foto comercial natural, produto bem visível"],
+ ["lojas","⌂","Lojas e comércios","Modelos divulgando lojas, salões, barbearias, farmácias e restaurantes.","foto de divulgação no próprio local do negócio"],
+ ["profissional","◉","Fotos profissionais","Estúdio, ensaios, retratos e imagens comerciais.","fotografia de estúdio com fundo limpo"],
+ ["videos","▶","Criação de vídeos","🔒 Em breve · movimentos, falas, expressões, gestos e cenas.","vídeo vertical gravado com celular"],
+ ["influencers","✦","Influencers digitais","Personagens fictícios com aparência e identidade consistentes.","foto de perfil de criadora de conteúdo, identidade visual consistente"]
+];
+var ENVS = [
+ [/loja de roupas|boutique|arara/,"interior de uma loja de roupas real: araras com peças penduradas, espelho de corpo inteiro, piso claro e vitrine levemente desfocada ao fundo"],
+ [/salão|cabeleir/,"interior de um salão de beleza: bancada com espelho, cadeiras, produtos nas prateleiras e luz do teto misturada à luz da rua"],
+ [/barbearia|barbeiro/,"interior de uma barbearia: cadeira de barbeiro, espelhos, ferramentas organizadas na bancada e madeira escura nas paredes"],
+ [/farmácia/,"interior de uma farmácia: gôndolas com produtos, balcão de atendimento e iluminação branca de teto"],
+ [/restaurante|café|cafeteria/,"mesa de um restaurante: pratos e copos sobre a mesa, outras pessoas desfocadas ao fundo e luz quente de ambiente"],
+ [/academia|treino/,"academia: aparelhos e halteres ao fundo, espelho grande e iluminação de teto fria"],
+ [/praia|mar/,"praia: areia, mar ao fundo, céu aberto e luz natural intensa com sombras duras suavizadas"],
+ [/viagem|passeio|rua|cidade/,"rua de uma cidade em dia comum: calçada, fachadas, pessoas desfocadas e luz natural do céu"],
+ [/estúdio/,"estúdio fotográfico com fundo neutro liso e luz controlada, sem excesso de efeitos"],
+ [/casa|sala|quarto|cozinha/,"ambiente doméstico real: móveis do dia a dia, pequenos objetos pessoais e luz natural vinda da janela"]
+];
+var CAMS = ["celular moderno (lente principal, equivalente a 26 mm), na altura dos olhos, leve inclinação natural","câmera mirrorless com lente 50 mm f/1.8, ligeiramente abaixo da linha dos olhos","câmera com lente 35 mm f/2, enquadramento levemente lateral, sem simetria perfeita"];
+var LUZ = ["luz natural suave e coerente com o ambiente, sombras macias sem recorte artificial","luz difusa lateral vinda de janela ou vitrine, contraste natural e leve queda de luz no lado oposto","luz ambiente do local combinada com luz indireta natural, sem flash e sem luz de estúdio"];
+var POSES = ["postura relaxada, peso do corpo levemente apoiado em uma perna, ombros soltos","corpo ligeiramente girado em três quartos, uma mão em movimento natural","postura ereta e confortável, cabeça levemente inclinada, gesto espontâneo"];
+var EXPR = ["expressão tranquila com sorriso leve e assimétrico, olhar direto para a câmera","sorriso discreto de quem acabou de falar algo, olhar levemente desviado para o lado","expressão simpática e natural, olhar para a lente com sobrancelhas relaxadas"];
+var REFORCOS = ["Pele com poros visíveis, pequenas linhas de expressão e variação natural de tom, sem suavização digital.","Fios de cabelo soltos, frizz sutil e mechas fora do lugar, sem penteado perfeito de salão.","Roupa com micro dobras e caimento real do tecido, sem aspecto de manequim ou renderização."];
+var EVITAR = "pele de plástico, efeito de boneca, brilho excessivo, filtros, saturação exagerada, contraste artificial, aparência de cinema, cabelo perfeito demais, sorriso artificial, mãos deformadas, texto ilegível";
 
-    <main>
-        
-        <div class="progress-container">
-            <div class="progress-label">
-                <span>Progresso da Análise</span>
-                <span id="percent-text">0%</span>
-            </div>
-            <div class="progress-track">
-                <div class="progress-fill" id="progress-bar"></div>
-            </div>
-        </div>
+var S = {view:"home",mode:"imagem",cat:"modelos",idea:"",opts:{},res:null,ver:0,lvl:0,lib:[],filter:"todas",busy:false,human:true,img:null};
+try{S.lib=JSON.parse(localStorage.getItem("fm_lib")||"[]")}catch(e){S.lib=[]}
+function saveLib(){try{localStorage.setItem("fm_lib",JSON.stringify(S.lib))}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function catName(id){var c=CATS.filter(function(x){return x[0]===id})[0];return c?c[2]:id}
 
-        <div id="step1" class="card active">
-            <div style="margin-bottom: 15px; color: var(--secondary); font-size: 40px;">
-                <i class="fas fa-mobile-alt"></i>
-            </div>
-            <h1>Uso de Aplicativo Bancário</h1>
-            <p class="desc">Para verificar a elegibilidade do seu CPF no <span class="highlight">Protocolo de 2026</span>, responda com sinceridade:</p>
-            <p class="desc" style="font-weight: 600;">Você possui o aplicativo de algum banco instalado no seu celular hoje?</p>
-            
-            <div class="btn-group">
-                <button class="btn" onclick="nextStep(2)">
-                    <i class="far fa-check-circle"></i> SIM, EU POSSUO
-                </button>
-                <button class="btn" onclick="nextStep(2)">
-                    <i class="far fa-times-circle"></i> NÃO POSSUO
-                </button>
-            </div>
-        </div>
+/* ===== MOTOR DEMONSTRATIVO (substituído pelo backend quando CONFIG.endpoint existir) ===== */
+function demo(p){
+ var t=p.ideia.toLowerCase(),o=p.opcoes,v=p.versao%3,cat=CATS.filter(function(c){return c[0]===p.categoria})[0]||CATS[0];
+ var masc=/homem|rapaz|barbeiro/.test(t),fem=/mulher|garota|menina|modelo|moça/.test(t)&&!masc;
+ var suj=masc?"homem":fem?"mulher":"pessoa";
+ var m=t.match(/(\d{2})\s*anos/),idade=o.idade||(m?m[1]:"");
+ var env="",et=(o.ambiente||"").toLowerCase()||t;for(var i=0;i<ENVS.length;i++){if(ENVS[i][0].test(et)){env=ENVS[i][1];break}}if(!env)env=o.ambiente||"";
+ var L=[];
+ L.push("Fotografia realista de "+(p.modo==="video"?"vídeo vertical, ":"")+"uma "+suj.replace("uma ","")+(idade?" de "+idade+" anos":" adulta")+(o.nacionalidade?", "+o.nacionalidade:"")+": "+p.ideia.replace(/\.$/,"")+".");
+ L.push("ESTILO: "+(o.estilo||cat[4])+".");
+ L.push("PERSONAGEM: rosto com proporções naturais e leve assimetria; pele com textura real, poros visíveis, pequenas linhas e imperfeições sutis, sem brilho excessivo; "+(o.cabelo?"cabelo "+o.cabelo+", ":"cabelo natural, ")+"com fios individuais e alguns fios soltos"+(o.olhos?"; olhos "+o.olhos:"")+".");
+ L.push("EXPRESSÃO E POSTURA: "+EXPR[v]+"; "+POSES[v]+".");
+ L.push("ROUPAS E ACESSÓRIOS: "+(o.roupa?o.roupa+", com caimento real do tecido":"peças coerentes com a ideia e com o ambiente, com caimento real do tecido e pequenas dobras naturais")+".");
+ L.push("CENÁRIO: "+(env||"ambiente coerente com a ideia, com objetos reais e discretos ao fundo, sem poluição visual")+".");
+ L.push("CÂMERA: "+(o.camera||CAMS[v])+"; enquadramento "+(o.enquadramento||"médio, da cintura para cima, com espaço de respiro")+"; fundo com profundidade de campo natural.");
+ L.push("ILUMINAÇÃO: "+(o.iluminacao||LUZ[v])+".");
+ if(p.modo==="video"){
+  var x=o.acao||"a pessoa realiza a ação descrita na ideia de forma natural, sem pressa";
+  L.push("AÇÃO: "+x+".");
+  L.push("MOVIMENTO CORPORAL E EXPRESSÕES: gestos pequenos e fluidos, respiração visível, piscadas naturais, sem movimentos robóticos ou exagerados; a expressão muda aos poucos conforme a fala.");
+  L.push("MOVIMENTO DE CÂMERA: "+(o.movcam||"câmera na mão com leve oscilação natural, sem zoom brusco")+".");
+  L.push("DIÁLOGO (português brasileiro): "+(o.fala?"“"+o.fala+"”":"fala curta, informal e natural, no tom de quem conversa com um amigo")+"; sincronização labial precisa, voz coerente com a idade e a aparência.");
+  L.push("DURAÇÃO: "+(o.duracao||"8 segundos")+". CONTINUIDADE: mesmo rosto, cabelo, roupa e cenário do início ao fim, sem trocas entre os cortes.");
+ }
+ L.push("QUALIDADE: aparência de foto feita por "+((o.camera||"").indexOf("celular")>-1||!o.camera&&v===0?"celular":"câmera")+" real, nitidez natural e leve grão, cores fiéis, sem aparência cinematográfica nem pós-produção pesada.");
+ if(p.nivel>0)for(var k=0;k<Math.min(p.nivel,3);k++)L.push("REFORÇO "+(k+1)+": "+REFORCOS[k]);
+ L.push("EVITAR: "+EVITAR+".");
+ return L.join("\n\n");
+}
+var DEFSUF="";
+function getSuf(){try{var s=localStorage.getItem("fm_suf");return s===null?DEFSUF:s}catch(e){return DEFSUF}}
+async function gerar(p){
+ if(CONFIG.endpoint){try{
+  var ins="Você é especialista em prompts de "+(p.modo==="video"?"vídeo":"imagem")+" para o Gemini. Transforme a ideia abaixo em UM prompt em português do Brasil, pronto para copiar e colar. Preserve a ideia original e acrescente só detalhes que melhorem o resultado e sejam coerentes com ela: idade aparente, rosto, pele com poros e imperfeições naturais, cabelo com fios individuais, expressão, olhar, postura, roupas, ambiente, objetos, câmera, enquadramento, luz natural, sombras, profundidade de campo. Realismo de foto feita com celular real: sem pele artificial, sem efeito de boneca, sem brilho excessivo, sem filtros, sem estética de cinema. Não invente traços que contradigam a ideia. Sem enrolação e sem palavras repetidas. Organize em parágrafos curtos com rótulos em maiúsculas."+(p.modo==="video"?" Inclua ação, movimento corporal natural, expressões, movimento de câmera, diálogo em português brasileiro, sincronização labial, duração e continuidade visual.":"")+" Responda somente com o prompt, sem explicações e sem aspas ao redor.\n\nCATEGORIA: "+catName(p.categoria)+"\nIDEIA: "+p.ideia+"\nOPÇÕES ESCOLHIDAS: "+JSON.stringify(p.opcoes)+"\nVERSÃO: "+(p.versao+1)+(p.versao>0?" (use uma interpretação diferente das anteriores, mantendo a ideia)":"")+(p.base?"\n\nPROMPT ATUAL, para enriquecer sem perder a ideia:\n"+p.base:"");
+  var rs=await fetch(CONFIG.endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({instrucao:ins,ideia:p.ideia,modo:p.modo})});
+  if(rs.ok){var d=await rs.json();if(d&&d.prompt&&d.prompt.trim())return {prompt:d.prompt.trim(),demo:false}}
+ }catch(e){}}
+ await new Promise(function(r){setTimeout(r,450)});
+ return {prompt:demo(p),demo:true};
+}
 
-        <div id="step2" class="card">
-            <div style="margin-bottom: 15px; color: var(--secondary); font-size: 40px;">
-                <i class="fas fa-calendar-check"></i>
-            </div>
-            <h1>Frequência de Movimentação</h1>
-            <p class="desc">O sistema identificou uma possível pendência.</p>
-            <p class="desc" style="font-weight: 600;">Você realizou alguma transação (Pix, cartão ou boleto) nos últimos 7 dias?</p>
-            
-            <div class="btn-group">
-                <button class="btn" onclick="nextStep(3)">
-                    <i class="far fa-check-circle"></i> SIM, RECENTEMENTE
-                </button>
-                <button class="btn" onclick="nextStep(3)">
-                    <i class="far fa-clock"></i> FAZ MAIS TEMPO
-                </button>
-            </div>
-        </div>
-
-        <div id="step3" class="card">
-            <div style="margin-bottom: 15px; color: var(--secondary); font-size: 40px;">
-                <i class="fas fa-shield-alt"></i>
-            </div>
-            <h1>Verificação Final</h1>
-            <p class="desc">Estamos prontos para consultar a base de dados.</p>
-            <p class="desc">Você confirma que é o titular da conta e deseja visualizar o saldo disponível para resgate?</p>
-            
-            <div class="btn-group">
-                <button class="btn primary" onclick="startLoading()">
-                    CONFIRMAR E CONSULTAR
-                </button>
-            </div>
-        </div>
-
-        <div id="loading" class="card">
-            <div class="loader-content">
-                <div class="spinner"></div>
-                <h2 style="color: var(--primary); font-size: 18px; margin-bottom: 10px;">Conectando ao Servidor...</h2>
-                <p style="font-size: 13px; color: #666;">Por favor, não feche esta página.</p>
-                
-                <div class="terminal-log" id="terminal">
-                    </div>
-            </div>
-        </div>
-
-    </main>
-
-    <footer>
-        <p>Copyright © 2026 - Todos os direitos reservados.</p>
-        <p style="margin-top: 5px;">Política de Privacidade | Termos de Uso | LGPD</p>
-    </footer>
-
-    <script>
-        // ============================================
-        // LINK CORRIGIDO PARA SUA PÁGINA DE VENDAS
-        // ============================================
-        const redirectUrl = "pgblack.html"; 
-        // ============================================
-
-        function updateProgress(percent) {
-            document.getElementById('progress-bar').style.width = percent + '%';
-            document.getElementById('percent-text').innerText = percent + '%';
-        }
-
-        function nextStep(step) {
-            if (navigator.vibrate) navigator.vibrate(50);
-            document.querySelectorAll('.card').forEach(el => el.classList.remove('active'));
-            document.getElementById('step' + step).classList.add('active');
-            if(step === 2) updateProgress(50);
-            if(step === 3) updateProgress(85);
-        }
-
-        function startLoading() {
-            if (navigator.vibrate) navigator.vibrate(50);
-            document.getElementById('step3').classList.remove('active');
-            document.getElementById('loading').classList.add('active');
-            updateProgress(90);
-
-            const terminal = document.getElementById('terminal');
-            const logs = [
-                { text: "> Iniciando conexão segura (SSL)...", delay: 500 },
-                { text: "> Validando dispositivo...", delay: 1500 },
-                { text: "> Acessando base de dados nacional...", delay: 2500, type: 'warning' },
-                { text: "> CPF Verificado. Status: ATIVO", delay: 3500, type: 'success' },
-                { text: "> Calculando valores pendentes...", delay: 4500 },
-                { text: "> PROTOCOLO AUTORIZADO!", delay: 5500, type: 'success' }
-            ];
-
-            let logIndex = 0;
-
-            function addLog() {
-                if (logIndex < logs.length) {
-                    const log = logs[logIndex];
-                    setTimeout(() => {
-                        const p = document.createElement('div');
-                        p.className = 'log-item ' + (log.type || '');
-                        p.style.display = 'block';
-                        p.innerText = log.text;
-                        terminal.appendChild(p);
-                        terminal.scrollTop = terminal.scrollHeight;
-                        
-                        if (logIndex === logs.length - 1) {
-                            setTimeout(() => {
-                                updateProgress(100);
-                                window.location.href = redirectUrl;
-                            }, 1500);
-                        }
-                        
-                        logIndex++;
-                        addLog();
-                    }, logIndex === 0 ? log.delay : 1000); 
-                }
-            }
-            addLog();
-        }
-    </script>
+/* ===== INTERFACE ===== */
+var NAV=[["home","⌂","Início"],["imagem","▣","Imagem"],["video","▶","Vídeo"],["cats","❖","Categorias"],["lib","♡","Biblioteca"],["perfil","◔","Perfil"]];
+var OPT={idade:["20","25","30","35","40","50","60"],nacionalidade:["brasileira","latina","europeia","americana","asiática","africana"],cabelo:["cacheado","liso","ondulado","crespo","curto","loiro","castanho","preto"],olhos:["castanhos","verdes","azuis","pretos","cor de mel"],roupa:["vestido","conjunto casual","roupa social","roupa de academia","biquíni ou saída de praia","uniforme do comércio"],ambiente:["Loja de roupas","Salão de beleza","Barbearia","Farmácia","Restaurante","Academia","Praia","Rua da cidade","Estúdio","Dentro de casa"],estilo:["foto espontânea de celular","retrato natural","foto comercial natural","estúdio profissional"],camera:["celular moderno","câmera mirrorless 50 mm","câmera 35 mm"],enquadramento:["close no rosto","médio, da cintura para cima","corpo inteiro"],iluminacao:["luz natural de janela","luz do próprio ambiente","luz suave de fim de tarde"],acao:["mostra o produto para a câmera","caminha em direção à câmera","fala olhando para a câmera","gira mostrando a roupa"],duracao:["4 segundos","6 segundos","8 segundos"],movcam:["câmera na mão com leve oscilação","câmera parada no tripé","aproximação lenta"]};
+function field(id,l,ph){var o=OPT[id];if(!o)return '<div><label for="o_'+id+'">'+l+'</label><input id="o_'+id+'" placeholder="'+ph+'" value="'+esc(S.opts[id]||"")+'"></div>';return '<div><label for="o_'+id+'">'+l+'</label><select id="o_'+id+'"><option value="">Deixar a IA decidir</option>'+o.map(function(x){return '<option value="'+esc(x)+'"'+(S.opts[id]===x?' selected':'')+'>'+(id==="idade"?x+' anos':x)+'</option>'}).join("")+'</select></div>'}
+function segHtml(){var vid=S.mode==="video";return '<div class="seg"><button data-a="mode" data-v="imagem" class="'+(!vid?"on":"")+'">Imagem</button><button data-a="mode" data-v="video" class="'+(vid?"on":"")+'">Vídeo 🔒</button></div>'}
+function catList(tiles){return '<div class="cats'+(tiles?' tiles':'')+'">'+CATS.map(function(c){return '<button class="cat '+(!tiles&&S.cat===c[0]?"on":"")+'" data-a="cat" data-v="'+c[0]+'"><em>'+c[1]+'</em><div><b>'+c[2]+'</b><span>'+c[3]+'</span></div></button>'}).join("")+'</div>'}
+function fixo(p){var o=p.opcoes,L=[],t=p.modo==="video"?"vídeo":"imagem";if(S.human)L.push("Mostrar poros, pelos, linhas faciais, pequenas espinhas e pequenas manchas de pele, de forma natural.");L.push("Sem sardas, sem aspecto cinematográfico, sem brilho, sem saturação, sem contraste forçado; apenas a iluminação do ambiente, sem luz de estúdio.");L.push(o.camera?"Qualidade e resolução de "+t+" de "+o.camera+".":"Qualidade e resolução de "+t+" de iPhone 17 (Shot on iPhone 17).");var x=getSuf();if(x)L.push(x);return L.join(" ")}
+S.auth=false;try{S.auth=localStorage.getItem("fm_auth")==="1"}catch(e){}
+function selBox(l,a){return '<div><label>'+l+'</label><select><option>Selecionar</option>'+a.map(function(x){return '<option>'+x+'</option>'}).join("")+'</select></div>'}
+function videoLocked(){return '<h2>Criar vídeo</h2><div class="sub"><span class="badge">🔒 EM BREVE</span><br>A criação de vídeos está em desenvolvimento. Nesta fase beta, teste a criação de imagens.</div><fieldset disabled style="border:0;padding:0;margin:0;opacity:.5"><label>Criar em</label><div class="row"><button class="btn o" style="margin:0">Gemini</button><button class="btn o" style="margin:0">Flow 🔒 Em breve</button></div><label>O que você deseja criar hoje?</label><textarea placeholder="Descreva a cena do vídeo…"></textarea><div class="g2">'+selBox("Tempo do roteiro",OPT.duracao)+selBox("Ação",OPT.acao)+selBox("Movimento de câmera",OPT.movcam)+selBox("Enquadramento",OPT.enquadramento)+'</div><label>Fala (português brasileiro)</label><input placeholder="ex.: Olha que lindo esse vestido!"><button class="btn">EM BREVE</button></fieldset>'}
+function loginHtml(){return '<div style="padding-top:7vh"><div class="brand"><i>P</i>FÁBRICA DE PROMPTS</div><h1>Transforme sua ideia em prompts profissionais</h1><p class="sub">Entre para acessar a versão beta.</p><label for="lg_user">Login</label><input id="lg_user" autocomplete="off" autocapitalize="off"><label for="lg_pass">Senha</label><input id="lg_pass" type="password" autocomplete="off"><p id="lg_err" class="hint" style="color:#e07a7a;min-height:20px"></p><button class="btn" data-a="login">ENTRAR</button></div>'}
+function doLogin(){var u=document.getElementById("lg_user"),p=document.getElementById("lg_pass");if(u&&p&&u.value.trim()==="1111#"&&p.value==="12345"){S.auth=true;try{localStorage.setItem("fm_auth","1")}catch(e){}S.view="home";render();window.scrollTo(0,0)}else{var m=document.getElementById("lg_err");if(m)m.textContent="Login ou senha incorretos."}}
+function composer(){
+ var vid=S.mode==="video",h="";
+ h+='<div class="seg"><button data-a="mode" data-v="imagem" class="'+(!vid?"on":"")+'">Imagem</button><button data-a="mode" data-v="video" class="'+(vid?"on":"")+'">Vídeo 🔒</button></div>';
+ h+='<label for="idea" style="font:700 19px Manrope,sans-serif;color:var(--tx);margin:0 0 8px">O que você deseja criar hoje?</label>';
+ h+='<textarea id="idea" placeholder="Exemplo: Quero uma modelo brasileira de 28 anos, cabelo cacheado, divulgando um vestido em uma loja de roupas…">'+esc(S.idea)+'</textarea>';
+ h+='<p class="hint">Descreva sua ideia com o máximo de detalhes possível. Nossa inteligência vai transformar sua descrição em um prompt profissional.</p>';
+ h+='<label style="display:flex;gap:10px;align-items:center;color:var(--tx);font-size:14px;margin:16px 0 0"><input type="checkbox" id="o_human" style="width:22px;height:22px;padding:0;flex:none"'+(S.human?' checked':'')+'>Pele humana real: poros, pelos, linhas, espinhas e manchas pequenas</label>';h+='<label for="o_img">Imagem de referência (opcional)</label><input type="file" id="o_img" accept="image/*">'+(S.img?'<p class="hint">'+esc(S.img.name)+' · <a href="#" data-a="rmimg" style="color:var(--gold)">remover</a></p>':'');h+='<p class="hint" style="color:var(--gold2)">Categoria: '+esc(catName(S.cat))+' · <a href="#" data-a="go" data-v="cats" style="color:var(--gold)">trocar</a></p>';
+ h+='<details><summary>Personalizar (opcional)</summary><div class="g2">'+field("idade","Idade","ex.: 28")+field("nacionalidade","Nacionalidade","ex.: brasileira")+field("cabelo","Tipo de cabelo","ex.: cacheado")+field("olhos","Cor dos olhos","ex.: castanhos")+field("roupa","Tipo de roupa","ex.: vestido floral")+field("ambiente","Ambiente","ex.: loja de roupas")+field("estilo","Estilo da fotografia","ex.: espontâneo")+field("camera","Tipo de câmera","ex.: celular")+field("enquadramento","Enquadramento","ex.: corpo inteiro")+field("iluminacao","Iluminação","ex.: luz da janela")+'</div>';
+ h+='<label for="o_real">Nível de realismo</label><select id="o_real"><option>Máximo (padrão)</option><option>Alto</option><option>Equilibrado</option></select>';
+ if(vid)h+='<div class="g2">'+field("acao","Ação","ex.: mostra o vestido")+field("duracao","Duração (máx. 8 s)","")+field("movcam","Movimento de câmera","ex.: câmera na mão")+'</div>'+field("fala","Fala (português brasileiro)","ex.: Olha que lindo esse vestido!");
+ h+='<div style="height:12px"></div></details>';
+ h+='<button class="btn" data-a="gen">GERAR MEU PROMPT</button>';
+ return h;
+}
+function render(){
+ var v=S.view,h="";if(!S.auth){document.getElementById("app").innerHTML=loginHtml();document.getElementById("nav").innerHTML="";document.querySelector("nav").style.display="none";return}document.querySelector("nav").style.display="";
+ h+='<div class="brand"><i>P</i>FÁBRICA DE PROMPTS</div>';
+ if(v==="home"){
+  h+='<h1>BEM-VINDO À FÁBRICA DE PROMPTS</h1><p class="sub">Sua criatividade é o limite. Transforme qualquer ideia em um prompt profissional com inteligência artificial.</p>'+segHtml()+'<div class="lab">Escolha o que você quer criar</div>'+catList(true);
+ }else if(v==="imagem"){
+  h+='<h2>Criar imagem</h2><p class="sub">Escreva a ideia. O resto é opcional.</p>'+composer();}else if(v==="video"){h+=videoLocked();
+ }else if(v==="cats"){
+  h+='<h2>Categorias</h2><p class="sub">Escolha um espaço de criação.</p>'+segHtml()+catList(false);
+ }else if(v==="res"){
+  var r=S.res;
+  h+='<h2>SEU PROMPT ESTÁ PRONTO!</h2><div class="sub"><span class="badge">'+(r.demo?"Modo básico · regras locais, sem IA":"Gerado com IA")+'</span><br>'+esc(catName(S.cat))+' · '+(S.mode==="video"?"vídeo":"imagem")+(S.lvl?' · refinado '+S.lvl+'×':'')+'</div>';
+  h+='<div class="out" id="out">'+esc(r.prompt)+'</div>';
+  h+='<button class="btn" data-a="copy">COPIAR PROMPT</button><div class="row"><button class="btn o" data-a="improve">MELHORAR PROMPT</button><button class="btn o" data-a="again">GERAR NOVA VERSÃO</button></div><div class="row"><button class="btn o" data-a="save">SALVAR NA BIBLIOTECA</button><button class="btn o" data-a="new">CRIAR OUTRA IDEIA</button></div>';
+ }else if(v==="lib"){
+  var cs=[["todas","Todas"]].concat(CATS.map(function(c){return [c[0],c[2]]}));
+  var items=S.lib.filter(function(i){return S.filter==="todas"||i.cat===S.filter});
+  h+='<h2>MINHA BIBLIOTECA</h2><p class="sub">Seus prompts salvos neste aparelho.</p><div class="chips">'+cs.map(function(c){return '<button class="chip '+(S.filter===c[0]?"on":"")+'" data-a="filter" data-v="'+c[0]+'">'+c[1]+'</button>'}).join("")+'</div>';
+  h+=items.length?items.map(function(i){return '<div class="item"><small>'+esc(catName(i.cat))+' · '+esc(i.date)+'</small><p>'+esc(i.idea)+'</p><div class="row"><button class="btn o" data-a="lcopy" data-v="'+i.id+'">Copiar</button><button class="btn o" data-a="ldel" data-v="'+i.id+'">Excluir</button></div></div>'}).join(""):'<div class="empty">Nenhum prompt aqui ainda. Gere um prompt e toque em Salvar na biblioteca.</div>';
+ }else if(v==="perfil"){
+  h+='<h2>Meu perfil</h2><p class="sub">Configurações do app.</p><div class="item"><h3>Texto extra no final do prompt</h3><p style="max-height:none">Opcional. O app já adiciona sozinho: sem sardas, sem cinematográfico, sem brilho, sem saturação, sem contraste, luz do ambiente e qualidade de iPhone 17 (ou da câmera escolhida). Escreva aqui só o que quiser a mais.</p><textarea id="suf" style="min-height:110px;font-size:14px">'+esc(getSuf())+'</textarea><button class="btn" data-a="sufsave">SALVAR</button></div><button class="btn o" data-a="clear">Apagar toda a biblioteca</button><button class="btn" data-a="logout">SAIR</button>';
+ }
+ document.getElementById("app").innerHTML=h;
+ var active=v==="res"?(S.mode==="video"?"video":"imagem"):v;
+ document.getElementById("nav").innerHTML=NAV.map(function(n){return '<button data-a="go" data-v="'+n[0]+'" class="'+(n[0]===active?"on":"")+'"><span>'+n[1]+'</span>'+n[2]+'</button>'}).join("");
+ var sel=document.getElementById("o_real");if(sel&&S.opts.real)sel.value=S.opts.real;
+}
+function readForm(){
+ var i=document.getElementById("idea");if(!i)return;S.idea=i.value;
+ ["idade","nacionalidade","cabelo","olhos","roupa","ambiente","estilo","camera","enquadramento","iluminacao","acao","duracao","movcam","fala"].forEach(function(k){var e=document.getElementById("o_"+k);if(e)S.opts[k]=e.value.trim()});
+ var s=document.getElementById("o_real");if(s)S.opts.real=s.value;var hm=document.getElementById("o_human");if(hm)S.human=hm.checked;
+}
+function toast(m){var t=document.createElement("div");t.className="toast";t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove()},1600)}
+function copy(txt){
+ function fb(){var a=document.createElement("textarea");a.value=txt;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(e){}a.remove()}
+ try{navigator.clipboard.writeText(txt).catch(fb)}catch(e){fb()}toast("Prompt copiado")
+}
+async function run(refine){
+ if(S.busy)return;
+ if(!S.idea.trim()){toast("Escreva sua ideia primeiro");return}
+ S.busy=true;
+ var btn=document.querySelector('[data-a="gen"]');if(btn)btn.textContent="GERANDO…";
+ try{
+  var payload={ideia:S.idea,modo:S.mode,categoria:S.cat,opcoes:S.opts,versao:S.ver,nivel:S.lvl,refinar:!!refine,base:refine&&S.res?S.res.core:null,img:S.img};
+  S.res=await gerar(payload);S.res.core=S.res.prompt;S.res.prompt=S.res.core+"\n\n"+fixo(payload);S.view="res";
+ }catch(e){toast("Não foi possível gerar. Tente de novo.")}
+ S.busy=false;render();window.scrollTo(0,0);
+}
+document.addEventListener("click",function(e){
+ var el=e.target.closest("[data-a]");if(!el)return;e.preventDefault();
+ var a=el.dataset.a,v=el.dataset.v;readForm();
+ if(a==="go"){if(v==="imagem")S.mode="imagem";S.view=v;render();window.scrollTo(0,0)}
+ else if(a==="mode"){if(v==="video"){S.view="video"}else{S.mode="imagem"}render();window.scrollTo(0,0)}
+ else if(a==="cat"){if(v!=="videos")S.cat=v;S.mode="imagem";S.view=v==="videos"?"video":"imagem";render();window.scrollTo(0,0)}
+ else if(a==="gen"){S.ver=0;S.lvl=0;run(false)}
+ else if(a==="again"){S.ver++;S.lvl=0;run(false)}
+ else if(a==="improve"){if(S.lvl>=3){toast("Prompt já está no nível máximo de detalhe");return}S.lvl++;run(true)}
+ else if(a==="new"){S.idea="";S.opts={};S.res=null;S.ver=0;S.lvl=0;S.view=S.mode;render();window.scrollTo(0,0)}
+ else if(a==="copy"){copy(S.res.prompt)}
+ else if(a==="save"){S.lib.unshift({id:String(Date.now()),cat:S.cat,idea:S.idea,prompt:S.res.prompt,date:new Date().toLocaleDateString("pt-BR")});saveLib();toast("Salvo na biblioteca")}
+ else if(a==="filter"){S.filter=v;render()}
+ else if(a==="lcopy"){copy(S.lib.filter(function(i){return i.id===v})[0].prompt)}
+ else if(a==="ldel"){S.lib=S.lib.filter(function(i){return i.id!==v});saveLib();render()}
+ else if(a==="login"){doLogin()}else if(a==="logout"){try{localStorage.removeItem("fm_auth")}catch(e){}S.auth=false;S.view="home";render()}
+ else if(a==="rmimg"){S.img=null;render()}
+ else if(a==="sufsave"){try{localStorage.setItem("fm_suf",document.getElementById("suf").value.trim())}catch(e){}toast("Salvo")}
+ else if(a==="clear"){if(S.lib.length&&confirm("Apagar todos os prompts salvos?")){S.lib=[];saveLib();toast("Biblioteca apagada")}}
+});
+document.addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target.id==="lg_pass")doLogin()});
+document.addEventListener("change",function(e){if(e.target.id==="o_img"){readForm();S.img=e.target.files[0]||null;render()}});
+render();
+</script>
 </body>
 </html>
